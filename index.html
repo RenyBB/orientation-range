@@ -64,14 +64,14 @@
     var fixation = {
       type: jsPsychHtmlKeyboardResponse,
       stimulus: '<div style="font-size:60px;">+</div>',
-      choices: jsPsych.NO_KEYS,
+      choices: 'NO_KEYS',
       trial_duration: 1000,
     }
 
     var test = {
       type: jsPsychImageKeyboardResponse,
       stimulus: jsPsych.timelineVariable('stimulus'),
-      choices: jsPsych.NO_KEYS,
+      choices: 'NO_KEYS',
       trial_duration: 500,
       maintain_aspect_ration: true,
       stimulus_height: 150
