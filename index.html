@@ -103,14 +103,14 @@
         var y_new = [];
         var x_new = [];
         var ctx = c.getContext("2d");
-        if(final_param_value <= 0.5) {
+        if(final_param_value >= 0.5) {
           orient_deg = 360*final_param_value - 180;
         }
         else {
           orient_deg = 360*final_param_value;
         }
-        
-        if(orient_deg >=90) {
+        console.log(orient_deg);
+        if(orient_deg <=90) {
           y_new = (orient_deg/90) * line_length;
           x_new = (1- (orient_deg/90)) * line_length;
         }
