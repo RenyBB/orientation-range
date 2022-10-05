@@ -7,6 +7,7 @@
   <script src="https://unpkg.com/@jspsych/plugin-reconstruction"></script>
   <script src="https://unpkg.com/@jspsych/plugin-html-keyboard-response"></script>
   <script src="https://unpkg.com/@jspsych/plugin-image-keyboard-response"></script>
+    <script src="https://unpkg.com/@jspsych/plugin-canvas-button-response"></script>
   <script src="https://unpkg.com/@jspsych/plugin-survey-likert"></script>
   <link rel="stylesheet" href="https://unpkg.com/jspsych@7.1.2/css/jspsych.css"/>  
   
@@ -29,6 +30,9 @@
     }
   });
       var timeline = [];
+      var final_param_value = [];
+      var true_orientation = [];
+      var line_length = 200;
 
       function generateRotationStyle (rotation) {
         return "transform: rotate(" + rotation + "deg);"
@@ -76,18 +80,68 @@
       choices: 'NO_KEYS',
       trial_duration: 500,
       maintain_aspect_ration: true,
-      stimulus_height: 150
+      stimulus_height: 150,
+      on_finish: function(data) {
+        true_orientation = 60;
+      }
     }
     
     var capture = {
         type: jsPsychReconstruction,
         stim_function: stim_function,
         starting_value: 0.1,
-        step_size: 0.025
+        step_size: 0.025,
+        on_finish: function(data) {
+          final_param_value = data.final_value;
+        }
     }
     
+   var feedback = {
+    type: jsPsychCanvasButtonResponse,
+    stimulus: function(c) {
+        var orient_deg = [];
+        var y_new = [];
+        var x_new = [];
+        var ctx = c.getContext("2d");
+        if(final_param_value >= 0.5) {
+          orient_deg = 360*final_param_value - 180;
+        }
+        else {
+          orient_deg = 360*final_param_value;
+        }
+        
+        if(orient_deg <=90) {
+          y_new = (orient_deg/90) * line_length;
+          x_new = (1- (orient_deg/90)) * line_length;
+        }
+        else {
+          y_new = ((180-orient_deg)/90) * line_length;
+          x_new = (1 - ((180-orient_deg)/90)) * line_length;
+        }
+      
+        // first line
+        ctx.beginPath();
+        ctx.moveTo(900, 360);
+        ctx.lineTo(x_new+900, y_new+360);
+        ctx.lineWidth = 10;
+        ctx.strokeStyle = 'MediumBlue';
+        ctx.stroke();
+        /* second line
+        ctx.beginPath();
+        ctx.moveTo(20, 100);
+        ctx.lineTo(100, 250);
+        ctx.lineWidth = 10;
+        ctx.strokeStyle = 'MediumPurple';
+        ctx.stroke();*/
+    },
+    canvas_size: [300, 300],
+    choices: ['Continue'],
+    prompt: '<p>Orientation of Response</p>',
+    data: {line1_color: 'blue', line1_length: line_length}//{line1_color: 'blue', line1_length: 290, line2_color: "purple", line2_length: 170}
+};
+    
     var test_procedure = {
-      timeline: [fixation, test, fixation, capture],
+      timeline: [fixation, test, fixation, capture, feedback],
       timeline_variables: test_stimuli,
       randomize_order: true,
       repetitions: 5
