@@ -1,0 +1,116 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+  <script src="https://unpkg.com/jspsych"></script>
+  <script src="https://unpkg.com/@jspsych/plugin-preload"></script>
+  <script src="https://unpkg.com/@jspsych/plugin-reconstruction"></script>
+  <script src="https://unpkg.com/@jspsych/plugin-html-keyboard-response"></script>
+  <script src="https://unpkg.com/@jspsych/plugin-image-keyboard-response"></script>
+  <script src="https://unpkg.com/@jspsych/plugin-survey-likert"></script>
+  <link rel="stylesheet" href="https://unpkg.com/jspsych@7.1.2/css/jspsych.css"/>  
+</head>
+<body></body>
+
+<script>
+
+
+  const  jsPsych = initJsPsych({
+    use_webaudio: false,
+    on_finish: function () {
+       jsPsych.data.displayData();
+    }
+  });
+      var timeline = [];
+
+      function generateRotationStyle (rotation) {
+        return "transform: rotate(" + rotation + "deg);"
+      }
+
+      var stim_function = function(param) {
+        console.log(param)
+        var rotation = 0 + param * 360;
+        var style = generateRotationStyle(rotation)
+        var html =
+        '<br><br><br><br><br><br><br><br><br><img src="Gab.png" width="150" height="16" opacity="0.5" style="' +
+          style +
+          '"></div></div><br><br><br><br><p>Press H to rotate line clockwise. Press G to rotate anticlockwise.</p>' +
+          "<p>When when you have matched rotation, click Continue.</p>";
+        return html;
+      };
+
+      timeline.push({
+        type: 'fullscreen',
+        fullscreen_mode: true
+        });
+
+      var instructions = {
+      type: jsPsychHtmlKeyboardResponse,
+      stimulus: "<br><br><p>In this experiment, an image like this one will appear in the center " +
+        "of the screen.</p> <img src='Gab.png'></img><p>The image will remian" +
+        " on screen for a short length of time. Immediately after a paddle will appear.</p>" +
+        "<p>Your task is to orientate the paddle to match the orientation of the lines.</p>" +
+        "<p>Press any key to begin.</p>"
+     
+        };
+        timeline.push(instructions);
+      
+        /* practice trial */
+    var test_stimuli = [
+      { stimulus: "Gab.png"},      
+    ];
+
+
+    var fixation = {
+      type: jsPsychHtmlKeyboardResponse,
+      stimulus: '<div style="font-size:60px;">+</div>',
+      choices: jsPsych.NO_KEYS,
+      trial_duration: 1000,
+    }
+
+    var test = {
+      type: jsPsychImageKeyboardResponse,
+      stimulus: jsPsych.timelineVariable('stimulus'),
+      choices: jsPsych.NO_KEYS,
+      trial_duration: 500,
+      maintain_aspect_ration: true,
+      stimulus_height: 150
+    }
+    
+    var capture = {
+        type: jsPsychReconstruction,
+        stim_function: stim_function,
+        starting_value: 0.5,
+        step_size: 0.025
+    }
+    
+    var test_procedure = {
+      timeline: [fixation, test, fixation, capture],
+      timeline_variables: test_stimuli,
+      randomize_order: true,
+      repetitions: 5
+    }
+
+    timeline.push(test_procedure); 
+    
+
+
+      /*create test screen
+      var test = {
+        type: "reconstruction",
+        stim_function: stim_function,
+        starting_value: 45,
+        step_size: 0.025
+      }; */
+      
+   
+
+      //start experiment
+     jsPsych.run(timeline);
+
+</script>
+
+
+
+
+</html>
