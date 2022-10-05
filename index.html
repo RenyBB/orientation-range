@@ -121,7 +121,7 @@
         else {
           y_new = ((180-orient_deg)/90) * line_length;
           x_new = ((1 - ((180-orient_deg)/90)) * line_length - line_length)*1.5;
-          x_start = 150 + ((1- (orient_deg/90)) * line_length)/2;
+          x_start = 150 + ((1 - ((180-orient_deg)/90)) * line_length - line_length)*1.5// 150 + ((1- (orient_deg/90)) * line_length)/2;
         }
       
         // first line
