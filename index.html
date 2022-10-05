@@ -9,6 +9,13 @@
   <script src="https://unpkg.com/@jspsych/plugin-image-keyboard-response"></script>
   <script src="https://unpkg.com/@jspsych/plugin-survey-likert"></script>
   <link rel="stylesheet" href="https://unpkg.com/jspsych@7.1.2/css/jspsych.css"/>  
+  
+  <style>
+      html,body {
+        background-color: #808080;
+        color: white;
+      }
+  </style>
 </head>
 <body></body>
 
@@ -75,7 +82,7 @@
     var capture = {
         type: jsPsychReconstruction,
         stim_function: stim_function,
-        starting_value: 0.5,
+        starting_value: 0.1,
         step_size: 0.025
     }
     
