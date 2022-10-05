@@ -102,6 +102,8 @@
         var orient_deg = [];
         var y_new = [];
         var x_new = [];
+        var x_start = [];
+        var y_start = [];
         var ctx = c.getContext("2d");
         if(final_param_value >= 0.5) {
           orient_deg = 360*final_param_value - 180;
@@ -112,16 +114,19 @@
         console.log(orient_deg);
         if(orient_deg <=90) {
           y_new = (orient_deg/90) * line_length;
-          x_new = (1- (orient_deg/90)) * line_length;
+          x_new = ((1- (orient_deg/90)) * line_length)/2;
+          x_start = 150 - ((1- (orient_deg/90)) * line_length)/2;
+         
         }
         else {
           y_new = ((180-orient_deg)/90) * line_length;
-          x_new = (1 - ((180-orient_deg)/90)) * line_length - line_length;
+          x_new = ((1 - ((180-orient_deg)/90)) * line_length - line_length)*1.5;
+          x_start = 150 + ((1- (orient_deg/90)) * line_length)/2;
         }
       
         // first line
         ctx.beginPath();
-        ctx.moveTo(150, 150);
+        ctx.moveTo(x_start, 150);
         ctx.lineTo(x_new+150, y_new+150);
         ctx.lineWidth = 10;
         ctx.strokeStyle = 'MediumBlue';
