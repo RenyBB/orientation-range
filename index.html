@@ -114,19 +114,19 @@
         console.log(orient_deg);
         if(orient_deg <=90) {
           y_new = (orient_deg/90) * line_length;
-          x_new = ((1- (orient_deg/90)) * line_length)/2;
-          x_start = 150 - ((1- (orient_deg/90)) * line_length)/2;
+          x_new = (1- (orient_deg/90)) * line_length;
+
          
         }
         else {
           y_new = ((180-orient_deg)/90) * line_length;
-          x_new = ((1 - ((180-orient_deg)/90)) * line_length - line_length)*1.5;
-          x_start = 150 + ((1 - ((180-orient_deg)/90)) * line_length - line_length)*1.5// 150 + ((1- (orient_deg/90)) * line_length)/2;
+          x_new = (1 - ((180-orient_deg)/90)) * line_length - line_length;
+        
         }
       
         // first line
         ctx.beginPath();
-        ctx.moveTo(x_start, 150);
+        ctx.moveTo(150, 150);
         ctx.lineTo(x_new+150, y_new+150);
         ctx.lineWidth = 10;
         ctx.strokeStyle = 'MediumBlue';
