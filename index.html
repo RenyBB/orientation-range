@@ -40,7 +40,7 @@
 
       var stim_function = function(param) {
         console.log(param)
-        var rotation = 0 + param * 360;
+        var rotation = 0 + param * 180;
         var style = generateRotationStyle(rotation)
         var html =
         '<br><br><br><br><br><br><br><br><br><img src="Line.png" width="200"style="' +
@@ -107,12 +107,14 @@
         var y_new = [];
         var x_new = [];
         var ctx = c.getContext("2d");
-        if(final_param_value >= 0.5) {
+      
+      orient_deg = 180*final_param_value;
+        /*if(final_param_value >= 0.5) {
           orient_deg = 360*final_param_value - 180;
         }
         else {
           orient_deg = 360*final_param_value;
-        }
+        }*/
         console.log(orient_deg);
         if(orient_deg <=90) {
           
