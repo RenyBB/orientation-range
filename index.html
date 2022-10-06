@@ -148,6 +148,11 @@
         error = error + 180;
       }
         console.log(error);
+      var feedback_colour = [];
+      if (Math.abs(error) < 5) { feedback_colour = 'MediumGreen';}
+      else {feedback_colour = 'MediumRed';}
+      
+      
         var y_new_stim = [];
         var x_new_stim = [];
 
@@ -176,7 +181,7 @@
         ctx.moveTo(350 - x_new , 350 - y_new);
         ctx.lineTo(x_new + 350, y_new + 350);
         ctx.lineWidth = 10;
-        ctx.strokeStyle = 'MediumBlue';
+        ctx.strokeStyle = 'feedback_colour';
         ctx.stroke();
         // line showing orientation of stimulus  
         ctx.beginPath();
@@ -187,9 +192,10 @@
         ctx.stroke();
     },
     canvas_size: [700, 700],
-    choices: ['Continue'],
+    choices: [],
+    trial_duration: 300,
     prompt: '<p>Orientation of Response</p>',
-    data: {line1_color: 'blue', line1_length: line_length}//{line1_color: 'blue', line1_length: 290, line2_color: "purple", line2_length: 170}
+    data: {line1_color: feedback_colour}//{line1_color: 'blue', line1_length: 290, line2_color: "purple", line2_length: 170}
 };
     
     var test_procedure = {
