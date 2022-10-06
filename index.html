@@ -32,7 +32,7 @@
       var timeline = [];
       var final_param_value = [];
       var true_orientation = [];
-      var line_length = 200;
+      var line_length = 100;
 
       function generateRotationStyle (rotation) {
         return "transform: rotate(" + rotation + "deg);"
@@ -131,6 +131,7 @@
         // coordinates of stimulus feedback line
         var orient_deg_stim = jsPsych.timelineVariable('orientation');
         console.log(orient_deg_stim);
+        console.log(orient_deg_stim-orient_deg);
         var y_new_stim = [];
         var x_new_stim = [];
 
