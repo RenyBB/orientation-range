@@ -115,10 +115,7 @@
       
       orient_deg = 180 - 180*final_param_value;
       
-      if (orient_deg_stim == 0 && orient_deg>90) {
-          orient_deg_stim = 180;
-      };
-        /*if(final_param_value >= 0.5) {
+       /*if(final_param_value >= 0.5) {
           orient_deg = 360*final_param_value - 180;
         }
         else {
@@ -142,8 +139,15 @@
         }     
      
         // coordinates of stimulus feedback line
-
-        console.log(orient_deg_stim-orient_deg);
+        var error = [];
+        error = orient_deg_stim-orient_deg;
+      if (error>90) {
+        error = 180 - error;
+      }
+      else if (error<-90) {
+        error = error + 180;
+      }
+        console.log(error);
         var y_new_stim = [];
         var x_new_stim = [];
 
