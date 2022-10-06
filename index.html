@@ -160,8 +160,8 @@
         ctx.stroke();
         // line showing orientation of stimulus  
         ctx.beginPath();
-        ctx.moveTo(350, 350);
-        ctx.lineTo(x_new_stim+350, y_new_stim+350);
+        ctx.moveTo(x_new_stim + 350, y_new_stim + 350);
+        ctx.lineTo(350 - x_new_stim, 350 - x_new_stim);
         ctx.lineWidth = 5;
         ctx.strokeStyle = 'White';
         ctx.stroke();
