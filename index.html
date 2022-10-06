@@ -111,12 +111,12 @@
         }
         console.log(orient_deg);
         if(orient_deg <=90) {
-          y_new = (orient_deg/90) * line_length;
-          x_new = (1- (orient_deg/90)) * line_length;
+          y_new = ((orient_deg/90) * line_length)/2;
+          x_new = ((1- (orient_deg/90)) * line_length)/2;
         }
         else {
-          y_new = ((180-orient_deg)/90) * line_length;
-          x_new = (1 - ((180-orient_deg)/90)) * line_length * (-1);
+          y_new = (((180-orient_deg)/90) * line_length)/2;
+          x_new = ((1 - ((180-orient_deg)/90)) * line_length * (-1))*1.5;
         }
       
         // first line
