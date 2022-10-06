@@ -149,8 +149,8 @@
       }
         console.log(error);
       var feedback_colour = [];
-      if (Math.abs(error) < 5) { feedback_colour = 'MediumGreen';}
-      else {feedback_colour = 'MediumRed';}
+      if (Math.abs(error) < 5) { feedback_colour = 'Green';}
+      else {feedback_colour = 'Red';}
       
       
         var y_new_stim = [];
@@ -174,7 +174,7 @@
         ctx.moveTo(350 - x_new , 350 - y_new);
         ctx.lineTo(x_new + 350, y_new + 350);
         ctx.lineWidth = 5;
-        ctx.strokeStyle = 'Red';
+        ctx.strokeStyle = feedback_colour;
         ctx.stroke();
         // line showing orientation of stimulus  
         ctx.beginPath();
