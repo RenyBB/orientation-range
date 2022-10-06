@@ -99,6 +99,7 @@
    var feedback = {
     type: jsPsychCanvasButtonResponse,
     stimulus: function(c) {
+        // coordinates of response feedback line
         var orient_deg = [];
         var y_new = [];
         var x_new = [];
@@ -117,22 +118,36 @@
         else {
           y_new = (((180-orient_deg)/90) * line_length);
           x_new = ((1 - ((180-orient_deg)/90)) * line_length * (-1));
+        }     
+     
+        // coordinates of stimulus feedback line
+        var orient_deg_stim = 70;
+        var y_new_stim = [];
+        var x_new_stim = [];
+
+        if(orient_deg_stim <=90) {
+          y_new_stim = ((orient_deg_stim/90) * line_length);
+          x_new_stim = ((1- (orient_deg_stim/90)) * line_length);
         }
+        else {
+          y_new_stim = (((180-orient_deg_stim)/90) * line_length);
+          x_new_stim = ((1 - ((180-orient_deg_stim)/90)) * line_length * (-1));
+        }     
       
-        // first line
+        // line showing orientation of response
         ctx.beginPath();
         ctx.moveTo(150, 150);
         ctx.lineTo(x_new+150, y_new+150);
         ctx.lineWidth = 10;
         ctx.strokeStyle = 'MediumBlue';
         ctx.stroke();
-        /* second line
+        // line showing orientation of stimulus  
         ctx.beginPath();
-        ctx.moveTo(20, 100);
-        ctx.lineTo(100, 250);
+        ctx.moveTo(150, 150);
+        ctx.lineTo(x_new_stim+150, y_new_stim+150);
         ctx.lineWidth = 10;
-        ctx.strokeStyle = 'MediumPurple';
-        ctx.stroke();*/
+        ctx.strokeStyle = 'White';
+        ctx.stroke();
     },
     canvas_size: [300, 300],
     choices: ['Continue'],
