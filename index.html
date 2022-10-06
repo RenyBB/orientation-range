@@ -153,15 +153,15 @@
       
         // line showing orientation of response
         ctx.beginPath();
-        ctx.moveTo(x_new + 350, y_new + 350);
-        ctx.lineTo(350 - x_new, 350 - y_new);
+        ctx.moveTo(350, 350);
+        ctx.lineTo(x_new + 350, y_new + 350);
         ctx.lineWidth = 10;
         ctx.strokeStyle = 'MediumBlue';
         ctx.stroke();
         // line showing orientation of stimulus  
         ctx.beginPath();
-        ctx.moveTo(x_new_stim + 350, y_new_stim + 350);
-        ctx.lineTo(350 - x_new_stim, 350 - x_new_stim);
+        ctx.moveTo(350, 350);
+        ctx.lineTo(x_new_stim + 350, y_new_stim + 350);
         ctx.lineWidth = 5;
         ctx.strokeStyle = 'White';
         ctx.stroke();
