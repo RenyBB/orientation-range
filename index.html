@@ -93,7 +93,7 @@
         type: jsPsychReconstruction,
         stim_function: stim_function,
         starting_value: 0.1,
-        step_size: 0.025,
+        step_size: 0.003,
         on_finish: function(data) {
           final_param_value = data.final_value;
         }
@@ -173,7 +173,7 @@
         ctx.beginPath();
         ctx.moveTo(350 - x_new , 350 - y_new);
         ctx.lineTo(x_new + 350, y_new + 350);
-        ctx.lineWidth = 5;
+        ctx.lineWidth = 9;
         ctx.strokeStyle = feedback_colour;
         ctx.stroke();
         // line showing orientation of stimulus  
