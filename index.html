@@ -108,7 +108,7 @@
         var x_new = [];
         var ctx = c.getContext("2d");
       
-      orient_deg = 180*final_param_value;
+      orient_deg = 180 - 180*final_param_value;
         /*if(final_param_value >= 0.5) {
           orient_deg = 360*final_param_value - 180;
         }
@@ -118,15 +118,17 @@
         console.log(orient_deg);
         if(orient_deg <=90) {
           
-          y_new = Math.sin(orient_deg * (Math.PI/180)) * line_length;
-          x_new = Math.sqrt( (line_length*line_length) - (y_new*y_new) );
+       y_new = Math.sin( (180-orient_deg) * (Math.PI/180)) * line_length;
+          x_new = Math.sqrt( (line_length*line_length) - (y_new*y_new) ) * (-1);
 
          
         }
         else {
 
-          y_new = Math.sin( (180-orient_deg) * (Math.PI/180)) * line_length;
-          x_new = Math.sqrt( (line_length*line_length) - (y_new*y_new) ) * (-1);
+          
+           y_new = Math.sin(orient_deg * (Math.PI/180)) * line_length;
+          x_new = Math.sqrt( (line_length*line_length) - (y_new*y_new) );
+
 
         }     
      
