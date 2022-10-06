@@ -63,7 +63,10 @@
       
         /* practice trial */
     var test_stimuli = [
-      { stimulus: "Gab.png"},      
+      { stimulus: "Gab_90.png", orientation: 90},  
+      { stimulus: "Gab_0.png", orientation: 0},  
+      { stimulus: "Gab_45.png", orientation: 45},
+      { stimulus: "Gab_135.png", orientation: 135},
     ];
 
 
@@ -126,7 +129,7 @@
         }     
      
         // coordinates of stimulus feedback line
-        var orient_deg_stim = 70;
+        var orient_deg_stim = jsPsych.timelineVariable('orientation');
         var y_new_stim = [];
         var x_new_stim = [];
 
