@@ -116,7 +116,7 @@
           //x_new = ((1- (orient_deg/90)) * line_length);
           
           y_new = Math.sin(orient_deg * (Math.PI/180)) * line_length;
-          x_new = Math.sqrt( (line_length*line_length)/(y_new*y_new) );
+          x_new = Math.sqrt( (line_length*line_length) - (y_new*y_new) );
         }
         else {
           y_new = (((180-orient_deg)/90) * line_length);
