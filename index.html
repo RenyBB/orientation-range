@@ -131,12 +131,18 @@
         var x_new_stim = [];
 
         if(orient_deg_stim <=90) {
-          y_new_stim = ((orient_deg_stim/90) * line_length);
-          x_new_stim = ((1- (orient_deg_stim/90)) * line_length);
+
+          y_new_stim = Math.sin(orient_deg_stim * (Math.PI/180)) * line_length;
+          x_new_stim = Math.sqrt( (line_length*line_length) - (y_new_stim*y_new_stim) );
+          
+          
         }
         else {
-          y_new_stim = (((180-orient_deg_stim)/90) * line_length);
-          x_new_stim = ((1 - ((180-orient_deg_stim)/90)) * line_length * (-1));
+          //y_new_stim = (((180-orient_deg_stim)/90) * line_length);
+          //x_new_stim = ((1 - ((180-orient_deg_stim)/90)) * line_length * (-1));
+          
+          y_new_stim = Math.sin( (180-orient_deg_stim) * (Math.PI/180)) * line_length;
+          x_new_stim = Math.sqrt( (line_length*line_length) - (y_new_stim*y_new_stim) ) * (-1);
         }     
       
         // line showing orientation of response
