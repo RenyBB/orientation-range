@@ -169,7 +169,13 @@
           x_new_stim = Math.sqrt( (line_length*line_length) - (y_new_stim*y_new_stim) );
         }     
       
-  
+          // line showing orientation of response
+        ctx.beginPath();
+        ctx.moveTo(350 - x_new , 350 - y_new);
+        ctx.lineTo(x_new + 350, y_new + 350);
+        ctx.lineWidth = 5;
+        ctx.strokeStyle = 'MediumRed';
+        ctx.stroke();
         // line showing orientation of stimulus  
         ctx.beginPath();
         ctx.moveTo(350 - x_new_stim, 350 - y_new_stim);
@@ -177,13 +183,7 @@
         ctx.lineWidth = 5;
         ctx.strokeStyle = 'White';
         ctx.stroke();
-        // line showing orientation of response
-        ctx.beginPath();
-        ctx.moveTo(350 - x_new , 350 - y_new);
-        ctx.lineTo(x_new + 350, y_new + 350);
-        ctx.lineWidth = 5;
-        ctx.strokeStyle = feedback_colour;
-        ctx.stroke();
+
     },
     canvas_size: [700, 700],
     choices: [],
