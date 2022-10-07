@@ -37,6 +37,7 @@
       let true_orientation = [];
       const line_length = 100;
       let corrected_angle = [];
+      let error = [];
 	        
       // practicestimuli
       const test_stimuli = [
@@ -156,7 +157,7 @@
 		console.log(`corrected orientation: ${corrected_angle}`);
 	  	
 		 
-		 var error = [];
+		error = [];
         	error = jsPsych.timelineVariable('orientation')-corrected_angle;
       		if (error>90) {
         		error = 180 - error;
@@ -172,6 +173,7 @@
 		data.selected_orientation = selected_orientation;
           	data.corrected_orientation = corrected_angle;
 		data.feedback_colour = feedback_colour;
+		data.error = error.
 		
 	}
       }
