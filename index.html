@@ -4,6 +4,8 @@
   	<script src="https://unpkg.com/jspsych"></script>
   	<script src="https://unpkg.com/@jspsych/plugin-html-button-response"></script>
 	<script src="https://unpkg.com/@jspsych/plugin-preload"></script>
+	<script src="https://unpkg.com/@jspsych/browser-check"></script>
+	<script src="https://unpkg.com/@jspsych/virtual-chinrest"></script>
   	<script src="https://unpkg.com/@jspsych/plugin-html-keyboard-response"></script>
   	<script src="https://unpkg.com/@jspsych/plugin-image-keyboard-response"></script>
     	<script src="https://unpkg.com/@jspsych/plugin-canvas-button-response"></script>
@@ -46,7 +48,29 @@
       { stimulus: "Gab_45.png", orientation: 45},
       { stimulus: "Gab_135.png", orientation: 135},
       ]; 
+      const browser_check = {
+ 	 type: jsPsychBrowserCheck,
+	 minimum_width: 1920,
+  	 inclusion_function: (data) => {
+    		return data.mobile === false
+  	},
+  	exclusion_message: (data) => {
+    		if(data.mobile){
+      			return '<p>You must use a desktop/laptop computer to participate in this experiment.</p>';
+    		} 
+  	}
+	};
+	    
+	    
+	    
+	const virtual_chinrest = {
+  		type: jsPsychVirtualChinrest,
+  		blindspot_reps: 5,
+  		resize_units: "deg",
+  		pixels_per_unit: 50
+		};
 
+	    
       const instruction = {
           type: jsPsychHtmlButtonResponse,
           stimulus: 'Click on the Start button.',
@@ -211,6 +235,8 @@
       // start the experiment 
 
       jsPsych.run([
+	  browser_check,
+	  virtual_chinrest,
           instruction,
           {
             timeline: [fixation, test, trial, feedback],
