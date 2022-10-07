@@ -69,7 +69,7 @@
       const line_obj = {
           obj_type: 'line',
           line_length: 200,
-          line_color: 'white',
+          line_color: 'black',
           line_width: 5,
           angle: function() {return Math.round(Math.random()*180)},
       };
@@ -96,8 +96,9 @@
           pixi: pixi_flag,
           canvas_height: 400,
 	  canvas_width: 1500,
-          button_choices: ['Continue'],
-          prompt: '<p>Click to wake up mouse. Move mouse SLOWLY to the left or right to rotate the dial. Click when you are happy with the orientation of the line.</p>',
+	  response_type: 'key',
+          choices: [' '],
+          prompt: '<p>Right-click to wake up mouse. Move mouse SLOWLY to the left or right to rotate the line. When you are happy with the orientation of the line, right click to stop the line moving. Press the spacebar to save your response. </p>',
           stimuli: [circle_obj, line_obj], // These can be referenced using the jsPsych.currentTrial().stim_array array.
           response_type: 'button',
           vert_button_margin: '50px',
