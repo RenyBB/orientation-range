@@ -100,6 +100,60 @@
         }
     }
     
+  
+  
+     const circle_obj = {
+          obj_type: 'circle',
+          startX: 'center',
+          startY: 'center',
+          radius: 100,
+          line_color: 'white',
+          line_width: 5,
+      };
+
+      let prev_mouseX = null;
+      let mouse_move_start = false;
+      
+      const line_obj = {
+          obj_type: 'line',
+          line_length: 200
+          line_color: 'white',
+          line_width: 5,
+          angle: 0
+      }
+
+      const trial = {
+          type: jsPsychPsychophysics,
+          canvas_height: 500,
+          button_choices: ['YES', 'NO'],
+          prompt: '<p>Click and move the mouse.</p>',
+          stimuli: [circle_obj, line_obj], // These can be referenced using the jsPsych.currentTrial().stim_array array.
+          response_type: 'button',
+          vert_button_margin: '50px',
+          horiz_button_margin: '50px',
+          mouse_down_func: function(event){
+            mouse_move_start = !mouse_move_start;
+          },                
+
+          mouse_move_func: function(event){ // This function will be automatically added as the event listener of the canvas.
+            if (mouse_move_start === false) return;
+
+            if (prev_mouseX === null){
+              prev_mouseX = event.offsetX;
+              return
+            }
+
+            // stim_array[0] means a circle, and stim_array[1] means a line.
+            if (event.offsetX > prev_mouseX){
+              jsPsych.getCurrentTrial().stim_array[1].angle += 5; // The angle changes by 5 degrees.
+            } else {
+              jsPsych.getCurrentTrial().stim_array[1].angle -= 5;
+            }
+            prev_mouseX = event.offsetX;
+	    console.log(jsPsych.getCurrentTrial().stim_array[1].angle);
+          },
+      }
+  
    var feedback = {
     type: jsPsychCanvasButtonResponse,
     stimulus: function(c) {
@@ -194,7 +248,7 @@
 };
     
     var test_procedure = {
-      timeline: [fixation, test, fixation, capture, feedback],
+      timeline: [fixation, test, fixation, capture, trial, feedback],
       timeline_variables: test_stimuli,
       randomize_order: true,
       repetitions: 5
