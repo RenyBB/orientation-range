@@ -69,9 +69,9 @@
       const line_obj = {
           obj_type: 'line',
           line_length: 200,
-          line_color: 'black',
+          line_color: 'white',
           line_width: 5,
-          angle: 0
+          angle: function() {return Math.round(Math.random()*180)},
       };
 	    
      var fixation = {
@@ -185,7 +185,7 @@
           canvas_height: 400,
 	  canvas_width: 1500,
           button_choices: ['Continue'],
-          prompt: '<p>Click to wake up mouse. Move mouse SLOWLY to the left or right to rotate the dial. Click when you are happy with the orientation of the line.</p>',
+          prompt: '<p>Click to activate mouse. Move mouse SLOWLY to the left or right to rotate the line. Click when you are happy with the orientation of the line.</p>',
           stimuli: [circle_obj, 
 		{
 		obj_type: 'line',
@@ -206,98 +206,8 @@
           vert_button_margin: '50px',
           horiz_button_margin: '50px'
 	};
-      
-    /*   var feedback = {
-    type: jsPsychCanvasButtonResponse,
-    stimulus: function(c) {
-        // stimulus orientation
-        var orient_deg_stim = jsPsych.timelineVariable('orientation');
-        console.log(`stimulus orientation: ${orient_deg_stim}`);
-      
-      
-        // coordinates of response feedback line
-        var orient_deg = [];
-        var y_new = [];
-        var x_new = [];
-        var ctx = c.getContext("2d");
-      
-       orient_deg = 180 - corrected_angle;//jsPsych.data.get().last(1).values()[0].corrected_angle;
-      
-      
-        console.log(orient_deg);
-        if(orient_deg <=90) {
-          
-       y_new = Math.sin( (180-orient_deg) * (Math.PI/180)) * line_length;
-          x_new = Math.sqrt( (line_length*line_length) - (y_new*y_new) ) * (-1);
-
-         
-        }
-        else {
-
-          
-           y_new = Math.sin(orient_deg * (Math.PI/180)) * line_length;
-          x_new = Math.sqrt( (line_length*line_length) - (y_new*y_new) );
-
-
-        }     
      
-        // coordinates of stimulus feedback line
-        var error = [];
-        error = orient_deg_stim-orient_deg;
-      if (error>90) {
-        error = 180 - error;
-      }
-      else if (error<-90) {
-        error = error + 180;
-      }
-        console.log(error);
-      var feedback_colour = [];
-      if (Math.abs(error) < 5) { feedback_colour = 'Green';}
-      else {feedback_colour = 'Red';}
-      
-      
-        var y_new_stim = [];
-        var x_new_stim = [];
-
-        if(orient_deg_stim <=90) {
-
-          //y_new_stim = Math.sin(orient_deg_stim * (Math.PI/180)) * line_length;
-          //x_new_stim = Math.sqrt( (line_length*line_length) - (y_new_stim*y_new_stim) );
-          
-          y_new_stim = Math.sin( (180-orient_deg_stim) * (Math.PI/180)) * line_length;
-          x_new_stim = Math.sqrt( (line_length*line_length) - (y_new_stim*y_new_stim) ) * (-1);
-        }
-        else {         
-          y_new_stim = Math.sin(orient_deg_stim * (Math.PI/180)) * line_length;
-          x_new_stim = Math.sqrt( (line_length*line_length) - (y_new_stim*y_new_stim) );
-        }     
-      
-          // line showing orientation of response
-        ctx.beginPath();
-        ctx.moveTo(350 - x_new , 350 - y_new);
-        ctx.lineTo(x_new + 350, y_new + 350);
-        ctx.lineWidth = 9;
-        ctx.strokeStyle = feedback_colour;
-        ctx.stroke();
-        // line showing orientation of stimulus  
-        ctx.beginPath();
-        ctx.moveTo(350 - x_new_stim, 350 - y_new_stim);
-        ctx.lineTo(x_new_stim + 350, y_new_stim + 350);
-        ctx.lineWidth = 5;
-        ctx.strokeStyle = 'White';
-        ctx.stroke();
-
-    },
-    canvas_size: [700, 700],
-    choices: ['continue'],
-    //trial_duration: 300,
-    prompt: '<p>Feedback</p>',
-   //data: {line1_color: 'blue', line1_length: 290, line2_color: "purple", line2_length: 170}
-};*/ 
-      
-      
-      
-      /* start the experiment */
+      // start the experiment 
 
       jsPsych.run([
           instruction,
