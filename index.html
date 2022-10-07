@@ -1,223 +1,138 @@
 <!DOCTYPE html>
-
 <html>
-<head>
-  <script src="jspsych-psychophysics.js"></script>
-  <script src="https://unpkg.com/jspsych"></script>
-  <script src="https://unpkg.com/@jspsych/plugin-preload"></script>
-  <script src="https://unpkg.com/@jspsych/plugin-reconstruction"></script>
-  <script src="https://unpkg.com/@jspsych/plugin-html-keyboard-response"></script>
-  <script src="https://unpkg.com/@jspsych/plugin-image-keyboard-response"></script>
-    <script src="https://unpkg.com/@jspsych/plugin-canvas-button-response"></script>
-	      <script src="https://pixijs.download/release/pixi.js"></script>
+    <head>
+  	<script src="https://unpkg.com/jspsych"></script>
+  	<script src="https://unpkg.com/@jspsych/plugin-html-button-response"></script>
+      	<script src="../jspsych-psychophysics.js"></script>
+      	<script src="https://pixijs.download/release/pixi.js"></script>
+  	<link rel="stylesheet" href="https://unpkg.com/jspsych@7.1.2/css/jspsych.css"/>  
+	<style>
+      		html,body {
+        	background-color: #808080;
+        	color: white;
+      		}
+  	</style>
+    </head>
+    <body></body>
+    <script>
+      // This file demonstrates how to specify the mouse-event functions.
+      // As you move the mouse, the slope of the line segment changes. 
+      // By changing the direction of the mouse in motion,  the direction of rotation of the line changes.
 
-  <link rel="stylesheet" href="https://unpkg.com/jspsych@7.1.2/css/jspsych.css"/>  
-  
-  <style>
-      html,body {
-        background-color: #808080;
-        color: white;
-      }
-  </style>
-</head>
-<body></body>
+      const jsPsych = initJsPsych({
+        on_finish: function() {
+            jsPsych.data.displayData();
+        }
+      })
+      console.log(`jsPsych Version ${jsPsych.version()}`)
 
-<script>
+      const pixi_flag = jsPsych.data.getURLVariable('pixi_flag') === '1' ? true : false;
 
-
-  const  jsPsych = initJsPsych({
-    use_webaudio: false,
-    on_finish: function () {
-       jsPsych.data.displayData();
-    }
-  });
-      var timeline = [];
-      var final_param_value = [];
-      var true_orientation = [];
-      var line_length = 100;
-
-      function generateRotationStyle (rotation) {
-        return "transform: rotate(" + rotation + "deg);"
+      const instruction = {
+          type: jsPsychHtmlButtonResponse,
+          stimulus: 'Click on the Start button.',
+          choices: ['Start'],
+          prompt: "This is a sample program for the jspsych-psychophysics plugin.",
       }
 
-      var stim_function = function(param) {
-        console.log(param)
-        var rotation = 0 + param * 180;
-        var style = generateRotationStyle(rotation)
-        var html =
-        '<br><br><br><br><br><br><br><br><br><img src="Line.png" width="200"style="' +
-          style +
-          '"></div></div><br><br><br><br><p>Press H to rotate line clockwise. Press G to rotate anticlockwise.</p>' +
-          "<p>When when you have matched rotation, click Continue.</p>";
-        return html;
+      const circle_obj = {
+          obj_type: 'circle',
+          startX: 'center',
+          startY: 'center',
+          radius: 100,
+          line_color: 'white',
+          line_width: 5,
       };
 
-      var instructions = {
-      type: jsPsychHtmlKeyboardResponse,
-      stimulus: "<br><br><p>In this experiment, an image like this one will appear in the center " +
-        "of the screen.</p> <img src='Gab.png' width='150'></img><p>The image will remian" +
-        " on screen for a short length of time. Immediately after a paddle will appear.</p>" +
-        "<p>Your task is to orientate the paddle to match the orientation of the lines.</p>" +
-        "<p>Press any key to begin.</p>"
-     
-        };
-        timeline.push(instructions);
+      let prev_mouseX = null;
+      let mouse_move_start = false;
       
-        /* practice trial */
-    var test_stimuli = [
-      { stimulus: "Gab_90.png", orientation: 90},  
-      { stimulus: "Gab_0.png", orientation: 0},  
-      { stimulus: "Gab_45.png", orientation: 45},
-      { stimulus: "Gab_135.png", orientation: 135},
-    ];
-
-
-    var fixation = {
-      type: jsPsychHtmlKeyboardResponse,
-      stimulus: '<div style="font-size:60px;">+</div>',
-      choices: 'NO_KEYS',
-      trial_duration: 1000,
-    }
-
-    var test = {
-      type: jsPsychImageKeyboardResponse,
-      stimulus: jsPsych.timelineVariable('stimulus'),
-      choices: 'NO_KEYS',
-      trial_duration: 500,
-      maintain_aspect_ration: true,
-      stimulus_height: 150,
-      on_finish: function(data) {
-        true_orientation = 60;
+      const line_obj = {
+          obj_type: 'line',
+          line_length: 200,
+          line_color: 'white',
+          line_width: 5,
+          angle: 0
       }
-    }
-    
-    var capture = {
-        type: jsPsychReconstruction,
-        stim_function: stim_function,
-        starting_value: 0.1,
-        step_size: 0.003,
-        on_finish: function(data) {
-          final_param_value = data.final_value;
-        }
-    }
 
-  
-   var feedback = {
-    type: jsPsychCanvasButtonResponse,
-    stimulus: function(c) {
-        // stimulus orientation
-        var orient_deg_stim = jsPsych.timelineVariable('orientation');
-        console.log(orient_deg_stim);
-      
-      
-        // coordinates of response feedback line
-        var orient_deg = [];
-        var y_new = [];
-        var x_new = [];
-        var ctx = c.getContext("2d");
-      
-      orient_deg = 180 - 180*final_param_value;
-      
-       /*if(final_param_value >= 0.5) {
-          orient_deg = 360*final_param_value - 180;
-        }
-        else {
-          orient_deg = 360*final_param_value;
-        }*/
-        console.log(orient_deg);
-        if(orient_deg <=90) {
+      const trial = {
+          type: jsPsychPsychophysics,
+          pixi: pixi_flag,
+          canvas_height: 400,
+	  canvas_width: 1500,
+          button_choices: ['Continue'],
+          prompt: '<p>Click to wake up mouse. Move mouse SLOWLY to the left or right to rotate the dial. Click when you are happy with the orientation of the line.</p>',
+          stimuli: [circle_obj, line_obj], // These can be referenced using the jsPsych.currentTrial().stim_array array.
+          response_type: 'button',
+          vert_button_margin: '50px',
+          horiz_button_margin: '50px',
+          mouse_down_func: function(event){
+            mouse_move_start = !mouse_move_start;
+          },                
+          // mouse_up_func: function(event){ // This also works, but, please comment out the mouse_down_function.
+          //   mouse_move_start = !mouse_move_start;
+          // },
+          mouse_move_func: function(event){ // This function will be automatically added as the event listener of the canvas.
+            let a = [];
+	    if (mouse_move_start === false) return;
+
+            if (prev_mouseX === null){
+              prev_mouseX = event.offsetX;
+              return
+            }
+
+            // stim_array[0] means a circle, and stim_array[1] means a line.
+            const line = pixi_flag ? jsPsych.getCurrentTrial().stim_array[1].pixi_obj : jsPsych.getCurrentTrial().stim_array[1];
+
+            if (event.offsetX > prev_mouseX){
+              line.angle += 1; // The angle changes by 1 degree.
+            } else {
+              line.angle -= 1;
+            }
+            prev_mouseX = event.offsetX;
+
+	    console.log(`current orientation: ${jsPsych.getCurrentTrial().stim_array[1].angle}`);
+          },
+	 on_finish: function(data) {
+		var selected_orientation = jsPsych.getCurrentTrial().stim_array[1].angle;
           
-       y_new = Math.sin( (180-orient_deg) * (Math.PI/180)) * line_length;
-          x_new = Math.sqrt( (line_length*line_length) - (y_new*y_new) ) * (-1);
+  	  	var positive_orientation = [];
 
-         
-        }
-        else {
+		if (selected_orientation<0) {
+			var negative_multiplier = Math.ceil(Math.abs(selected_orientation)/360);
+			positive_orientation =  selected_orientation + 360*negative_multiplier;
+        	}
+		else { positive_orientation =  selected_orientation; }
+	 
+		var quadrant_angle = [];
+		if (positive_orientation >= 360) {
+	 		var positive_multiplier = Math.floor(positive_orientation /360);
+	       		quadrant_angle = positive_orientation - 360*positive_multiplier; 	
+		}
+		else {quadrant_angle = positive_orientation;}
 
-          
-           y_new = Math.sin(orient_deg * (Math.PI/180)) * line_length;
-          x_new = Math.sqrt( (line_length*line_length) - (y_new*y_new) );
+		var corrected_angle = [];
+		if (quadrant_angle>=0 && quadrant_angle<=90) {corrected_angle = quadrant_angle;}
+		else if (quadrant_angle>90 && quadrant_angle<=180) {corrected_angle = 180 - quadrant_angle;}
+		else if (quadrant_angle>180 && quadrant_angle<=270) {corrected_angle = quadrant_angle - 180;}
+		else if (quadrant_angle>270 && quadrant_angle<=360) {corrected_angle = 360 - quadrant_angle;}
 
-
-        }     
-     
-        // coordinates of stimulus feedback line
-        var error = [];
-        error = orient_deg_stim-orient_deg;
-      if (error>90) {
-        error = 180 - error;
+		console.log(`selected orientation: ${selected_orientation}`);
+		console.log(`corrected orientation: ${corrected_angle}`);
+	  	data.selected_orientation = selected_orientation;
+          	data.corrected_orientation = corrected_angle;
+	}
       }
-      else if (error<-90) {
-        error = error + 180;
-      }
-        console.log(error);
-      var feedback_colour = [];
-      if (Math.abs(error) < 5) { feedback_colour = 'Green';}
-      else {feedback_colour = 'Red';}
-      
-      
-        var y_new_stim = [];
-        var x_new_stim = [];
 
-        if(orient_deg_stim <=90) {
+      /* start the experiment */
 
-          //y_new_stim = Math.sin(orient_deg_stim * (Math.PI/180)) * line_length;
-          //x_new_stim = Math.sqrt( (line_length*line_length) - (y_new_stim*y_new_stim) );
-          
-          y_new_stim = Math.sin( (180-orient_deg_stim) * (Math.PI/180)) * line_length;
-          x_new_stim = Math.sqrt( (line_length*line_length) - (y_new_stim*y_new_stim) ) * (-1);
-        }
-        else {         
-          y_new_stim = Math.sin(orient_deg_stim * (Math.PI/180)) * line_length;
-          x_new_stim = Math.sqrt( (line_length*line_length) - (y_new_stim*y_new_stim) );
-        }     
-      
-          // line showing orientation of response
-        ctx.beginPath();
-        ctx.moveTo(350 - x_new , 350 - y_new);
-        ctx.lineTo(x_new + 350, y_new + 350);
-        ctx.lineWidth = 9;
-        ctx.strokeStyle = feedback_colour;
-        ctx.stroke();
-        // line showing orientation of stimulus  
-        ctx.beginPath();
-        ctx.moveTo(350 - x_new_stim, 350 - y_new_stim);
-        ctx.lineTo(x_new_stim + 350, y_new_stim + 350);
-        ctx.lineWidth = 5;
-        ctx.strokeStyle = 'White';
-        ctx.stroke();
+      jsPsych.run([
+          instruction,
+          {
+            timeline: [trial],
+            repetitions: 10
+          }
+        ])
 
-    },
-    canvas_size: [700, 700],
-    choices: [],
-    trial_duration: 300,
-    prompt: '<p>Orientation of Response</p>',
-   //data: {line1_color: 'blue', line1_length: 290, line2_color: "purple", line2_length: 170}
-};
-    
-    var test_procedure = {
-      timeline: [fixation, test, fixation, capture, feedback],
-      timeline_variables: test_stimuli,
-      randomize_order: true,
-      repetitions: 5
-    }
-
-    timeline.push(test_procedure); 
-    
-
-
-      /*create test screen
-      var test = {
-        type: "reconstruction",
-        stim_function: stim_function,
-        starting_value: 45,
-        step_size: 0.025
-      }; */
-      
-   
-
-      //start experiment
-     jsPsych.run(timeline);
-
-</script>
+  </script>
 </html>
