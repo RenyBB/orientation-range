@@ -174,7 +174,7 @@
         var x_new = [];
         var ctx = c.getContext("2d");
       
-       orient_deg = corrected_angle;//jsPsych.data.get().last(1).values()[0].corrected_angle;
+       orient_deg = 180 - corrected_angle;//jsPsych.data.get().last(1).values()[0].corrected_angle;
       
        /*if(final_param_value >= 0.5) {
           orient_deg = 360*final_param_value - 180;
