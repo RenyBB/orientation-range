@@ -68,7 +68,7 @@
       const line_obj = {
           obj_type: 'line',
           line_length: 200,
-          line_color: 'white',
+          line_color: 'black',
           line_width: 5,
           angle: 0
       };
@@ -154,8 +154,25 @@
 
 		console.log(`selected orientation: ${selected_orientation}`);
 		console.log(`corrected orientation: ${corrected_angle}`);
-	  	data.selected_orientation = selected_orientation;
+	  	
+		 
+		 var error = [];
+        	error = jsPsych.timelineVariable('orientation')-corrected_angle;
+      		if (error>90) {
+        		error = 180 - error;
+     		 }
+      		else if (error<-90) {
+        		error = error + 180;
+      		}
+        	console.log(error);
+		var feedback_colour = [];
+     			if (Math.abs(error) < 5) { feedback_colour = 'green';}
+      			else {feedback_colour = 'red';} 
+		 
+		data.selected_orientation = selected_orientation;
           	data.corrected_orientation = corrected_angle;
+		data.feedback_colour = feedback_colour;
+		
 	}
       }
 
@@ -171,7 +188,7 @@
 		{
 		obj_type: 'line',
           	line_length: 200,
-          	line_color: 'Red',
+          	line_color: function () {return jsPsych.data.get().last(1).values()[0].feedback_colour}
           	line_width: 5,
           	angle: function () {return jsPsych.data.get().last(1).values()[0].selected_orientation}
 		},
