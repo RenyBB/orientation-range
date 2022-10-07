@@ -160,7 +160,35 @@
       }
 
       
-       var feedback = {
+       const feedback= {
+          type: jsPsychPsychophysics,
+          pixi: pixi_flag,
+          canvas_height: 400,
+	  canvas_width: 1500,
+          button_choices: ['Continue'],
+          prompt: '<p>Click to wake up mouse. Move mouse SLOWLY to the left or right to rotate the dial. Click when you are happy with the orientation of the line.</p>',
+          stimuli: [circle_obj, 
+		{
+		obj_type: 'line',
+          	line_length: 200,
+          	line_color: 'Red',
+          	line_width: 5,
+          	angle: function () {return jsPsych.data.get().last(1).values()[0].selected_orientation}
+		},
+		{
+		obj_type: 'line',
+          	line_length: 200,
+          	line_color: 'White',
+          	line_width: 5,
+          	angle: function () {return jsPsych.timelineVariable('orientation')}	
+		    }   
+		   ],
+          response_type: 'button',
+          vert_button_margin: '50px',
+          horiz_button_margin: '50px'
+	};
+      
+    /*   var feedback = {
     type: jsPsychCanvasButtonResponse,
     stimulus: function(c) {
         // stimulus orientation
@@ -176,12 +204,7 @@
       
        orient_deg = 180 - corrected_angle;//jsPsych.data.get().last(1).values()[0].corrected_angle;
       
-       /*if(final_param_value >= 0.5) {
-          orient_deg = 360*final_param_value - 180;
-        }
-        else {
-          orient_deg = 360*final_param_value;
-        }*/
+      
         console.log(orient_deg);
         if(orient_deg <=90) {
           
@@ -251,7 +274,7 @@
     //trial_duration: 300,
     prompt: '<p>Feedback</p>',
    //data: {line1_color: 'blue', line1_length: 290, line2_color: "purple", line2_length: 170}
-};
+};*/ 
       
       
       
