@@ -235,9 +235,9 @@
       // start the experiment 
 
       jsPsych.run([
+	  instruction,
 	  browser_check,
-	  virtual_chinrest,
-          instruction,
+	  virtual_chinrest, 
           {
             timeline: [fixation, test, trial, feedback],
             timeline_variables: test_stimuli,
