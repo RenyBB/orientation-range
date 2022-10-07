@@ -16,7 +16,7 @@
   	<link rel="stylesheet" href="https://unpkg.com/jspsych@7.1.2/css/jspsych.css"/>  
 	<style>
       		html,body {
-        	background-color: #808080;
+        	background-color: black;
         	color: white;
       		}
   	</style>
@@ -124,7 +124,6 @@
           choices: [' '],
           prompt: '<p>Right-click to wake up mouse. Move mouse SLOWLY to the left or right to rotate the line. When you are happy with the orientation of the line, right click to stop the line moving. Press the spacebar to save your response. </p>',
           stimuli: [circle_obj, line_obj], // These can be referenced using the jsPsych.currentTrial().stim_array array.
-          response_type: 'button',
           vert_button_margin: '50px',
           horiz_button_margin: '50px',
           mouse_down_func: function(event){
