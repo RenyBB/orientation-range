@@ -146,7 +146,7 @@
 		}
 		else {quadrant_angle = positive_orientation;}
 
-		var corrected_angle = [];
+		corrected_angle = [];
 		if (quadrant_angle>=0 && quadrant_angle<=90) {corrected_angle = quadrant_angle;}
 		else if (quadrant_angle>90 && quadrant_angle<=180) {corrected_angle = 180 - quadrant_angle;}
 		else if (quadrant_angle>180 && quadrant_angle<=270) {corrected_angle = quadrant_angle - 180;}
@@ -165,7 +165,7 @@
     stimulus: function(c) {
         // stimulus orientation
         var orient_deg_stim = jsPsych.timelineVariable('orientation');
-        console.log(orient_deg_stim);
+        console.log(`stimulus orientation: ${orient_deg_stim}`);
       
       
         // coordinates of response feedback line
@@ -174,7 +174,7 @@
         var x_new = [];
         var ctx = c.getContext("2d");
       
-      orient_deg = corrected_angle;
+       orient_deg = corrected_angle;//jsPsych.data.get().last(1).values()[0].corrected_angle;
       
        /*if(final_param_value >= 0.5) {
           orient_deg = 360*final_param_value - 180;
@@ -247,8 +247,8 @@
 
     },
     canvas_size: [700, 700],
-    choices: [],
-    trial_duration: 300,
+    choices: ['continue'],
+    //trial_duration: 300,
     prompt: '<p>Feedback</p>',
    //data: {line1_color: 'blue', line1_length: 290, line2_color: "purple", line2_length: 170}
 };
