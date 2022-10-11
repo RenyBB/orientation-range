@@ -272,6 +272,7 @@
         },
         on_finish: function(){
             // remove the keyboard listener 
+		clearInterval(interval);
             document.removeEventListener('keydown', function(e){
                 if (e.key == 'q'){
                     window.clear_timer = -1;
