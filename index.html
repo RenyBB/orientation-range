@@ -41,13 +41,18 @@
       let corrected_angle = [];
       let error = [];
 	        
-      // practicestimuli
-      const test_stimuli = [
+      // practice stimuli
+      const training_stimuli = [
       { stimulus: "Gab_90.png", orientation: 90},  
       { stimulus: "Gab_0.png", orientation: 0},  
+      ]; 
+	    
+      // test stimuli
+      const training_stimuli = [
       { stimulus: "Gab_45.png", orientation: 45},
       { stimulus: "Gab_135.png", orientation: 135},
       ]; 
+	    
       const browser_check = {
  	 type: jsPsychBrowserCheck,
 	 minimum_width: 1500,
@@ -235,13 +240,20 @@
       jsPsych.run([
 	  instruction,
 	  browser_check,
-	  virtual_chinrest, 
+	  //virtual_chinrest, 
           {
+            timeline: [fixation, test, trial, feedback],
+            timeline_variables: training_stimuli,
+      	    randomize_order: true,
+            repetitions: 2
+          },
+	  instruction,
+	  {
             timeline: [fixation, test, trial, feedback],
             timeline_variables: test_stimuli,
       	    randomize_order: true,
             repetitions: 5
-          }
+          },  
         ])
 
   </script>
