@@ -262,6 +262,7 @@
             if(time_left <= 0){
                 document.querySelector('#clock').innerHTML = "0:00";
                 window.clear_timer = -1;
+		clearInterval(interval);
             };
             if(window.clear_timer > 0){
                 document.querySelector('#clock').innerHTML = minutes + ':' + seconds_str
@@ -272,7 +273,6 @@
         },
         on_finish: function(){
             // remove the keyboard listener 
-		clearInterval(interval);
             document.removeEventListener('keydown', function(e){
                 if (e.key == 'q'){
                     window.clear_timer = -1;
