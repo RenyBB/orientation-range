@@ -7,6 +7,7 @@
 	<script src="https://unpkg.com/@jspsych/plugin-browser-check@1.0.1"></script>
 	<script src="https://unpkg.com/@jspsych/plugin-virtual-chinrest@2.0.1"></script>
   	<script src="https://unpkg.com/@jspsych/plugin-html-keyboard-response"></script>
+	<script src="https://unpkg.com/@jspsych/plugin-html-button-response"></script>
   	<script src="https://unpkg.com/@jspsych/plugin-image-keyboard-response"></script>
     	<script src="https://unpkg.com/@jspsych/plugin-canvas-button-response"></script>
 	    
@@ -237,45 +238,31 @@
      
 //timer	    
     const mkTimer = {
-        type: jsPsychHtmlKeyboardResponse,
+        type: jsPsychHtmlButtonResponse,
         stimulus: '<div style="font-size: 25px"><p>The next part of the experiment will start in</p>'
                 + '<div style="font-size: 50px"><p><span id="clock">1:00</span></div></p>',
-        choices: ['q'],
+        choices: ['Continuew'],
         trial_duration: 60100,
         on_load: function(){
-        // add a keyboard listener 
-        document.addEventListener('keydown', function(e){
-            if (e.key == 'q'){
-                window.clear_timer = -1;
-            }
-        });
-        window.clear_timer = 1;
         var wait_time = 1 * 60 * 1000; // in milliseconds
-        var start_time = performance.now();
-        // document.querySelector('button').disabled = true;
-        var interval = setInterval(function(){
-            var time_left = wait_time - (performance.now() - start_time);
-            var minutes = Math.floor(time_left / 1000 / 60);
-            var seconds = Math.floor((time_left - minutes*1000*60)/1000);
-            var seconds_str = seconds.toString().padStart(2,'0');
-           // if(time_left <= 0){
-           //     document.querySelector('#clock').innerHTML = "0:00";
-           //     window.clear_timer = -1;
-           // };
-            if(window.clear_timer >= 0){
-                document.querySelector('#clock').innerHTML = minutes + ':' + seconds_str
-            }else {
-                clearInterval(interval);
-            };
+    var start_time = performance.now();
+    document.querySelector('button').disabled = true;
+    var interval = setInterval(function(){
+      var time_left = wait_time - (performance.now() - start_time);
+      var minutes = Math.floor(time_left / 1000 / 60);
+      var seconds = Math.floor((time_left - minutes*1000*60)/1000);
+      var seconds_str = seconds.toString().padStart(2,'0');
+      document.querySelector('#clock').innerHTML = minutes + ':' + seconds_str
+      if(time_left <= 0){
+        document.querySelector('#clock').innerHTML = "0:00";
+        document.querySelector('button').disabled = false;
+        clearInterval(interval);
+            }
         }, 250)
         },
         on_finish: function(){
             // remove the keyboard listener 
-            document.removeEventListener('keydown', function(e){
-                if (e.key == 'q'){
-                    window.clear_timer = -1;
-                }
-            });
+            
         }};
     
 	    
