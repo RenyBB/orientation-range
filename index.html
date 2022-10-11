@@ -234,7 +234,7 @@
           vert_button_margin: '50px',
           horiz_button_margin: '50px'
 	};
-      // timer
+      /* timer
 var countdown_trial = {
   	type: jsPsychHtmlButtonResponse,
   	stimulus: '<p>The next part of the experiment will start in <span id="clock">1:00</span>.',
@@ -256,7 +256,7 @@ var countdown_trial = {
       		}
     		}, 250)
   	}
-};
+};*/
 
 jsPsych.init({
   timeline: [countdown_trial]
@@ -274,7 +274,7 @@ jsPsych.init({
       	    randomize_order: true,
             repetitions: 2
           },
-	  countdown_trial,
+	  //countdown_trial,
 	  instruction,
 	  {
             timeline: [fixation, test, trial, feedback],
