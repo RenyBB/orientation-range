@@ -32,8 +32,20 @@
             jsPsych.data.displayData();
         }
       })
-      console.log(`jsPsych Version ${jsPsych.version()}`)
+     
+        var subject_id = {return Math.round(Math.random())}; //jsPsych.data.getURLVariable('PROLIFIC_PID');
+  	var study_id = 'orientation_range';//jsPsych.data.getURLVariable('STUDY_ID');
+  	var session_id = {return ath.round(Math.random())+1};// jsPsych.data.getURLVariable('SESSION_ID');
 
+  	jsPsych.data.addProperties({
+   		subject_id: subject_id,
+    		study_id: study_id,
+    		session_id: session_id
+  	});
+      
+	    
+     
+	   
       const pixi_flag = jsPsych.data.getURLVariable('pixi_flag') === '1' ? true : false;
 	    
       let true_orientation = [];
@@ -48,11 +60,28 @@
       ]; 
 	    
       // test stimuli
-      const test_stimuli = [
+      const test_stimuli_range1 = [
       { stimulus: "Gab_45.png", orientation: 45},
       { stimulus: "Gab_135.png", orientation: 135},
       ]; 
-	    
+      
+      const test_stimuli_range2 = [
+      { stimulus: "Gab_90.png", orientation: 90},
+      { stimulus: "Gab_0.png", orientation: 0},
+      ];
+	  
+      let test_stimuli_block1 = [];
+      let test_stimuli_block2 = [];
+      if( (subject_id % 2==0 && session_id == 1) || (subject_id % 2!=0 && session_id == 2)) {
+       
+	       test_stimuli_block1 = test_stimuli_range1; 
+	       test_stimuli_block2 = test_stimuli_range2; 
+        }
+      	else if ( (subject_id % 2==0 && session_id == 2) || (subject_id % 2!=0 && session_id == 1)) {
+	       test_stimuli_block1 = test_stimuli_range2; 
+	       test_stimuli_block2 = test_stimuli_range1; 
+	};    
+    
       const browser_check = {
  	 type: jsPsychBrowserCheck,
 	 minimum_width: 1500,
@@ -291,16 +320,24 @@
             timeline: [fixation, test, trial, feedback],
             timeline_variables: training_stimuli,
       	    randomize_order: true,
-            repetitions: 2
+            repetitions: 1
           },
 	  mkTimer,
 	  instruction,
 	  {
             timeline: [fixation, test, trial, feedback],
-            timeline_variables: test_stimuli,
+            timeline_variables: test_stimuli_block1,
       	    randomize_order: true,
-            repetitions: 5
+            repetitions: 2
           },  
+	  mkTimer,
+	  instruction,
+	  {
+            timeline: [fixation, test, trial, feedback],
+            timeline_variables: test_stimuli_block2,
+      	    randomize_order: true,
+            repetitions: 2
+          }, 
         ])
 
   </script>
