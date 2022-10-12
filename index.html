@@ -31,11 +31,13 @@
         on_finish: function() {
             jsPsych.data.displayData();
         }
-      })
+      });
      
         var subject_id =  Math.round(Math.random()*100); //jsPsych.data.getURLVariable('PROLIFIC_PID');
   	var study_id = 'orientation_range';//jsPsych.data.getURLVariable('STUDY_ID');
   	var session_id = Math.round(Math.random())+1;// jsPsych.data.getURLVariable('SESSION_ID');
+      });
+
 
   	jsPsych.data.addProperties({
    		subject_id: subject_id,
@@ -47,7 +49,7 @@
      
 	   
       const pixi_flag = jsPsych.data.getURLVariable('pixi_flag') === '1' ? true : false;
-	    
+	    	    
       let true_orientation = [];
       const line_length = 100;
       let corrected_angle = [];
