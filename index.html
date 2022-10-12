@@ -31,29 +31,10 @@
         on_finish: function() {
             jsPsych.data.displayData();
         }
-      })
-      console.log(`jsPsych Version ${jsPsych.version()}`)
+      });
 
       const pixi_flag = jsPsych.data.getURLVariable('pixi_flag') === '1' ? true : false;
-	    
-        import GaborStimulusPlugin from '@kogpsy/jspsych-gabor-stimulus-plugin';
-	const config = {
-  	stimulus: {
-    		size: 200,
-    		rotation: 45,
-  		},
-  	fixation_cross: {
-    		size: 20,
-    		weight: 4,
-  	  	color: 'white',
-  	},
-	};
-	    
-	    const gabor = {
-          type: GaborStimulusPlugin,
-          stimulus: config,
-	    };
-	    
+	    	    
       let true_orientation = [];
       const line_length = 100;
       let corrected_angle = [];
@@ -302,7 +283,6 @@
       // start the experiment 
 
       jsPsych.run([
-	      gabor,
 	  instruction,
 	  browser_check,
 	  //virtual_chinrest, 
