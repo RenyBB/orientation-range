@@ -33,9 +33,9 @@
         }
       })
      
-        var subject_id = {return Math.round(Math.random())}; //jsPsych.data.getURLVariable('PROLIFIC_PID');
+        var subject_id =  Math.round(Math.random()); //jsPsych.data.getURLVariable('PROLIFIC_PID');
   	var study_id = 'orientation_range';//jsPsych.data.getURLVariable('STUDY_ID');
-  	var session_id = {return ath.round(Math.random())+1};// jsPsych.data.getURLVariable('SESSION_ID');
+  	var session_id = Math.round(Math.random())+1;// jsPsych.data.getURLVariable('SESSION_ID');
 
   	jsPsych.data.addProperties({
    		subject_id: subject_id,
