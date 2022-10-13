@@ -216,18 +216,13 @@
 			    else if (quadrant_angle>180 && quadrant_angle<=270) {corrected_angle = quadrant_angle - 180;}
 			    else if (quadrant_angle>270 && quadrant_angle<=360) {corrected_angle = 360 - quadrant_angle;}
 
-			    
-			    corrected_stimulus_angle = [];
-			    if (jsPsych.timelineVariable('orientation')>90) { corrected_stimulus_angle = 180 - jsPsych.timelineVariable('orientation');}
-			    else if (jsPsych.timelineVariable('orientation')<=90) {corrected_stimulus_angle = jsPsych.timelineVariable('orientation');}
-			    
 			    console.log(`selected orientation: ${selected_orientation}`);
 			    console.log(`corrected orientation: ${corrected_angle}`);
 			    console.log(`stimulus orientation:  ${jsPsych.timelineVariable('orientation')}`);
-			    console.log(`corrected stimulus orientation:  ${corrected_stimulus_angle}`);
+			    
 			    // calculate error between stimulus and response
 			    error = [];
-			    error = corrected_stimulus_angle-corrected_angle;
+			    error = jsPsych.timelineVariable('orientation')-corrected_angle;
 			    if (error>90) {
 				    error = 180 - error;
 			    } else if (error<-90) {
@@ -240,9 +235,8 @@
 			    if (Math.abs(error) <= 5) { feedback_colour = 'green';}
 			    else {feedback_colour = 'red';} 
 			    
-			    data.selected_response_orientation = selected_orientation;
-			    data.corrected_response_orientation = corrected_angle;
-			    data.corrected_stimulus_orientation = corrected_stimulus_angle;
+			    data.selected_orientation = selected_orientation;
+			    data.corrected_orientation = corrected_angle;
 			    data.feedback_colour = feedback_colour;
 			    data.error = error;
 		    }
