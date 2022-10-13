@@ -177,19 +177,20 @@
 			    mouse_move_start = !mouse_move_start;
 		    },                
 		    mouse_move_func: function(event){ // This function will be automatically added as the event listener of the canvas.
-			    if (mouse_move_start === false) return;
-			    if (prev_mouseX === null){
-				    prev_mouseX = event.offsetX;
-				    return;
-			    }
-			    // stim_array[0] means a circle, and stim_array[1] means a line.
-			    const line = pixi_flag ? jsPsych.getCurrentTrial().stim_array[1].pixi_obj : jsPsych.getCurrentTrial().stim_array[1];
-			    if (event.offsetX > prev_mouseX){
-				    line.angle += 1; // The angle changes by 1 degree.
-			    } else {
-				    line.angle -= 1; // The angle changes by 1 degree.
-			    }
-			    prev_mouseX = event.offsetX;
+            		 if (mouse_move_start === false) return;
+
+            if (prev_mouseX === null){
+              prev_mouseX = event.offsetX;
+              return
+            }
+
+            // stim_array[0] means a circle, and stim_array[1] means a line.
+            if (event.offsetX > prev_mouseX){
+              jsPsych.getCurrentTrial().stim_array[1].angle += 1; // The angle changes by 1 degrees.
+            } else {
+              jsPsych.getCurrentTrial().stim_array[1].angle -= 5;
+            }
+            prev_mouseX = event.offsetX;
 			    console.log(`current orientation: ${jsPsych.getCurrentTrial().stim_array[1].angle}`);
 		    },
 		    on_finish: function(data) {
