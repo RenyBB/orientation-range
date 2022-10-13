@@ -263,14 +263,14 @@
 	};
      
 //timer	    
-    const mkTimer = function(){
-    // @ jsPsych 7.2 
-    return{
+    const mkTimer = {
+  
+  
         type: jsPsychHtmlKeyboardResponse,
         stimulus: '<div style="font-size: 25px"><p>The next part of the experiment will start in</p>'
                 + '<div style="font-size: 50px; color: blue"><p><span id="clock">0:10</span></div></p></div>',
         choices: ['q'],
-        trial_duration: 60100,
+        trial_duration: 10500,
         on_load: function(){
         // add a keyboard listener 
         document.addEventListener('keydown', function(e){
@@ -299,14 +299,8 @@
         }, 250)
         },
         on_finish: function(){
-            // remove the keyboard listener 
-            document.removeEventListener('keydown', function(e){
-                if (e.key == 'q'){
-                    window.clear_timer = -1;
-                }
-            });
+		window.clear_timer = -1;          
         }
-    }
 };
 
 
