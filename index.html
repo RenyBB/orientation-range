@@ -306,7 +306,7 @@
 
     
 	const alarm = {
-		type: jsPsychHtmlButtonResponse,
+		type: jsPsychAudioButtonResponse,
 		stimulus: 'Alarm.mp3',
 		choices: ['Continue'],
 		prompt: 'This is the end of the break. Please continue the experiment.'	
@@ -324,6 +324,7 @@
             repetitions: 1
           },
 	  mkTimer,
+	  alarm,
 	  instruction,
 	  {
             timeline: [fixation, test, trial, feedback],
