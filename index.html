@@ -263,22 +263,23 @@
 	};
      
 //timer	    
-    const mkTimer = {
+    const mkTimer = function(){
+    // @ jsPsych 7.2 
+    return{
         type: jsPsychHtmlKeyboardResponse,
         stimulus: '<div style="font-size: 25px"><p>The next part of the experiment will start in</p>'
-                + '<div style="font-size: 50px; color: blue"><p><span id="clock">1:00</span></div></p>'
-                + '</div>',
+                + '<div style="font-size: 50px; color: blue"><p><span id="clock">0:10</span></div></p></div>',
         choices: ['q'],
         trial_duration: 60100,
         on_load: function(){
         // add a keyboard listener 
-        //document.addEventListener('keydown', function(e){
-        //    if (e.key == 'q'){
-         //       window.clear_timer = -1;
-         //   }
-       // });
+        document.addEventListener('keydown', function(e){
+            if (e.key == 'q'){
+                window.clear_timer = -1;
+            }
+        });
         window.clear_timer = 1;
-        var wait_time = 1 * 60 * 1000; // in milliseconds
+        var wait_time = 1 * 10 * 1000; // in milliseconds
         var start_time = performance.now();
         // document.querySelector('button').disabled = true;
         var interval = setInterval(function(){
@@ -289,7 +290,6 @@
             if(time_left <= 0){
                 document.querySelector('#clock').innerHTML = "0:00";
                 window.clear_timer = -1;
-		clearInterval(interval);
             };
             if(window.clear_timer > 0){
                 document.querySelector('#clock').innerHTML = minutes + ':' + seconds_str
@@ -299,14 +299,23 @@
         }, 250)
         },
         on_finish: function(){
+            // remove the keyboard listener 
+            document.removeEventListener('keydown', function(e){
+                if (e.key == 'q'){
                     window.clear_timer = -1;
-        }};
+                }
+            });
+        }
+    }
+};
+
+
     
-	    const alarm = {
+	const alarm = {
 		type: jsPsychHtmlButtonResponse,
 		stimulus: 'Alarm.mp3',
-		choices: 'Continue',
-		prompt: 'This is the end of the break. Please continuew the experiment.'	
+		choices: ['Continue'],
+		prompt: 'This is the end of the break. Please continue the experiment.'	
 	};
       // start the experiment 
 
@@ -329,7 +338,7 @@
             repetitions: 2
           },  
 	  mkTimer,
-	  alarm,
+	  //alarm,
 	  instruction,
 	  {
             timeline: [fixation, test, trial, feedback],
