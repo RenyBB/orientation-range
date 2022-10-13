@@ -186,7 +186,7 @@
 			    if (event.offsetX > prev_mouseX){
 				    jsPsych.getCurrentTrial().stim_array[1].angle += 1; // The angle changes by 1 degrees.
 			    } else {
-				    jsPsych.getCurrentTrial().stim_array[1].angle -= 5;
+				    jsPsych.getCurrentTrial().stim_array[1].angle -= 1;
 			    }
 			    prev_mouseX = event.offsetX;
 			    console.log(`current orientation: ${jsPsych.getCurrentTrial().stim_array[1].angle}`);
