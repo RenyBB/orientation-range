@@ -177,24 +177,21 @@
 			    mouse_move_start = !mouse_move_start;
 		    },                
 		    mouse_move_func: function(event){ // This function will be automatically added as the event listener of the canvas.
-            		 if (mouse_move_start === false) return;
-
-            if (prev_mouseX === null){
-              prev_mouseX = event.offsetX;
-              return
-            }
-
-            // stim_array[0] means a circle, and stim_array[1] means a line.
-            if (event.offsetX > prev_mouseX){
-              jsPsych.getCurrentTrial().stim_array[1].angle += 1; // The angle changes by 1 degrees.
-            } else {
-              jsPsych.getCurrentTrial().stim_array[1].angle -= 5;
-            }
-            prev_mouseX = event.offsetX;
+			    if (mouse_move_start === false) return;
+			    if (prev_mouseX === null){
+				    prev_mouseX = event.offsetX;
+				    return
+			    }
+			    // stim_array[0] means a circle, and stim_array[1] means a line.
+			    if (event.offsetX > prev_mouseX){
+				    jsPsych.getCurrentTrial().stim_array[1].angle += 1; // The angle changes by 1 degrees.
+			    } else {
+				    jsPsych.getCurrentTrial().stim_array[1].angle -= 5;
+			    }
+			    prev_mouseX = event.offsetX;
 			    console.log(`current orientation: ${jsPsych.getCurrentTrial().stim_array[1].angle}`);
 		    },
 		    on_finish: function(data) {
-			    
 			    // transform selected orientation to a number between 0 and 180
 			    var selected_orientation = jsPsych.getCurrentTrial().stim_array[1].angle;
 			    var positive_orientation = [];
@@ -220,8 +217,8 @@
 			    else if (quadrant_angle>270 && quadrant_angle<=360) {corrected_angle = 360 - quadrant_angle;}
 
 			    console.log(`selected orientation: ${selected_orientation}`);
-			    console.log(`corrected orientation: ${jsPsych.timelineVariable('orientation')}`);
-			    console.log(`stimulus orientation: $()`
+			    console.log(`corrected orientation: ${corrected_angle}`);
+			    console.log(`stimulus orientation:  ${jsPsych.timelineVariable('orientation')}`);
 			    
 			    // calculate error between stimulus and response
 			    error = [];
@@ -321,8 +318,7 @@
 		    prompt: 'This is the end of the break. Please continue the experiment.'	
 	    };
 	    
-	    
-      // define tinemline and run experiment
+	    // define tinemline and run experiment
 	    jsPsych.run([
 		    instruction,
 		    browser_check,
