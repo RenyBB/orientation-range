@@ -219,7 +219,8 @@
 			    else if (quadrant_angle>270 && quadrant_angle<=360) {corrected_angle = 360 - quadrant_angle;}
 
 			    console.log(`selected orientation: ${selected_orientation}`);
-			    console.log(`corrected orientation: ${corrected_angle}`);
+			    console.log(`corrected orientation: ${jsPsych.timelineVariable('orientation')}`);
+			    console.log(`stimulus orientation: $()`
 			    
 			    // calculate error between stimulus and response
 			    error = [];
@@ -229,11 +230,11 @@
 			    } else if (error<-90) {
 				    error = error + 180;
 			    }
-			    console.log(`serror between stimulus and response: ${error}`);
+			    console.log(`error between stimulus and response: ${error}`);
 			    
 			    // define colour of feedback line: green if response is close to the stimulus; red if it is not
 			    var feedback_colour = [];
-			    if (Math.abs(error) < 5) { feedback_colour = 'green';}
+			    if (Math.abs(error) <= 5) { feedback_colour = 'green';}
 			    else {feedback_colour = 'red';} 
 			    
 			    data.selected_orientation = selected_orientation;
