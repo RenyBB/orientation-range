@@ -272,11 +272,11 @@
         trial_duration: 60100,
         on_load: function(){
         // add a keyboard listener 
-        document.addEventListener('keydown', function(e){
-            if (e.key == 'q'){
-                window.clear_timer = -1;
-            }
-        });
+        //document.addEventListener('keydown', function(e){
+        //    if (e.key == 'q'){
+         //       window.clear_timer = -1;
+         //   }
+       // });
         window.clear_timer = 1;
         var wait_time = 1 * 60 * 1000; // in milliseconds
         var start_time = performance.now();
@@ -299,12 +299,7 @@
         }, 250)
         },
         on_finish: function(){
-            // remove the keyboard listener 
-            document.removeEventListener('keydown', function(e){
-                if (e.key == 'q'){
                     window.clear_timer = -1;
-                }
-            });
         }};
     
 	    const alarm = {
