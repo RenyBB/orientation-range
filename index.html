@@ -45,11 +45,8 @@
 	    // currently not using pixijs, but would be a good idea to do so
 	    const pixi_flag = jsPsych.data.getURLVariable('pixi_flag') === '1' ? true : false;
 	    
-	    // initialize some vairables
-	    const line_length = 100; // lenght of the line used in the response in pixels
-	    let true_orientation = []; // placeholder for the true orientation of the presented gabor
-	    let corrected_angle = []; // placeholder for the reference angle of the response
-	    let error = [];	      //placeholder for the error between the stimulus and the response
+	    // lenght of the line used in the response in pixels	    
+	    const line_length = 100; 
 	        
 	    // practice stimuli
 	    const training_stimuli = [
