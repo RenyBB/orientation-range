@@ -160,7 +160,7 @@
 		    canvas_height: 800,
 		    response_type: 'key',
 		    choices: ['NO_KEYS'],
-		    stimuli: [fixation, gabor], // These can be referenced using the jsPsych.currentTrial().stim_array array.
+		    stimuli: [gabor], // These can be referenced using the jsPsych.currentTrial().stim_array array.
 		    on_finish: function(data) {
 			    // transform selected orientation to a number between 0 and 180
 			    data.stimulus_orientation = jsPsych.getCurrentTrial().stim_array[1].tilt; 
