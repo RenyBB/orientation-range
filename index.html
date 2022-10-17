@@ -124,7 +124,7 @@
 	    };*/
 	    const fixation = {
 		    obj_type: 'cross',
-		    line_length: 10,
+		    line_length: 50,
 		    line_colour: 'white',
 		    is_frame: true,
 		    show_start_frame: () => Math.round(150/((1 / jsPsych.data.get().select('vsync_rate').values[0]) * 1000)),
@@ -137,7 +137,7 @@
 	    const gabor = {
 		    obj_type: 'image',
 		    width: 100,
-		    file:jsPsych.timelineVariable('stimulus'), 
+		    file: jsPsych.timelineVariable('stimulus'), 
 		    is_frame: true,
 		    show_start_frame: () => Math.round((1000+300)/((1 / jsPsych.data.get().select('vsync_rate').values[0]) * 1000)),
 		    show_end_frame: () => Math.round((1000+300+500)/jsPsych.data.get().select('frame_duration').values[0]),
@@ -160,11 +160,12 @@
 		    canvas_height: 800,
 		    response_type: 'key',
 		    choices: ['NO_KEYS'],
+		    trial_duration: ,
 		    stimuli: [fixation, gabor], // These can be referenced using the jsPsych.currentTrial().stim_array array.
 		    on_finish: function(data) {
 			    // transform selected orientation to a number between 0 and 180
 			    data.stimulus_file = jsPsych.getCurrentTrial().stim_array[1].file; 
-			    data.stimulus_orientation = jsPsych.timelineVariable('orientation');
+			    //data.stimulus_orientation = jsPsych.timelineVariable('orientation');
 			    }
 	    };
 	    
