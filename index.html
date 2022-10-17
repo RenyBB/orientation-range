@@ -219,15 +219,20 @@
 			    console.log(`selected orientation: ${selected_orientation}`);
 			    console.log(`corrected orientation: ${corrected_angle}`);
 			    console.log(`stimulus orientation:  ${jsPsych.timelineVariable('orientation')}`);
-			    
+			    	    
 			    // calculate error between stimulus and response
-			    error = [];
-			    error = jsPsych.timelineVariable('orientation')-corrected_angle;
-			    if (error>90) {
+			    // first transform stimulus orientation to be between 0 and 90 degrees
+			    let corrected_stimulus = [];
+			    if (jsPsych.timelineVariable('orientation')>90) {corrected_stimulus = 180 - jsPsych.timelineVariable('orientation');}
+			    else {corrected_stimulus = jsPsych.timelineVariable('orientation');}
+			    
+			    let error = [];
+			    error = corrected_stimulus-corrected_angle;
+			    /*if (error>90) {
 				    error = 180 - error;
 			    } else if (error<-90) {
 				    error = error + 180;
-			    }
+			    }*/
 			    console.log(`error between stimulus and response: ${error}`);
 			    
 			    // define colour of feedback line: green if response is close to the stimulus; red if it is not
@@ -235,8 +240,9 @@
 			    if (Math.abs(error) <= 5) { feedback_colour = 'green';}
 			    else {feedback_colour = 'red';} 
 			    
-			    data.selected_orientation = selected_orientation;
-			    data.corrected_orientation = corrected_angle;
+			    data.corrected_stimulus = corrected_stimulus;
+			    data.selected_response = selected_orientation;
+			    data.corrected_response = corrected_angle;
 			    data.feedback_colour = feedback_colour;
 			    data.error = error;
 		    }
