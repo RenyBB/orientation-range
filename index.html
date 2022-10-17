@@ -295,7 +295,17 @@
 		    canvas_height: 800,
 		    response_type: 'key',
 		    choices: [' '],
-		    prompt: '<p>The white line shows the true orienation of the grating. The colour line shows your response.<br>If the line is green, you were close to the true orientation of the grating. Press the spacebar to continue.</p>',
+		    prompt: [],
+		    on_start: function(trial) {
+			    if (jsPsych.data.get().last(1).values()[0].feedback_colour == 'green') {
+				    trial.prompt = 'The white line shows the true orienation of the grating. The colour line shows your response.<br>If the line is green, you were close to the true orientation of the grating. Press the spacebar to continue.'    
+			    };
+			    else if (jsPsych.data.get().last(1).values()[0].feedback_colour == 'red') {
+				    trial.prompt = 'The white line shows the true orienation of the grating. The colour line shows your response.<br>If the line is red, you were not close to the true orientation of the grating. Press the spacebar to continue.'
+			    };
+			    
+		    
+		    },
 		    stimuli: [circle_obj, 
 			      // response line
 			      {
