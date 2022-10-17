@@ -127,8 +127,8 @@
 		    line_length: 10,
 		    line_colour: 'white',
 		    is_frame: true,
-		    show_start_frame: () => Math.round(150/jsPsych.data.get().select('frame_duration').values[0]),
-		    show_end_frame: () => Math.round((1000+150)/jsPsych.data.get().select('frame_duration').values[0]),
+		    show_start_frame: () => Math.round(150/((1 / jsPsych.data.get().select('vsync_rate').values[0]) * 1000)),
+		    show_end_frame: () => Math.round((1000+150)/((1 / jsPsych.data.get().select('vsync_rate').values[0]) * 1000)),
 	    };
 	    
 	    
@@ -138,8 +138,9 @@
 		    obj_type: 'gabor',
 		    width: 100,
 		    tilt:jsPsych.timelineVariable('orientation'), 
+		    contrast: 50,
 		    is_frame: true,
-		    show_start_frame: () => Math.round(1000+300/jsPsych.data.get().select('frame_duration').values[0]),
+		    show_start_frame: () => Math.round((1000+300)/((1 / jsPsych.data.get().select('vsync_rate').values[0]) * 1000)),
 		    show_end_frame: () => Math.round((1000+300+500)/jsPsych.data.get().select('frame_duration').values[0]),
 	    };
 	    
