@@ -129,7 +129,7 @@
 		    line_width: 5,
 		    is_frame: true,
 		    show_start_frame: () => Math.round(150/((1 / jsPsych.data.get().select('vsync_rate').values[0]) * 1000)),
-		    show_end_frame: () => Math.round((1000+150)/((1 / jsPsych.data.get().select('vsync_rate').values[0]) * 1000)),
+		    show_end_frame: () => Math.round((500+150)/((1 / jsPsych.data.get().select('vsync_rate').values[0]) * 1000)),
 	    };
 	    
 	    
@@ -161,7 +161,7 @@
 		    canvas_height: 800,
 		    response_type: 'key',
 		    choices: ['NO_KEYS'],
-		    trial_duration: 2000,
+		    trial_duration: 2100,
 		    stimuli: [fixation, gabor], // These can be referenced using the jsPsych.currentTrial().stim_array array.
 		    on_finish: function(data) {
 			    // transform selected orientation to a number between 0 and 180
