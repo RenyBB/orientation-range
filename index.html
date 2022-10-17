@@ -91,6 +91,10 @@
 			    if(data.mobile){
 				    return '<p>You must use a desktop/laptop computer to participate in this experiment.</p>';
 			    } 
+		    },
+		    on_finish: function (data) {
+			    data.frame_duration = (1 / data.vsync_rate) * 1000;
+			    let frame_duration = (1 / data.vsync_rate) * 1000;
 		    }
 	    };
 	    
@@ -112,21 +116,55 @@
 	    };
 	    
 	    //define fixation cross
-	    const fixation = {
+	    /*const fixation = {
 		    type: jsPsychHtmlKeyboardResponse,
 		    stimulus: '<div style="font-size:60px;">+</div>',
 		    choices: 'NO_KEYS',
 		    trial_duration: 1000,
+	    };*/
+	    const fixation = {
+		    obj_typoe: 'cross',
+		    line_length: 10,
+		    line_colour: 'white',
+		    is_frame: true,
+		    show_start_frame: () => Math.round(150/jsPsych.data.get().select('frame_duration').values[0]),
+		    show_end_frame: () => Math.round((1000+150)/jsPsych.data.get().select('frame_duration').values[0]),
 	    };
 	    
+	    
+	    
 	    // define gabor
-	    const test = {
+	    const gabor = {
+		    obj_typoe: 'gabor',
+		    width: 100,
+		    tilt:jsPsych.timelineVariable('orientation'), 
+		    is_frame: true,
+		    show_start_frame: () => Math.round(1000+300/jsPsych.data.get().select('frame_duration').values[0]),
+		    show_end_frame: () => Math.round((1000+300+500)/jsPsych.data.get().select('frame_duration').values[0]),
+	    };
+	    
+	    /*const test = {
 		    type: jsPsychImageKeyboardResponse,
 		    stimulus: jsPsych.timelineVariable('stimulus'),
 		    choices: 'NO_KEYS',
 		    trial_duration: 500,
 		    maintain_aspect_ration: true,
 		    stimulus_height: 150
+	    };*/
+	    
+	    
+	    const test = {
+		    type: jsPsychPsychophysics,
+		    pixi: pixi_flag,
+		    canvas_offsetY: 100,
+		    canvas_height: 800,
+		    response_type: 'key',
+		    choices: ['NO_KEYS'],
+		    stimuli: [fixation, gabor], // These can be referenced using the jsPsych.currentTrial().stim_array array.
+		    on_finish: function(data) {
+			    // transform selected orientation to a number between 0 and 180
+			    data.stimulus_orientation = jsPsych.getCurrentTrial().stim_array[1].tilt; 
+			    },
 	    };
 	    
 	    // define objects needed for response display
