@@ -138,7 +138,7 @@
 	    // define gabor
 	    const gabor = {
 		    obj_type: 'image',
-		    image_width: 100,
+		    image_width: 200,
 		    file: jsPsych.timelineVariable('stimulus'), 
 		    is_frame: true,
 		    show_start_frame: () => Math.round((1000+300)/((1 / jsPsych.data.get().select('vsync_rate').values[0]) * 1000)),
