@@ -121,7 +121,7 @@
 		    stimulus: '<div style="font-size:60px;">+</div>',
 		    choices: 'NO_KEYS',
 		    trial_duration: 1000,
-	    };
+	    };*/
 	    const fixation = {
 		    obj_type: 'cross',
 		    line_length: 10,
@@ -129,7 +129,7 @@
 		    is_frame: true,
 		    show_start_frame: () => Math.round(150/jsPsych.data.get().select('frame_duration').values[0]),
 		    show_end_frame: () => Math.round((1000+150)/jsPsych.data.get().select('frame_duration').values[0]),
-	    };*/
+	    };
 	    
 	    
 	    
@@ -366,7 +366,7 @@
 		    //virtual_chinrest, 
 		    // practice block
 		    {
-			    timeline: [fixation, test, response, feedback],
+			    timeline: [test, response, feedback],
 			    timeline_variables: training_stimuli,
 			    randomize_order: true,
 			    repetitions: 1
@@ -376,7 +376,7 @@
 		    instruction,
 		    // block 1
 		    {
-			    timeline: [fixation, test, response, feedback],
+			    timeline: [test, response, feedback],
 			    timeline_variables: test_stimuli_block1,
 			    randomize_order: true,
 			    repetitions: 2
@@ -386,7 +386,7 @@
 		    instruction,
 		    // block 2
 		    {
-			    timeline: [fixation, test, response, feedback],
+			    timeline: [test, response, feedback],
 			    timeline_variables: test_stimuli_block2,
 			    randomize_order: true,repetitions: 2
 		    }, 
