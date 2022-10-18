@@ -449,25 +449,25 @@
 			    "first_gabor_orientation": 45,
 			    "first_gabor_filename": "Gab_45.png",
 			    "second_gabor_orientation": 90,
-			    "second_sound_filename": "Gab_90.png"
+			    "second_gabor_filename": "Gab_90.png"
 		    },
 		    {
 			    "first_gabor_orientation": 135,
 			    "first_gabor_filename": "Gab_135.png",
 			    "second_gabor_orientation": 0,
-			    "second_sound_filename": "Gab_0.png"
+			    "second_gabor_filename": "Gab_0.png"
 		    },
 		    {
 			    "first_gabor_orientation": 90,
 			    "first_gabor_filename": "Gab_90.png",
 			    "second_gabor_orientation": 45,
-			    "second_sound_filename": "Gab_45.png"
+			    "second_gabor_filename": "Gab_45.png"
 		    },
 		    {
 			    "first_gabor_orientation": 0,
 			    "first_gabor_filename": "Gab_0.png",
 			    "second_gabor_orientation": 135,
-			    "second_sound_filename": "Gab_135.png"
+			    "second_gabor_filename": "Gab_135.png"
 		    }];
 	    
 	    // Define number of repetitions per stimulus and total number of trials
@@ -493,7 +493,7 @@
 	    };
 	    var second_gabor = {
 		    obj_type: 'image',
-		    file: "Gab_0.png",
+		    file: jsPsych.timelineVariable('second_gabor_filename'), 
 		    image_width: 200,
 		    show_start_time: 1500,
 		    show_end_time: 2000,
