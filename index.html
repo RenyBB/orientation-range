@@ -418,7 +418,7 @@
 	    ])*/
 	    
 // orientation discrimination task
-	    var discrimination_training_stimuli = [
+	    const discrimination_training_stimuli = [
 		    {
 			    "first_gabor_orientation": 45,
 			    "first_gabor_filename": "Gab_45.png",
@@ -444,7 +444,7 @@
 			    "second_gabor_filename": "Gab_135.png"
 		    }];
 	    
-	    var discrimination_test_stimuli = [
+	    const discrimination_test_stimuli = [
 		    {
 			    "first_gabor_orientation": 45,
 			    "first_gabor_filename": "Gab_45.png",
@@ -484,21 +484,21 @@
 	    var training_trials_shuffled = jsPsych.randomization.shuffle(repeated_training_stim_organized);*/
 
 	    // Define stimuli 
-	    var first_gabor = {
+	    let first_gabor = {
 		    obj_type: 'image',
 		    file: jsPsych.timelineVariable('first_gabor_filename'),
 		    image_width: 200,
 		    show_start_time: 500,
 		    show_end_time: 1000,		    
 	    };
-	    var second_gabor = {
+	    let second_gabor = {
 		    obj_type: 'image',
 		    file: jsPsych.timelineVariable('second_gabor_filename'), 
 		    image_width: 200,
 		    show_start_time: 1500,
 		    show_end_time: 2000,
 	    };
-	    var discrimination_trial = {
+	    let discrimination_trial = {
 		    type: jsPsychPsychophysics,
 		    stimuli: [first_gabor, second_gabor],
 		    canvas_width: 800,
@@ -520,7 +520,7 @@
 		    }
 	    };
 	    
-	    var discrimination_response = {
+	    let discrimination_response = {
 		    type: jsPsychHtmlButtonResponse,
 		    stimulus: '<p>Which grating was closer to vertical?</p>',
 		    choices: ['First', 'second'],
@@ -536,8 +536,30 @@
 			    console.log(data.correct);
 		    }
 	    };
+	    // Feedback - appears only in training phase
+	    var training_feedback = {
+		    type: jsPsychHtmlButtonResponse,
+		    stimulus: function () {
+			    // The feedback stimulus is a dynamic parameter because we can't know in advance whether
+			    // the stimulus should be 'correct' or 'incorrect'.
+			    // Instead, this function will check the accuracy of the last response and use that information to set
+			    // the stimulus value on each trial.
+			    var last_trial_correct_resp = jsPsych.data.get().last(1).values()[0].correct_response;
+			    var last_trial_correct = jsPsych.data.get().last(1).values()[0].correct;
+			    if (last_trial_correct) {
+				    return "<p>That was the correct answer!</p>"; // the parameter value has to be returned from the function
+			    } else if (last_trial_correct == 0 && last_trial_correct_resp == 0) {
+                    return "<p>That wasn't the correct answer.</p><p>The first grating was closer to vertical.</p>"; // the parameter value has to be returned from the function
+                } else if (last_trial_correct == 0 && last_trial_correct_resp == 1) {
+                    return "<p>That wasn't the correct answer.</p><p>The second grating was closer to vertical.</p>"; // the parameter value has to be returned from the function
+                }
+            },
+            //trial_duration: 5000,
+            choices: ['Continue'],
+            response_ends_trial: true,
+        }
 	    // Training procedure
-	    var training_procedure = {
+	    let training_procedure = {
 		    timeline: [discrimination_trial,  discrimination_response],  //Interval1_Training, Interval2_Training,
 		    timeline_variables: discrimination_training_stimuli,
 		    repetitions: 1,
