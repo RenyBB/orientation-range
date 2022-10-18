@@ -446,28 +446,16 @@
 	    
 	    const discrimination_test_stimuli = [
 		    {
-			    "first_gabor_orientation": 45,
+			    "first_gabor_orientation": 90,
 			    "first_gabor_filename": "Gab_45.png",
-			    "second_gabor_orientation": 90,
-			    "second_gabor_filename": "Gab_90.png"
-		    },
-		    {
-			    "first_gabor_orientation": 135,
-			    "first_gabor_filename": "Gab_135.png",
 			    "second_gabor_orientation": 0,
 			    "second_gabor_filename": "Gab_0.png"
 		    },
 		    {
-			    "first_gabor_orientation": 90,
-			    "first_gabor_filename": "Gab_90.png",
-			    "second_gabor_orientation": 45,
-			    "second_gabor_filename": "Gab_45.png"
-		    },
-		    {
 			    "first_gabor_orientation": 0,
 			    "first_gabor_filename": "Gab_0.png",
-			    "second_gabor_orientation": 135,
-			    "second_gabor_filename": "Gab_135.png"
+			    "second_gabor_orientation": 90,
+			    "second_gabor_filename": "Gab_90.png"
 		    }];
 	    
 	    /* Define number of repetitions per stimulus and total number of trials
@@ -567,9 +555,18 @@
 	    };
 	    
 	    
+	    let testing_procedure = {
+		    timeline: [discrimination_trial,  discrimination_response],  //Interval1_Training, Interval2_Training,
+		    timeline_variables: discrimination_test_stimuli,
+		    repetitions: 3,
+		    randomize: true,
+	    };
+	    
 	    jsPsych.run([
 		    instruction,
-		    training_procedure
+		    training_procedure,
+		    intstructions
+		    testing_procdure,
 	    ]);
 
 	</script>
