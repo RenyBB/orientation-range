@@ -487,20 +487,22 @@
 	    var first_gabor = {
 		    obj_type: 'image',
 		    file: "Gab_135.png",
+		    image_width: 200,
 		    show_start_time: 500,
-		    show_end_time: 1000,
+		    show_end_time: 1000,		    
 	    };
 	    var second_gabor = {
 		    obj_type: 'image',
 		    file: "Gab_0.png",
+		    image_width: 200,
 		    show_start_time: 1500,
 		    show_end_time: 2000,
 	    };
 	    var discrimination_trial = {
 		    type: jsPsychPsychophysics,
 		    stimuli: [first_gabor, second_gabor],
-		    canvas_width: 0,
-		    canvas_height: 0,
+		    canvas_width: 800,
+		    canvas_height: 800,
 		    trial_duration: 2500,
 		    response_ends_trial: false,
 		    background_color: 'rgb(125,125,125)',
