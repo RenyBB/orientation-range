@@ -470,7 +470,7 @@
 			    "second_gabor_filename": "Gab_135.png"
 		    }];
 	    
-	    // Define number of repetitions per stimulus and total number of trials
+	    /* Define number of repetitions per stimulus and total number of trials
 	    var n_reps_per_training_stim = 2;
 	    var n_training_stimuli = discrimination_training_stimuli.length;
 	    var n_training_trials = n_training_trials * n_training_stimuli;
@@ -481,7 +481,7 @@
 	    
 	    var repeated_training_stim_organized = [].concat.apply([], repeated_training_stim);
 	    
-	    var training_trials_shuffled = jsPsych.randomization.shuffle(repeated_training_stim_organized);
+	    var training_trials_shuffled = jsPsych.randomization.shuffle(repeated_training_stim_organized);*/
 
 	    // Define stimuli 
 	    var first_gabor = {
@@ -509,19 +509,21 @@
 		    on_finish: function (data) {
 			    data.first_stimulus = jsPsych.timelineVariable('first_gabor_orientation');
 			    data.second_stimulus = jsPsych.timelineVariable('second_gabor_orientation');
-			    
-			   /* if (data.first_stimulus.match(/\d+/)[0] > data.second_stimulus.match(/\d+/)[0]) {
-				    data.correct_response = 1;
-			    } else {
+			    let difference_to_vertical_gabor1 = Math.abs(90-data.first_stimulus);
+			    let difference_to_vertical_gabor2 = Math.abs(90-data.second_stimulus);
+			    if (difference_to_vertical_gabor1 < difference_to_vertical_gabor2) {
 				    data.correct_response = 0;
-			    } */
+			    } else {
+				    data.correct_response = 1;
+			    } 
+			    console.log(data.correct_response);
 		    }
 	    };
 	    
 	    var discrimination_response = {
 		    type: jsPsychHtmlButtonResponse,
-		    stimulus: '<p>Did the pitch go up or down?</p>',
-		    choices: ['Pitch went up', 'Pitch went down'],
+		    stimulus: '<p>Which grating was closer to vertical?</p>',
+		    choices: ['First', 'second'],
 		    on_finish: function (data) {
 			    var stim_trial_id = data.trial_index - 1;
 			    data.correct_response = jsPsych.data.get().trials[stim_trial_id].correct_response;
@@ -531,6 +533,7 @@
 			    } else {
 				    data.correct = false;
 			    }
+			    console.log(data.correct);
 		    }
 	    };
 	    // Training procedure
@@ -538,6 +541,7 @@
 		    timeline: [discrimination_trial,  discrimination_response],  //Interval1_Training, Interval2_Training,
 		    timeline_variables: discrimination_training_stimuli,
 		    repetitions: 1,
+		    randomize: true,
 	    };
 	    
 	    
