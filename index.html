@@ -486,7 +486,7 @@
 	    // Define stimuli 
 	    var first_gabor = {
 		    obj_type: 'image',
-		    file: "Gab_135.png",
+		    file: jsPsych.timelineVariable('first_gabor_filename'),
 		    image_width: 200,
 		    show_start_time: 500,
 		    show_end_time: 1000,		    
@@ -505,7 +505,7 @@
 		    canvas_height: 800,
 		    trial_duration: 2500,
 		    response_ends_trial: false,
-		    background_color: 'rgb(125,125,125)',
+		    background_color: '#808080',
 		    on_finish: function (data) {
 			    data.first_stimulus = jsPsych.timelineVariable('first_gabor_orientation');
 			    data.second_stimulus = jsPsych.timelineVariable('second_gabor_orientation');
