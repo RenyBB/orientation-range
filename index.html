@@ -482,27 +482,8 @@
 	    var repeated_training_stim_organized = [].concat.apply([], repeated_training_stim);
 	    
 	    var training_trials_shuffled = jsPsych.randomization.shuffle(repeated_training_stim_organized);
-	    
-	    
-	    var gabor1_training = {
-		    type: jsPsychImageButtonResponse,
-		    stimulus: jsPsych.timelineVariable('first_gabor_filename'),
-		    choices: '',
-		    trial_ends_after_audio: true,
-		    trial_duration: 500,
-		    post_trial_gap: 500
-	    };
-	    
-	    var gabor2_training = {
-		    type: jsPsychImageButtonResponse,
-		    stimulus: jsPsych.timelineVariable('second_gabor_filename'),
-		    choices: '',
-		    trial_ends_after_audio: true,
-		    trial_duration: 500,
-		    post_trial_gap: 500
-	    };
-	    
-	    // Define stimuli for the test phase
+
+	    // Define stimuli 
 	    var first_gabor = {
 		    obj_type: 'image',
 		    file: jsPsych.timelineVariable('first_gabor_filename'),
