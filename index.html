@@ -113,14 +113,44 @@
 		    pixels_per_unit: 50
 	    };
 	    
-	    // experiment instructions
-	    const instructions = {
+	    // welcome to experiment instructions
+	    const welcome_instructions = {
 		    type: jsPsychInstructions,
 		    pages: [
 			    '<p>Welcome to the experiment. You have volunteered to take part in a research study investigating individual differences in orienation perception.<br>'+
 			    'This study consists of 2 sessions. In each session, you will complete 2 different tasks. You have to complete the two sessions within 1 week.<br>'+
 			    'This means that by agreeing to take part in this experiment, you will be committing to 2 sessions.<br>'+
 			    'The experimenter will invite you to complete the second session. Each session should take you around 45 minutes to complete.</p>'
+		    ],
+		    show_clickable_nav: true,
+		    allow_backward: false
+	    };
+	    
+	    // orientation reproduction instructions: practice 
+	    const reproduction_practice_instructions = {
+		    type: jsPsychInstructions,
+		    pages: [
+			    '<p> You will now perform an orientation matching task. You will see a black and white grating like the one below. </p>'
+		    ],
+		    show_clickable_nav: true,
+		    allow_backward: false
+	    };
+	    
+	    // orientation reproduction instructions: test block 1
+	    const reproduction_test_instructions_block1 = {
+		    type: jsPsychInstructions,
+		    pages: [
+			    '<p> You will now perform an orientation matching task. You will see a black and white grating like the one below. </p>'
+		    ],
+		    show_clickable_nav: true,
+		    allow_backward: false
+	    };
+	    
+	    // orientation reproduction instructions: test block 2
+	    const reproduction_test_instructions_block2 = {
+		    type: jsPsychInstructions,
+		    pages: [
+			    '<p> You will now perform an orientation matching task. You will see a black and white grating like the one below. </p>'
 		    ],
 		    show_clickable_nav: true,
 		    allow_backward: false
@@ -376,9 +406,10 @@
 	    
 	    /* define tinemline and run orientation reproduction task
 	    jsPsych.run([
-		    instructions,
-		    browser_check,
-		    //virtual_chinrest, 
+	            browser_check,
+		    welcome_instructions,
+		    virtual_chinrest, 
+		    reproduction_practice_instructions,
 		    // practice block
 		    {
 			    timeline: [test, response, feedback],
@@ -388,7 +419,7 @@
 		    },
 		    mkTimer,
 		    alarm,
-		    instructions,
+		    reproduction_test_instructions_block1,
 		    // block 1
 		    {
 			    timeline: [test, response, feedback],
@@ -398,7 +429,7 @@
 		    },  
 		    mkTimer,
 		    alarm,
-		    instructions,
+		    reproduction_test_instructions_block2,
 		    // block 2
 		    {
 			    timeline: [test, response, feedback],
