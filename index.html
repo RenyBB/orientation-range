@@ -422,41 +422,7 @@
 		    choices: ['Continue'],
 		    prompt: 'This is the end of the break. Please continue the experiment.'	
 	    };
-	    
-	    // define tinemline and run orientation reproduction task
-	    jsPsych.run([
-	            browser_check,
-		    welcome_instructions,
-		    //virtual_chinrest, 
-		    reproduction_practice_instructions,
-		    // practice block
-		    {
-			    timeline: [test, response, feedback],
-			    timeline_variables: training_stimuli,
-			    randomize_order: true,
-			    repetitions: 1
-		    },
-		    mkTimer,
-		    alarm,
-		    reproduction_test_instructions_block1,
-		    // block 1
-		    {
-			    timeline: [test, response, feedback],
-			    timeline_variables: test_stimuli_block1,
-			    randomize_order: true,
-			    repetitions: 2
-		    },  
-		    mkTimer,
-		    alarm,
-		    reproduction_test_instructions_block2,
-		    // block 2
-		    {
-			    timeline: [test, response, feedback],
-			    timeline_variables: test_stimuli_block2,
-			    randomize_order: true,repetitions: 2
-		    }, 
-	    ]);
-	    
+	    	    
 // orientation discrimination task
 	    
 	    
@@ -611,12 +577,48 @@
 		    randomize: true,
 	    };
 	    
+	    // define tinemline and run experiment
 	    jsPsych.run([
+	            browser_check,
+		    welcome_instructions,
+		    //virtual_chinrest, 
+		    reproduction_practice_instructions,
+		    // practice block
+		    {
+			    timeline: [test, response, feedback],
+			    timeline_variables: training_stimuli,
+			    randomize_order: true,
+			    repetitions: 1
+		    },
+		    mkTimer,
+		    alarm,
+		    reproduction_test_instructions_block1,
+		    // block 1
+		    {
+			    timeline: [test, response, feedback],
+			    timeline_variables: test_stimuli_block1,
+			    randomize_order: true,
+			    repetitions: 2
+		    },  
+		    mkTimer,
+		    alarm,
+		    reproduction_test_instructions_block2,
+		    // block 2
+		    {
+			    timeline: [test, response, feedback],
+			    timeline_variables: test_stimuli_block2,
+			    randomize_order: true,repetitions: 2
+		    }, 
+		    mkTimer,
+		    alarm,
 		    discrimination_practice_instructions,
 		    training_procedure,
 		    discrimination_test_instructions,
 		    testing_procedure,
 	    ]);
+	    
+	    
+	
 	    
 	</script>
 </html>
