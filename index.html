@@ -114,7 +114,7 @@
 	    };
 	    
 	    // experiment instructions
-	    const instruction = {
+	    const instructions = {
 		    type: jsPsychInstructions,
 		    pages: [
 			    '<p>Welcome to the experiment. You have volunteered to take part in a research study investigating individual differences in orienation perception.<br>'+
@@ -376,7 +376,7 @@
 	    
 	    /* define tinemline and run orientation reproduction task
 	    jsPsych.run([
-		    instruction,
+		    instructions,
 		    browser_check,
 		    //virtual_chinrest, 
 		    // practice block
@@ -388,7 +388,7 @@
 		    },
 		    mkTimer,
 		    alarm,
-		    instruction,
+		    instructions,
 		    // block 1
 		    {
 			    timeline: [test, response, feedback],
@@ -398,7 +398,7 @@
 		    },  
 		    mkTimer,
 		    alarm,
-		    instruction,
+		    instructions,
 		    // block 2
 		    {
 			    timeline: [test, response, feedback],
