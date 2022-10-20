@@ -410,11 +410,11 @@
 		    prompt: 'This is the end of the break. Please continue the experiment.'	
 	    };
 	    
-	    /* define tinemline and run orientation reproduction task
+	    // define tinemline and run orientation reproduction task
 	    jsPsych.run([
 	            browser_check,
 		    welcome_instructions,
-		    virtual_chinrest, 
+		    //virtual_chinrest, 
 		    reproduction_practice_instructions,
 		    // practice block
 		    {
@@ -442,7 +442,7 @@
 			    timeline_variables: test_stimuli_block2,
 			    randomize_order: true,repetitions: 2
 		    }, 
-	    ])*/
+	    ]);
 	    
 // orientation discrimination task
 	    const discrimination_training_stimuli = [
@@ -589,12 +589,12 @@
 		    randomize: true,
 	    };
 	    
-	    jsPsych.run([
+	    /*jsPsych.run([
 		    instructions,
 		    training_procedure,
 		    instructions,
 		    testing_procedure,
 	    ]);
-
+	    */
 	</script>
 </html>
