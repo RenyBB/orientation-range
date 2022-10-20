@@ -159,7 +159,7 @@
 	    const reproduction_test_instructions_block1 = {
 		    type: jsPsychInstructions,
 		    pages: [
-			    '<p> You will now perform an orientation matching task. You will see a black and white grating like the one below. </p>'
+			    '<p> You will now complete two test blocks. Click Next to start the first test block.</p>'
 		    ],
 		    show_clickable_nav: true,
 		    allow_backward: false
@@ -169,7 +169,7 @@
 	    const reproduction_test_instructions_block2 = {
 		    type: jsPsychInstructions,
 		    pages: [
-			    '<p> You will now perform an orientation matching task. You will see a black and white grating like the one below. </p>'
+			    '<p>Click Next to start the second test block.</p>'
 		    ],
 		    show_clickable_nav: true,
 		    allow_backward: false
@@ -260,7 +260,7 @@
 		    canvas_height: 800,
 		    response_type: 'key',
 		    choices: [' '],
-		    prompt: '<p>Right-click to wake up mouse. Move mouse SLOWLY to the left or right to rotate the line.<br>When you are happy with the orientation of the line, right click to stop the line moving.Then press the spacebar to save your response. </p>',
+		    prompt: '<p>Left-click to wake up mouse. Move mouse SLOWLY to the left or right to rotate the line.<br>When you are happy with the orientation of the line, left click to stop the line moving.Then press the spacebar to save your response. </p>',
 		    stimuli: [circle_obj, line_obj], // These can be referenced using the jsPsych.currentTrial().stim_array array.
 		    mouse_down_func: function(event){
 			    mouse_move_start = !mouse_move_start;
@@ -349,10 +349,10 @@
 		    prompt: [],
 		    on_start: function(trial) {
 			    if (jsPsych.data.get().last(1).values()[0].feedback_colour == 'green') {
-				    trial.prompt = 'The white line shows the true orienation of the grating. The colour line shows your response.<br>If the line is green, you were close to the true orientation of the grating. Press the spacebar to continue.'    
+				    trial.prompt = 'The white line shows the true orienation of the grating. The coloured line shows your response.<br>If the line is green, you were close to the true orientation of the grating. Press the spacebar to continue.'    
 			    }
 			    else {
-				    trial.prompt = 'The white line shows the true orienation of the grating. The colour line shows your response.<br>If the line is red, you were not close to the true orientation of the grating. Press the spacebar to continue.'
+				    trial.prompt = 'The white line shows the true orienation of the grating. The coloured line shows your response.<br>If the line is red, you were not close to the true orientation of the grating. Press the spacebar to continue.'
 			    }
 			    
 		    
@@ -458,6 +458,38 @@
 	    ]);
 	    
 // orientation discrimination task
+	    
+	    
+	    // 	orientation discrimination instructions: practice 
+	    const discrimination_practice_instructions = {
+		    type: jsPsychInstructions,
+		    pages: [
+			    // stimulus instructions
+			    '<p> You will now perform an orientation discrimination task.<br>'+
+			    'On each trial you will see two black and white gratings one after the other.<br>'+
+			    'Your task will be to report whether the first or second grating was closer to vertical.<br>'+
+			    'You will then receive feedback whether your response was correct.<br><br>'+
+			    'You will first complete a practice block. Click Next to start the task. </p>'   	    
+		    ],
+		    show_clickable_nav: true,
+		    allow_backward: false
+	    };
+	    
+	    // 	orientation discrimination instructions: test 
+	    const discrimination_test_instructions = {
+		    type: jsPsychInstructions,
+		    pages: [
+			    // stimulus instructions
+			    '<p> You will now complete a test block.<br>'+
+			    'On each trial you will see two black and white gratings one after the other.<br><br>'+
+			    'Your task will be to report whether the first or second grating was closer to vertical.<br>'+
+			    'You will not receive feedback in the test block. Click Next to start the task. </p>'   	    
+		    ],
+		    show_clickable_nav: true,
+		    allow_backward: false
+	    };	    
+	    
+	    // Define stimuli combinations for practice and test blocks
 	    const discrimination_training_stimuli = [
 		    {
 			    "first_gabor_orientation": 45,
@@ -466,27 +498,16 @@
 			    "second_gabor_filename": "Gab_90.png"
 		    },
 		    {
-			    "first_gabor_orientation": 135,
-			    "first_gabor_filename": "Gab_135.png",
-			    "second_gabor_orientation": 0,
-			    "second_gabor_filename": "Gab_0.png"
-		    },
-		    {
 			    "first_gabor_orientation": 90,
 			    "first_gabor_filename": "Gab_90.png",
 			    "second_gabor_orientation": 45,
 			    "second_gabor_filename": "Gab_45.png"
 		    },
-		    {
-			    "first_gabor_orientation": 0,
-			    "first_gabor_filename": "Gab_0.png",
-			    "second_gabor_orientation": 135,
-			    "second_gabor_filename": "Gab_135.png"
-		    }];
+		   ];
 	    
 	    const discrimination_test_stimuli = [
 		    {
-			    "first_gabor_orientation": 90,
+			    "first_gabor_orientation": 45,
 			    "first_gabor_filename": "Gab_45.png",
 			    "second_gabor_orientation": 0,
 			    "second_gabor_filename": "Gab_0.png"
@@ -498,18 +519,6 @@
 			    "second_gabor_filename": "Gab_90.png"
 		    }];
 	    
-	    /* Define number of repetitions per stimulus and total number of trials
-	    var n_reps_per_training_stim = 2;
-	    var n_training_stimuli = discrimination_training_stimuli.length;
-	    var n_training_trials = n_training_trials * n_training_stimuli;
-	    
-	    var repeated_training_stim = (
-		    Array(n_reps_per_training_stim).fill(discrimination_training_stimuli)
-	    );
-	    
-	    var repeated_training_stim_organized = [].concat.apply([], repeated_training_stim);
-	    
-	    var training_trials_shuffled = jsPsych.randomization.shuffle(repeated_training_stim_organized);*/
 
 	    // Define stimuli 
 	    let first_gabor = {
@@ -602,12 +611,12 @@
 		    randomize: true,
 	    };
 	    
-	    /*jsPsych.run([
-		    instructions,
+	    jsPsych.run([
+		    discrimination_practice_instructions,
 		    training_procedure,
-		    instructions,
+		    discrimination_test_instructions,
 		    testing_procedure,
 	    ]);
-	    */
+	    
 	</script>
 </html>
