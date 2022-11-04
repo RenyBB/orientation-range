@@ -458,63 +458,103 @@
 	    // Define stimuli combinations for practice and test blocks
 	    const discrimination_training_stimuli = [
 		    {
-			    "first_gabor_orientation": 45,
-			    "first_gabor_filename": "Gab_45.png",
-			    "second_gabor_orientation": 90,
-			    "second_gabor_filename": "Gab_90.png"
+			    "first_left_gabor_orientation": 45,
+			    "first_left_gabor_filename": "Gab_45.png",
+			    "first_right_gabor_orientation": 90,
+			    "first_right_gabor_filename": "Gab_90.png",
+			    "second_left_gabor_orientation": 90,
+			    "second_left_gabor_filename": "Gab_90.png",
+			    "second_right_gabor_orientation": 90,
+			    "second_right_gabor_filename": "Gab_90.png"
 		    },
 		    {
-			    "first_gabor_orientation": 90,
-			    "first_gabor_filename": "Gab_90.png",
-			    "second_gabor_orientation": 45,
-			    "second_gabor_filename": "Gab_45.png"
+			    "first_left_gabor_orientation": 0,
+			    "first_left_gabor_filename": "Gab_0.png",
+			    "first_right_gabor_orientation": 90,
+			    "first_right_gabor_filename": "Gab_90.png",
+			    "second_left_gabor_orientation": 45,
+			    "second_left_gabor_filename": "Gab_45.png",
+			    "second_right_gabor_orientation": 90,
+			    "second_right_gabor_filename": "Gab_90.png"
 		    },
-		   ];
+	    ];
 	    
 	    const discrimination_test_stimuli = [
-		    {
-			    "first_gabor_orientation": 45,
-			    "first_gabor_filename": "Gab_45.png",
-			    "second_gabor_orientation": 0,
-			    "second_gabor_filename": "Gab_0.png"
+		      {
+			    "first_left_gabor_orientation": 45,
+			    "first_left_gabor_filename": "Gab_45.png",
+			    "first_right_gabor_orientation": 90,
+			    "first_right_gabor_filename": "Gab_90.png",
+			    "second_left_gabor_orientation": 90,
+			    "second_left_gabor_filename": "Gab_90.png",
+			    "second_right_gabor_orientation": 90,
+			    "second_right_gabor_filename": "Gab_90.png"
 		    },
 		    {
-			    "first_gabor_orientation": 0,
-			    "first_gabor_filename": "Gab_0.png",
-			    "second_gabor_orientation": 90,
-			    "second_gabor_filename": "Gab_90.png"
-		    }];
+			    "first_left_gabor_orientation": 0,
+			    "first_left_gabor_filename": "Gab_0.png",
+			    "first_right_gabor_orientation": 90,
+			    "first_right_gabor_filename": "Gab_90.png",
+			    "second_left_gabor_orientation": 45,
+			    "second_left_gabor_filename": "Gab_45.png",
+			    "second_right_gabor_orientation": 90,
+			    "second_right_gabor_filename": "Gab_90.png"
+		    },
+	    ];
 	    
 
 	    // Define stimuli 
-	    let first_gabor = {
+	    let first_left_gabor = {
 		    obj_type: 'image',
-		    file: jsPsych.timelineVariable('first_gabor_filename'),
+		    file: jsPsych.timelineVariable('first_left_gabor_filename'), 
+		    startX: 300,
 		    image_width: 200,
 		    show_start_time: 500,
 		    show_end_time: 1000,		    
 	    };
-	    let second_gabor = {
+	    
+	    let first_right_gabor = {
 		    obj_type: 'image',
-		    file: jsPsych.timelineVariable('second_gabor_filename'), 
+		    file: jsPsych.timelineVariable('first_right_gabor_filename'),
+		    startX: 6300,
+		    image_width: 200,
+		    show_start_time: 500,
+		    show_end_time: 1000,		    
+	    };
+	    
+	    let second_left_gabor = {
+		    obj_type: 'image',
+		    file: jsPsych.timelineVariable('second_left_gabor_filename'), 
+		    startX: 300,
 		    image_width: 200,
 		    show_start_time: 1500,
-		    show_end_time: 2000,
+		    show_end_time: 2000,		    
 	    };
+	    
+	    let second_right_gabor = {
+		    obj_type: 'image',
+		    file: jsPsych.timelineVariable('second_right_gabor_filename'),
+		    startX: 6300,
+		    image_width: 200,
+		    show_start_time: 1500,
+		    show_end_time: 2000,		    
+	    };
+	    
+	    
+	    
 	    let discrimination_trial = {
 		    type: jsPsychPsychophysics,
-		    stimuli: [first_gabor, second_gabor],
+		    stimuli: [first_left_gabor, first_right_gabor, second_left_gabor, second_right_gabor],
 		    canvas_width: 800,
 		    canvas_height: 800,
 		    trial_duration: 2500,
 		    response_ends_trial: false,
 		    background_color: '#808080',
 		    on_finish: function (data) {
-			    data.first_stimulus = jsPsych.timelineVariable('first_gabor_orientation');
-			    data.second_stimulus = jsPsych.timelineVariable('second_gabor_orientation');
-			    let difference_to_vertical_gabor1 = Math.abs(90-data.first_stimulus);
-			    let difference_to_vertical_gabor2 = Math.abs(90-data.second_stimulus);
-			    if (difference_to_vertical_gabor1 < difference_to_vertical_gabor2) {
+			    data.difference_first_pair = abs(jsPsych.timelineVariable('first_left_gabor_orientation') - jsPsych.timelineVariable('first_right_gabor_orientation'));
+			    data.difference_second_pair = abs(jsPsych.timelineVariable('second_left_gabor_orientation') - jsPsych.timelineVariable('second_right_gabor_orientation'));
+			    
+			    if (data.difference_first_pair < data.difference_second_pair) {
 				    data.correct_response = 0;
 			    } else {
 				    data.correct_response = 1;
@@ -525,8 +565,8 @@
 	    
 	    let discrimination_response = {
 		    type: jsPsychHtmlButtonResponse,
-		    stimulus: '<p>Which grating was closer to vertical?</p>',
-		    choices: ['First', 'second'],
+		    stimulus: '<p>Which pair was closer together?</p>',
+		    choices: ['First', 'Second'],
 		    on_finish: function (data) {
 			    var stim_trial_id = data.trial_index - 1;
 			    data.correct_response = jsPsych.data.get().trials[stim_trial_id].correct_response;
@@ -581,7 +621,7 @@
 	    jsPsych.run([
 	            browser_check,
 		    welcome_instructions,
-		    //virtual_chinrest, 
+		   /* //virtual_chinrest, 
 		    reproduction_practice_instructions,
 		    // practice block
 		    {
@@ -610,7 +650,7 @@
 			    randomize_order: true,repetitions: 2
 		    }, 
 		    mkTimer,
-		    alarm,
+		    alarm, */
 		    discrimination_practice_instructions,
 		    training_procedure,
 		    discrimination_test_instructions,
