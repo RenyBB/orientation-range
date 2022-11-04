@@ -501,7 +501,7 @@
 			    "second_right_gabor_filename": "Gab_90.png"
 		    },
 	    ];
-	    
+	    	    
 
 	    // Define stimuli 
 	    let first_left_gabor = {
@@ -540,11 +540,22 @@
 		    show_end_time: 2000,		    
 	    };
 	    
-	    
-	    
+	    //define fixation cross
+	    const fixation_discrimination = {
+		    obj_type: 'cross',
+		    line_length: 50,
+		    line_color: 'white',
+		    line_width: 5,
+		    startX: 'center',
+		    show_start_time: 500,
+		    show_end_time: 2000,
+		    //is_frame: true,
+		    //show_start_frame: () => Math.round(250/((1 / jsPsych.data.get().select('vsync_rate').values[0]) * 1000)),
+		    //show_end_frame: () => Math.round((500+250)/((1 / jsPsych.data.get().select('vsync_rate').values[0]) * 1000)),
+	    };
 	    let discrimination_trial = {
 		    type: jsPsychPsychophysics,
-		    stimuli: [first_left_gabor, first_right_gabor, second_left_gabor, second_right_gabor],
+		    stimuli: [fixation_discrimination, first_left_gabor, first_right_gabor, second_left_gabor, second_right_gabor],
 		    canvas_width: 1000,
 		    canvas_height: 800,
 		    trial_duration: 2500,
