@@ -507,7 +507,7 @@
 	    let first_left_gabor = {
 		    obj_type: 'image',
 		    file: jsPsych.timelineVariable('first_left_gabor_filename'), 
-		    startX: 300,
+		    startX: () => {return jsPsych.data.get().select('vsync_rate').width[0]-200},
 		    image_width: 200,
 		    show_start_time: 500,
 		    show_end_time: 1000,		    
@@ -516,7 +516,7 @@
 	    let first_right_gabor = {
 		    obj_type: 'image',
 		    file: jsPsych.timelineVariable('first_right_gabor_filename'),
-		    startX: 600,
+		    startX: () => {return jsPsych.data.get().select('vsync_rate').width[0]+200},
 		    image_width: 200,
 		    show_start_time: 500,
 		    show_end_time: 1000,		    
@@ -525,7 +525,7 @@
 	    let second_left_gabor = {
 		    obj_type: 'image',
 		    file: jsPsych.timelineVariable('second_left_gabor_filename'), 
-		    startX: 300,
+		    startX: () => {return jsPsych.data.get().select('vsync_rate').width[0]-200},
 		    image_width: 200,
 		    show_start_time: 1500,
 		    show_end_time: 2000,		    
@@ -534,7 +534,7 @@
 	    let second_right_gabor = {
 		    obj_type: 'image',
 		    file: jsPsych.timelineVariable('second_right_gabor_filename'),
-		    startX: 600,
+		    startX: () => {return jsPsych.data.get().select('vsync_rate').width[0]+200},
 		    image_width: 200,
 		    show_start_time: 1500,
 		    show_end_time: 2000,		    
