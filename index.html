@@ -534,7 +534,7 @@
 	    let second_right_gabor = {
 		    obj_type: 'image',
 		    file: jsPsych.timelineVariable('second_right_gabor_filename'),
-		    startX: 6300,
+		    startX: 600,
 		    image_width: 200,
 		    show_start_time: 1500,
 		    show_end_time: 2000,		    
@@ -551,8 +551,8 @@
 		    response_ends_trial: false,
 		    background_color: '#808080',
 		    on_finish: function (data) {
-			    data.difference_first_pair = abs(jsPsych.timelineVariable('first_left_gabor_orientation') - jsPsych.timelineVariable('first_right_gabor_orientation'));
-			    data.difference_second_pair = abs(jsPsych.timelineVariable('second_left_gabor_orientation') - jsPsych.timelineVariable('second_right_gabor_orientation'));
+			    data.difference_first_pair = Math.abs(jsPsych.timelineVariable('first_left_gabor_orientation') - jsPsych.timelineVariable('first_right_gabor_orientation'));
+			    data.difference_second_pair = Math.abs(jsPsych.timelineVariable('second_left_gabor_orientation') - jsPsych.timelineVariable('second_right_gabor_orientation'));
 			    
 			    if (data.difference_first_pair < data.difference_second_pair) {
 				    data.correct_response = 0;
