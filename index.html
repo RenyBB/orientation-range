@@ -507,7 +507,7 @@
 	    let first_left_gabor = {
 		    obj_type: 'image',
 		    file: jsPsych.timelineVariable('first_left_gabor_filename'), 
-		    startX: () => {return jsPsych.data.get().select('width').values[0]/2-200},
+		    startX: 300,
 		    image_width: 200,
 		    show_start_time: 500,
 		    show_end_time: 1000,		    
@@ -516,7 +516,7 @@
 	    let first_right_gabor = {
 		    obj_type: 'image',
 		    file: jsPsych.timelineVariable('first_right_gabor_filename'),
-		    startX: () => {return jsPsych.data.get().select('width').values[0]/2+200},
+		    startX: 600,
 		    image_width: 200,
 		    show_start_time: 500,
 		    show_end_time: 1000,		    
@@ -525,7 +525,7 @@
 	    let second_left_gabor = {
 		    obj_type: 'image',
 		    file: jsPsych.timelineVariable('second_left_gabor_filename'), 
-		    startX: () => {return jsPsych.data.get().select('width').values[0]/2-200},
+		    startX: 300,
 		    image_width: 200,
 		    show_start_time: 1500,
 		    show_end_time: 2000,		    
@@ -534,7 +534,7 @@
 	    let second_right_gabor = {
 		    obj_type: 'image',
 		    file: jsPsych.timelineVariable('second_right_gabor_filename'),
-		    startX: () => {return jsPsych.data.get().select('width').values[0]/2+200},
+		    startX: 600,
 		    image_width: 200,
 		    show_start_time: 1500,
 		    show_end_time: 2000,		    
@@ -545,7 +545,7 @@
 	    let discrimination_trial = {
 		    type: jsPsychPsychophysics,
 		    stimuli: [first_left_gabor, first_right_gabor, second_left_gabor, second_right_gabor],
-		    canvas_width: 800,
+		    canvas_width: 1000,
 		    canvas_height: 800,
 		    trial_duration: 2500,
 		    response_ends_trial: false,
