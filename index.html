@@ -56,20 +56,20 @@
 	        
 	    // practice stimuli
 	    const training_stimuli = [
-		    { stimulus: "gabor_stimuli/gabor_ori15_phase0.05.svg", orientation: 15},
-		    { stimulus: "gabor_stimuli/gabor_ori29_phase0.05.svg", orientation: 29},
+		    { stimulus: "gabor_stimuli/gabor_ori15_phase0.05.svg", orientation: 90-15},
+		    { stimulus: "gabor_stimuli/gabor_ori29_phase0.05.svg", orientation: 90-29},
 	    ];
 	    
 	    // test stimuli for condition 1
     	    const test_stimuli_range1 = [
-		    { stimulus: "gabor_stimuli/gabor_ori23_phase0.05.svg", orientation: 23},
+		    { stimulus: "gabor_stimuli/gabor_ori23_phase0.05.svg", orientation: 90-23},
 		    { stimulus: "gabor_stimuli/gabor_ori27_phase0.05.svg", orientation: 27},
 	    ];
 	    
 	    // test stimuli for condition 2
 	    const test_stimuli_range2 = [
-		    { stimulus: "gabor_stimuli/gabor_ori17_phase0.05.svg", orientation: 17},
-		    { stimulus: "gabor_stimuli/gabor_ori21_phase0.05.svg", orientation: 21},
+		    { stimulus: "gabor_stimuli/gabor_ori17_phase0.05.svg", orientation: 90-17},
+		    { stimulus: "gabor_stimuli/gabor_ori21_phase0.05.svg", orientation: 90-21},
 	    ];
 	    
 	    // assign order of conditions based on subject and session ids
@@ -372,7 +372,7 @@
 				      line_length: 200,
 				      line_color: 'white',
 				      line_width: 5,
-				      angle: function () {return 0}	 //180 - jsPsych.timelineVariable('orientation')
+				      angle: function () {return 180 - jsPsych.timelineVariable('orientation')}	 
 			      }   
 			     ],
 	    };
