@@ -10,7 +10,7 @@
   	<script src="https://unpkg.com/@jspsych/plugin-html-keyboard-response"></script>
 	<script src="https://unpkg.com/@jspsych/plugin-html-button-response"></script>
   	<script src="https://unpkg.com/@jspsych/plugin-image-keyboard-response"></script>
-    	<script src="https://unpkg.com/@jspsych/plugin-canvas-button-response"></script>
+    	<script src="https://unpkg.com/@jspsych/plugin-instructions"></script>
 	    
       	<script src="jspsych-psychophysics.js"></script>
       	<script src="https://pixijs.download/release/pixi.js"></script>
@@ -56,20 +56,20 @@
 	        
 	    // practice stimuli
 	    const training_stimuli = [
-		    { stimulus: "Gab_45.png", orientation: 45},
-		    { stimulus: "Gab_135.png", orientation: 135},
+		    { stimulus: "gabor_stimuli/gabor_ori15_phase0.05.svg", orientation: 90-15},
+		    { stimulus: "gabor_stimuli/gabor_ori29_phase0.05.svg", orientation: 90-29},
 	    ];
 	    
 	    // test stimuli for condition 1
     	    const test_stimuli_range1 = [
-		    { stimulus: "Gab_45.png", orientation: 45},
-		    { stimulus: "Gab_135.png", orientation: 135},
+		    { stimulus: "gabor_stimuli/gabor_ori23_phase0.05.svg", orientation: 90-23},
+		    { stimulus: "gabor_stimuli/gabor_ori27_phase0.05.svg", orientation: 27},
 	    ];
 	    
 	    // test stimuli for condition 2
 	    const test_stimuli_range2 = [
-		    { stimulus: "Gab_90.png", orientation: 90},
-		    { stimulus: "Gab_0.png", orientation: 0},
+		    { stimulus: "gabor_stimuli/gabor_ori17_phase0.05.svg", orientation: 90-17},
+		    { stimulus: "gabor_stimuli/gabor_ori21_phase0.05.svg", orientation: 90-21},
 	    ];
 	    
 	    // assign order of conditions based on subject and session ids
@@ -113,21 +113,69 @@
 		    pixels_per_unit: 50
 	    };
 	    
-	    // experiment instructions
-	    const instruction = {
-		    type: jsPsychHtmlButtonResponse,
-		    stimulus: 'Click on the Start button.',
-		    choices: ['Start'],
-		    prompt: "This is a sample program for the jspsych-psychophysics plugin.",
+	    // welcome to experiment instructions
+	    const welcome_instructions = {
+		    type: jsPsychInstructions,
+		    pages: [
+			    '<p>Welcome to the experiment. You have volunteered to take part in a research study investigating individual differences in orienation perception.<br>'+
+			    'This study consists of 2 sessions. In each session, you will complete 2 different tasks. You have to complete the two sessions within 1 week.<br>'+
+			    'This means that by agreeing to take part in this experiment, you will be committing to 2 sessions.<br>'+
+			    'The experimenter will invite you to complete the second session. Each session should take you around 45 minutes to complete.</p>'
+		    ],
+		    show_clickable_nav: true,
+		    allow_backward: false
+	    };
+	    
+	    // orientation reproduction instructions: practice 
+	    const reproduction_practice_instructions = {
+		    type: jsPsychInstructions,
+		    pages: [
+			    // stimulus instructions
+			    '<p> You will now perform an orientation matching task.<br>'+
+			    'Each trial will begin with the presentation of a fixation cross.<br><br>'+
+			    'Then you will see a black and white grating like the one below.<br>'+
+			    '<img src="Gab.png" width="200"></img></p>',
+			    // response instructions
+			    '<p>After the grating disappears, you will be presented with a black line.<br>'+
+			    'Your task will be to rotate the line so that it is oriented the same way as the grating.<br>'+
+			    'To rotate the line, you have to have move your mouse to the right and to the left.<br><br>'+
+			    '<video width="800" controls> <source src="response_instruction_video.mp4" type="video/mp4"></video></p>',
+			    // feedback instructions
+			    '<p>Finally, you will receive feedback which will indicate the accuracy of your response<br>'+
+			    'The white line shows the true orientation of the grating. The coloured line shows your reponse.<br>'+
+			    'The further away the coloured line is from the white line, the bigger the difference between your response and the true orientation of the grating.<br>'+
+			    'If the coloured line is green, that means your response was close to the true orientation of the grating.<br>'+
+			    '<img src="correct_response_feedback.png" width="150"></img><br>'+
+			    'If the coloured line is red, that means your response was not close to the true orientation of the grating.<br>'+
+			    '<img src="incorrect_response_feedback.png" width="150"></img></p>',
+			    '<p>You will first complete a practice block. Click Next to start the task. </p>'
+			    	    
+		    ],
+		    show_clickable_nav: true,
+		    allow_backward: true
+	    };
+	    
+	    // orientation reproduction instructions: test block 1
+	    const reproduction_test_instructions_block1 = {
+		    type: jsPsychInstructions,
+		    pages: [
+			    '<p> You will now complete two test blocks. Click Next to start the first test block.</p>'
+		    ],
+		    show_clickable_nav: true,
+		    allow_backward: false
+	    };
+	    
+	    // orientation reproduction instructions: test block 2
+	    const reproduction_test_instructions_block2 = {
+		    type: jsPsychInstructions,
+		    pages: [
+			    '<p>Click Next to start the second test block.</p>'
+		    ],
+		    show_clickable_nav: true,
+		    allow_backward: false
 	    };
 	    
 	    //define fixation cross
-	    /*const fixation = {
-		    type: jsPsychHtmlKeyboardResponse,
-		    stimulus: '<div style="font-size:60px;">+</div>',
-		    choices: 'NO_KEYS',
-		    trial_duration: 1000,
-	    };*/
 	    const fixation = {
 		    obj_type: 'cross',
 		    line_length: 50,
@@ -149,17 +197,8 @@
 		    show_start_frame: () => Math.round((1000+250+250)/((1 / jsPsych.data.get().select('vsync_rate').values[0]) * 1000)),
 		    show_end_frame: () => Math.round((1000+500+500)/jsPsych.data.get().select('frame_duration').values[0]),
 	    };
-	    
-	    /*const test = {
-		    type: jsPsychImageKeyboardResponse,
-		    stimulus: jsPsych.timelineVariable('stimulus'),
-		    choices: 'NO_KEYS',
-		    trial_duration: 500,
-		    maintain_aspect_ration: true,
-		    stimulus_height: 150
-	    };*/
-	    
-	    
+	     
+	    // display fixation cross followed by gabor
 	    const test = {
 		    type: jsPsychPsychophysics,
 		    pixi: pixi_flag,
@@ -221,7 +260,7 @@
 		    canvas_height: 800,
 		    response_type: 'key',
 		    choices: [' '],
-		    prompt: '<p>Right-click to wake up mouse. Move mouse SLOWLY to the left or right to rotate the line.<br>When you are happy with the orientation of the line, right click to stop the line moving.Then press the spacebar to save your response. </p>',
+		    prompt: '<p>Left-click to wake up mouse. Move mouse SLOWLY to the left or right to rotate the line.<br>When you are happy with the orientation of the line, left click to stop the line moving.Then press the spacebar to save your response. </p>',
 		    stimuli: [circle_obj, line_obj], // These can be referenced using the jsPsych.currentTrial().stim_array array.
 		    mouse_down_func: function(event){
 			    mouse_move_start = !mouse_move_start;
@@ -310,10 +349,10 @@
 		    prompt: [],
 		    on_start: function(trial) {
 			    if (jsPsych.data.get().last(1).values()[0].feedback_colour == 'green') {
-				    trial.prompt = 'The white line shows the true orienation of the grating. The colour line shows your response.<br>If the line is green, you were close to the true orientation of the grating. Press the spacebar to continue.'    
+				    trial.prompt = 'The white line shows the true orienation of the grating. The coloured line shows your response.<br>If the line is green, you were close to the true orientation of the grating. Press the spacebar to continue.'    
 			    }
 			    else {
-				    trial.prompt = 'The white line shows the true orienation of the grating. The colour line shows your response.<br>If the line is red, you were not close to the true orientation of the grating. Press the spacebar to continue.'
+				    trial.prompt = 'The white line shows the true orienation of the grating. The coloured line shows your response.<br>If the line is red, you were not close to the true orientation of the grating. Press the spacebar to continue.'
 			    }
 			    
 		    
@@ -333,7 +372,7 @@
 				      line_length: 200,
 				      line_color: 'white',
 				      line_width: 5,
-				      angle: function () {return 180 - jsPsych.timelineVariable('orientation')}	
+				      angle: function () {return 180 - jsPsych.timelineVariable('orientation')}	 
 			      }   
 			     ],
 	    };
@@ -383,135 +422,150 @@
 		    choices: ['Continue'],
 		    prompt: 'This is the end of the break. Please continue the experiment.'	
 	    };
-	    
-	    // define tinemline and run orientation reproduction task
-	    jsPsych.run([
-		    instruction,
-		    browser_check,
-		    //virtual_chinrest, 
-		    // practice block
-		    {
-			    timeline: [test, response, feedback],
-			    timeline_variables: training_stimuli,
-			    randomize_order: true,
-			    repetitions: 1
-		    },
-		    mkTimer,
-		    alarm,
-		    instruction,
-		    // block 1
-		    {
-			    timeline: [test, response, feedback],
-			    timeline_variables: test_stimuli_block1,
-			    randomize_order: true,
-			    repetitions: 2
-		    },  
-		    mkTimer,
-		    alarm,
-		    instruction,
-		    // block 2
-		    {
-			    timeline: [test, response, feedback],
-			    timeline_variables: test_stimuli_block2,
-			    randomize_order: true,repetitions: 2
-		    }, 
-	    ])
-	    
+	    	    
 // orientation discrimination task
+	    
+    
+	    // 	orientation discrimination instructions: practice 
+	    const discrimination_practice_instructions = {
+		    type: jsPsychInstructions,
+		    pages: [
+			    // stimulus instructions
+			    '<p> You will now perform an orientation discrimination task.<br>'+
+			    'On each trial you will see two black and white gratings one after the other.<br>'+
+			    'Your task will be to report whether the first or second grating was closer to vertical.<br>'+
+			    'You will then receive feedback whether your response was correct.<br><br>'+
+			    'You will first complete a practice block. Click Next to start the task. </p>'   	    
+		    ],
+		    show_clickable_nav: true,
+		    allow_backward: false
+	    };
+	    
+	    // 	orientation discrimination instructions: test 
+	    const discrimination_test_instructions = {
+		    type: jsPsychInstructions,
+		    pages: [
+			    // stimulus instructions
+			    '<p> You will now complete a test block.<br>'+
+			    'On each trial you will see two black and white gratings one after the other.<br><br>'+
+			    'Your task will be to report whether the first or second grating was closer to vertical.<br>'+
+			    'You will not receive feedback in the test block. Click Next to start the task. </p>'   	    
+		    ],
+		    show_clickable_nav: true,
+		    allow_backward: false
+	    };	    
+	    
+	    // Define stimuli combinations for practice and test blocks
 	    const discrimination_training_stimuli = [
 		    {
-			    "first_gabor_orientation": 45,
-			    "first_gabor_filename": "Gab_45.png",
-			    "second_gabor_orientation": 90,
-			    "second_gabor_filename": "Gab_90.png"
+			    "first_left_gabor_orientation": 45,
+			    "first_left_gabor_filename": "Gab_45.png",
+			    "first_right_gabor_orientation": 90,
+			    "first_right_gabor_filename": "Gab_90.png",
+			    "second_left_gabor_orientation": 90,
+			    "second_left_gabor_filename": "Gab_90.png",
+			    "second_right_gabor_orientation": 90,
+			    "second_right_gabor_filename": "Gab_90.png"
 		    },
 		    {
-			    "first_gabor_orientation": 135,
-			    "first_gabor_filename": "Gab_135.png",
-			    "second_gabor_orientation": 0,
-			    "second_gabor_filename": "Gab_0.png"
+			    "first_left_gabor_orientation": 0,
+			    "first_left_gabor_filename": "Gab_0.png",
+			    "first_right_gabor_orientation": 90,
+			    "first_right_gabor_filename": "Gab_90.png",
+			    "second_left_gabor_orientation": 45,
+			    "second_left_gabor_filename": "Gab_45.png",
+			    "second_right_gabor_orientation": 90,
+			    "second_right_gabor_filename": "Gab_90.png"
 		    },
-		    {
-			    "first_gabor_orientation": 90,
-			    "first_gabor_filename": "Gab_90.png",
-			    "second_gabor_orientation": 45,
-			    "second_gabor_filename": "Gab_45.png"
-		    },
-		    {
-			    "first_gabor_orientation": 0,
-			    "first_gabor_filename": "Gab_0.png",
-			    "second_gabor_orientation": 135,
-			    "second_gabor_filename": "Gab_135.png"
-		    }];
+	    ];
 	    
 	    const discrimination_test_stimuli = [
-		    {
-			    "first_gabor_orientation": 45,
-			    "first_gabor_filename": "Gab_45.png",
-			    "second_gabor_orientation": 90,
-			    "second_gabor_filename": "Gab_90.png"
+		      {
+			    "first_left_gabor_orientation": 45,
+			    "first_left_gabor_filename": "Gab_45.png",
+			    "first_right_gabor_orientation": 90,
+			    "first_right_gabor_filename": "Gab_90.png",
+			    "second_left_gabor_orientation": 90,
+			    "second_left_gabor_filename": "Gab_90.png",
+			    "second_right_gabor_orientation": 90,
+			    "second_right_gabor_filename": "Gab_90.png"
 		    },
 		    {
-			    "first_gabor_orientation": 135,
-			    "first_gabor_filename": "Gab_135.png",
-			    "second_gabor_orientation": 0,
-			    "second_gabor_filename": "Gab_0.png"
+			    "first_left_gabor_orientation": 0,
+			    "first_left_gabor_filename": "Gab_0.png",
+			    "first_right_gabor_orientation": 90,
+			    "first_right_gabor_filename": "Gab_90.png",
+			    "second_left_gabor_orientation": 45,
+			    "second_left_gabor_filename": "Gab_45.png",
+			    "second_right_gabor_orientation": 90,
+			    "second_right_gabor_filename": "Gab_90.png"
 		    },
-		    {
-			    "first_gabor_orientation": 90,
-			    "first_gabor_filename": "Gab_90.png",
-			    "second_gabor_orientation": 45,
-			    "second_gabor_filename": "Gab_45.png"
-		    },
-		    {
-			    "first_gabor_orientation": 0,
-			    "first_gabor_filename": "Gab_0.png",
-			    "second_gabor_orientation": 135,
-			    "second_gabor_filename": "Gab_135.png"
-		    }];
-	    
-	    /* Define number of repetitions per stimulus and total number of trials
-	    var n_reps_per_training_stim = 2;
-	    var n_training_stimuli = discrimination_training_stimuli.length;
-	    var n_training_trials = n_training_trials * n_training_stimuli;
-	    
-	    var repeated_training_stim = (
-		    Array(n_reps_per_training_stim).fill(discrimination_training_stimuli)
-	    );
-	    
-	    var repeated_training_stim_organized = [].concat.apply([], repeated_training_stim);
-	    
-	    var training_trials_shuffled = jsPsych.randomization.shuffle(repeated_training_stim_organized);*/
+	    ];
+	    	    
 
 	    // Define stimuli 
-	    let first_gabor = {
+	    let first_left_gabor = {
 		    obj_type: 'image',
-		    file: jsPsych.timelineVariable('first_gabor_filename'),
+		    file: jsPsych.timelineVariable('first_left_gabor_filename'), 
+		    startX: 100,
 		    image_width: 200,
 		    show_start_time: 500,
 		    show_end_time: 1000,		    
 	    };
-	    let second_gabor = {
+	    
+	    let first_right_gabor = {
 		    obj_type: 'image',
-		    file: jsPsych.timelineVariable('second_gabor_filename'), 
+		    file: jsPsych.timelineVariable('first_right_gabor_filename'),
+		    startX: 900,
+		    image_width: 200,
+		    show_start_time: 500,
+		    show_end_time: 1000,		    
+	    };
+	    
+	    let second_left_gabor = {
+		    obj_type: 'image',
+		    file: jsPsych.timelineVariable('second_left_gabor_filename'), 
+		    startX: 200,
 		    image_width: 200,
 		    show_start_time: 1500,
-		    show_end_time: 2000,
+		    show_end_time: 2000,		    
+	    };
+	    
+	    let second_right_gabor = {
+		    obj_type: 'image',
+		    file: jsPsych.timelineVariable('second_right_gabor_filename'),
+		    startX: 800,
+		    image_width: 200,
+		    show_start_time: 1500,
+		    show_end_time: 2000,		    
+	    };
+	    
+	    //define fixation cross
+	    const fixation_discrimination = {
+		    obj_type: 'cross',
+		    line_length: 25,
+		    line_color: 'white',
+		    line_width: 5,
+		    startX: 'center',
+		    show_start_time: 0,
+		    show_end_time: 2500,
+		    //is_frame: true,
+		    //show_start_frame: () => Math.round(250/((1 / jsPsych.data.get().select('vsync_rate').values[0]) * 1000)),
+		    //show_end_frame: () => Math.round((500+250)/((1 / jsPsych.data.get().select('vsync_rate').values[0]) * 1000)),
 	    };
 	    let discrimination_trial = {
 		    type: jsPsychPsychophysics,
-		    stimuli: [first_gabor, second_gabor],
-		    canvas_width: 800,
+		    stimuli: [fixation_discrimination, first_left_gabor, first_right_gabor, second_left_gabor, second_right_gabor],
+		    canvas_width: 1000,
 		    canvas_height: 800,
-		    trial_duration: 2500,
+		    trial_duration: 2800,
 		    response_ends_trial: false,
 		    background_color: '#808080',
 		    on_finish: function (data) {
-			    data.first_stimulus = jsPsych.timelineVariable('first_gabor_orientation');
-			    data.second_stimulus = jsPsych.timelineVariable('second_gabor_orientation');
-			    let difference_to_vertical_gabor1 = Math.abs(90-data.first_stimulus);
-			    let difference_to_vertical_gabor2 = Math.abs(90-data.second_stimulus);
-			    if (difference_to_vertical_gabor1 < difference_to_vertical_gabor2) {
+			    data.difference_first_pair = Math.abs(jsPsych.timelineVariable('first_left_gabor_orientation') - jsPsych.timelineVariable('first_right_gabor_orientation'));
+			    data.difference_second_pair = Math.abs(jsPsych.timelineVariable('second_left_gabor_orientation') - jsPsych.timelineVariable('second_right_gabor_orientation'));
+			    
+			    if (data.difference_first_pair < data.difference_second_pair) {
 				    data.correct_response = 0;
 			    } else {
 				    data.correct_response = 1;
@@ -522,8 +576,8 @@
 	    
 	    let discrimination_response = {
 		    type: jsPsychHtmlButtonResponse,
-		    stimulus: '<p>Which grating was closer to vertical?</p>',
-		    choices: ['First', 'second'],
+		    stimulus: '<p>Which pair was closer together?</p>',
+		    choices: ['First', 'Second'],
 		    on_finish: function (data) {
 			    var stim_trial_id = data.trial_index - 1;
 			    data.correct_response = jsPsych.data.get().trials[stim_trial_id].correct_response;
@@ -567,10 +621,55 @@
 	    };
 	    
 	    
+	    let testing_procedure = {
+		    timeline: [discrimination_trial,  discrimination_response],  //Interval1_Training, Interval2_Training,
+		    timeline_variables: discrimination_test_stimuli,
+		    repetitions: 3,
+		    randomize: true,
+	    };
+	    
+	    // define tinemline and run experiment
 	    jsPsych.run([
-		    instruction,
-		    training_procedure
+	            browser_check,
+		    welcome_instructions,
+		    //virtual_chinrest, 
+		    reproduction_practice_instructions,
+		    // practice block
+		    {
+			    timeline: [test, response, feedback],
+			    timeline_variables: training_stimuli,
+			    randomize_order: true,
+			    repetitions: 1
+		    },
+		    mkTimer,
+		    alarm,
+		    reproduction_test_instructions_block1,
+		    // block 1
+		    {
+			    timeline: [test, response, feedback],
+			    timeline_variables: test_stimuli_block1,
+			    randomize_order: true,
+			    repetitions: 2
+		    },  
+		    mkTimer,
+		    alarm,
+		    reproduction_test_instructions_block2,
+		    // block 2
+		    {
+			    timeline: [test, response, feedback],
+			    timeline_variables: test_stimuli_block2,
+			    randomize_order: true,repetitions: 2
+		    }, 
+		    mkTimer,
+		    alarm, 
+		    discrimination_practice_instructions,
+		    training_procedure,
+		    discrimination_test_instructions,
+		    testing_procedure,
 	    ]);
-
+	    
+	    
+	
+	    
 	</script>
 </html>
