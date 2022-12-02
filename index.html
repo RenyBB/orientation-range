@@ -463,29 +463,31 @@
 	    
 	    // Define stimuli combinations for practice and test blocks
 	    const discrimination_training_stimuli = [
-		    {
-			    "first_left_gabor_orientation": 45,
-			    "first_left_gabor_filename": "Gab_45.png",
-			    "first_right_gabor_orientation": 90,
-			    "first_right_gabor_filename": "Gab_90.png",
-			    "second_left_gabor_orientation": 90,
-			    "second_left_gabor_filename": "Gab_90.png",
-			    "second_right_gabor_orientation": 90,
-			    "second_right_gabor_filename": "Gab_90.png"
-		    },
-		    {
-			    "first_left_gabor_orientation": 0,
-			    "first_left_gabor_filename": "Gab_0.png",
-			    "first_right_gabor_orientation": 90,
-			    "first_right_gabor_filename": "Gab_90.png",
-			    "second_left_gabor_orientation": 45,
-			    "second_left_gabor_filename": "Gab_45.png",
-			    "second_right_gabor_orientation": 90,
-			    "second_right_gabor_filename": "Gab_90.png"
-		    },
+		      {
+    "stimulus_directory": "gabor_stimuli_new/",
+    "first_left_gabor_orientation": 23,
+    "first_left_gabor_filename": "gabor_stimuli_new/gabor_ori23_phase0.05.png",
+    "first_right_gabor_orientation": 23,
+    "first_right_gabor_filename": "gabor_stimuli_new/gabor_ori23_phase0.05.png",
+    "second_left_gabor_orientation": 15,
+    "second_left_gabor_filename": "gabor_stimuli_new/gabor_ori15_phase0.05.png",
+    "second_right_gabor_orientation": 29,
+    "second_right_gabor_filename": "gabor_stimuli_new/gabor_ori29_phase0.05.png"
+  },
+  		      {
+    "stimulus_directory": "gabor_stimuli_new/",
+    "first_left_gabor_orientation": 29,
+    "first_left_gabor_filename": "gabor_stimuli_new/gabor_ori29_phase0.05.png",
+    "first_right_gabor_orientation": 15,
+    "first_right_gabor_filename": "gabor_stimuli_new/gabor_ori15_phase0.05.png",
+    "second_left_gabor_orientation": 23,
+    "second_left_gabor_filename": "gabor_stimuli_new/gabor_ori23_phase0.05.png",
+    "second_right_gabor_orientation": 23,
+    "second_right_gabor_filename": "gabor_stimuli_new/gabor_ori23_phase0.05.png"
+  },
 	    ];
 	    
-	    const discrimination_test_stimuli = [
+  const discrimination_test_stimuli = [
   {
     "stimulus_directory": "gabor_stimuli_new/",
     "first_left_gabor_orientation": 15,
@@ -1021,7 +1023,7 @@
 	    let first_left_gabor = {
 		    obj_type: 'image',
 		    file: jsPsych.timelineVariable('first_left_gabor_filename'), 
-		    startX: 100,
+		    startX: 300,
 		    image_width: 200,
 		    show_start_time: 500,
 		    show_end_time: 1000,		    
@@ -1030,7 +1032,7 @@
 	    let first_right_gabor = {
 		    obj_type: 'image',
 		    file: jsPsych.timelineVariable('first_right_gabor_filename'),
-		    startX: 900,
+		    startX: 700,
 		    image_width: 200,
 		    show_start_time: 500,
 		    show_end_time: 1000,		    
@@ -1039,7 +1041,7 @@
 	    let second_left_gabor = {
 		    obj_type: 'image',
 		    file: jsPsych.timelineVariable('second_left_gabor_filename'), 
-		    startX: 200,
+		    startX: 300,
 		    image_width: 200,
 		    show_start_time: 1500,
 		    show_end_time: 2000,		    
@@ -1048,7 +1050,7 @@
 	    let second_right_gabor = {
 		    obj_type: 'image',
 		    file: jsPsych.timelineVariable('second_right_gabor_filename'),
-		    startX: 800,
+		    startX: 700,
 		    image_width: 200,
 		    show_start_time: 1500,
 		    show_end_time: 2000,		    
