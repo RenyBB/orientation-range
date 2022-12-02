@@ -189,7 +189,7 @@
 		    line_width: 5,
 		    is_frame: true,
 		    show_start_frame: () => Math.round(250/((1 / jsPsych.data.get().select('vsync_rate').values[0]) * 1000)),
-		    show_end_frame: () => Math.round((500+250)/((1 / jsPsych.data.get().select('vsync_rate').values[0]) * 1000)),
+		    show_end_frame: () => Math.round((1000+500+500+250)/jsPsych.data.get().select('frame_duration').values[0]); // Math.round((500+250)/((1 / jsPsych.data.get().select('vsync_rate').values[0]) * 1000)),
 	    };
 	    
 	    
@@ -198,6 +198,7 @@
 	    const gabor = {
 		    obj_type: 'image',
 		    image_width: 200,
+			startY: -200,
 		    file: jsPsych.timelineVariable('stimulus'), 
 		    is_frame: true,
 		    show_start_frame: () => Math.round((1000+250+250)/((1 / jsPsych.data.get().select('vsync_rate').values[0]) * 1000)),
@@ -208,7 +209,7 @@
 	    const test = {
 		    type: jsPsychPsychophysics,
 		    pixi: pixi_flag,
-		    canvas_offsetY: 100,
+		    canvas_offsetY: 0,
 		    canvas_height: 800,
 		    response_type: 'key',
 		    choices: ['NO_KEYS'],
@@ -262,7 +263,7 @@
 	    const response = {
 		    type: jsPsychPsychophysics,
 		    pixi: pixi_flag,
-		    canvas_offsetY: 100,
+		    canvas_offsetY: 0,
 		    canvas_height: 800,
 		    response_type: 'key',
 		    choices: [' '],
@@ -348,7 +349,7 @@
 	    const feedback= {
 		    type: jsPsychPsychophysics,
 		    pixi: pixi_flag,
-		    canvas_offsetY: 100,
+		    canvas_offsetY: 0,
 		    canvas_height: 800,
 		    response_type: 'key',
 		    choices: [' '],
