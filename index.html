@@ -184,7 +184,7 @@
 	    //define fixation cross
 	    const fixation = {
 		    obj_type: 'cross',
-		    line_length: 50,
+		    line_length: 25,
 		    line_color: 'white',
 		    line_width: 5,
 		    is_frame: true,
@@ -228,7 +228,7 @@
 		    obj_type: 'circle',
 		    startX: 'center',
 		    startY: 'center',
-		    radius: 100,
+		    radius: 50,
 		    line_color: 'white',
 		    line_width: 5,
 	    };
@@ -237,7 +237,7 @@
 //!!NOTE: need to exclude correct orientation from possible starting points
 	    const line_obj = {
 		    obj_type: 'line',
-		    line_length: 200,
+		    line_length: 100,
 		    line_color: 'black',
 		    line_width: 5,
 		    angle: function() {
@@ -367,7 +367,7 @@
 			      // response line
 			      {
 				      obj_type: 'line',
-				      line_length: 200,
+				      line_length: 100,
 				      line_color: function () {return jsPsych.data.get().last(1).values()[0].feedback_colour},
 				      line_width: 5,
 				      angle: function () {return jsPsych.data.get().last(1).values()[0].selected_response},
@@ -375,7 +375,7 @@
 			      // stimulus line
 			      {
 				      obj_type: 'line',
-				      line_length: 200,
+				      line_length: 100,
 				      line_color: 'white',
 				      line_width: 5,
 				      angle: function () {return 180 - jsPsych.timelineVariable('orientation')}	 
@@ -387,7 +387,7 @@
 	    const mkTimer = {
 		    type: jsPsychHtmlKeyboardResponse,
 		    stimulus: '<div style="font-size: 25px"><p>The next part of the experiment will start in</p>'
-		    + '<div style="font-size: 50px; color: blue"><p><span id="clock">0:10</span></div></p></div>',
+		    + '<div style="font-size: 50px; color: white"><p><span id="clock">0:10</span></div></p></div>',
 		    choices: ['q'],
 		    trial_duration: 10500,
 		    on_load: function(){
