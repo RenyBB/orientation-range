@@ -71,11 +71,11 @@
 	    
 	    // test stimuli for condition 2
 	    const test_stimuli_range2 = [
-		    { stimulus: "gabor_stimuli_matching/gabor_ori41_phase0.05.png", orientation: 77},
-		    { stimulus: "gabor_stimuli_matching/gabor_ori50_phase0.05.png", orientation: 86},
-			{ stimulus: "gabor_stimuli_matching/gabor_ori59_phase0.05.png", orientation: 95},
-		    { stimulus: "gabor_stimuli_matching/gabor_ori68_phase0.05.png", orientation: 104},
-		    { stimulus: "gabor_stimuli_matching/gabor_ori77_phase0.05.png", orientation: 113},
+		    { stimulus: "gabor_stimuli_matching/gabor_ori77_phase0.05.png", orientation: 77},
+		    { stimulus: "gabor_stimuli_matching/gabor_ori86_phase0.05.png", orientation: 86},
+			{ stimulus: "gabor_stimuli_matching/gabor_ori95_phase0.05.png", orientation: 95},
+		    { stimulus: "gabor_stimuli_matching/gabor_ori104_phase0.05.png", orientation: 104},
+		    { stimulus: "gabor_stimuli_matching/gabor_ori113_phase0.05.png", orientation: 113},
 	    ];
 	    
 	    // assign order of conditions based on subject and session ids
@@ -266,7 +266,7 @@
 		    canvas_height: 800,
 		    response_type: 'key',
 		    choices: [' '],
-		    prompt: '<p>Left-click to wake up mouse. Move mouse SLOWLY to the left or right to rotate the line.<br>When you are happy with the orientation of the line, left click to stop the line moving.Then press the spacebar to save your response. </p>',
+		    prompt: 'Left-click to wake up mouse. Move mouse SLOWLY to the left or right to rotate the line.<br>When you are happy with the orientation of the line, left click to stop the line moving.Then press the spacebar to save your response.',
 		    stimuli: [circle_obj, line_obj], // These can be referenced using the jsPsych.currentTrial().stim_array array.
 		    mouse_down_func: function(event){
 			    mouse_move_start = !mouse_move_start;
