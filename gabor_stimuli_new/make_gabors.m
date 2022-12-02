@@ -1,5 +1,10 @@
-phase_range = 0:0.05:1;
-theta_range = 15:2:29;
+phase_range = 0.05;
+
+theta_range_normal_matching = [15, 139];
+theta_range_rotated_matching = [90-theta_range_normal_matching(theta_range_normal_matching<90), 180-(theta_range_normal_matching(theta_range_normal_matching>90)-90)];
+
+theta_range_rotated_discrimination = 15:2:29;
+theta_range_normal_discrimination = 90 - (15:2:29);
 
 lamda = 10;                             % wavelength (number of pixels per cycle)
 sigma = 12;                             % gaussian standard deviation in pixels
@@ -9,9 +14,9 @@ imSize = 200;                           % image size: n X n
 X = 1:imSize;                           % X is a vector from 1 to imageSize
 X0 = (X / imSize) - .5;                 % rescale X -> -.5 to .5
 
-for t = 1:length(theta_range)
-    theta = theta_range(t);                 % grating orientation
-    
+for t = 1:length(theta_range_rotated_matching)
+    theta = theta_range_rotated_matching(t);              % grating orientation
+    theta_for_name = theta_range_normal_matching(t);
     for p = 1:length(phase_range)
         phase = phase_range(p);                 % phase (0 -> 1)
 
@@ -48,7 +53,7 @@ for t = 1:length(theta_range)
         %fig1 = figure('units','normalized','outerposition',[0 0 1 1]);
         %imshow(gabor_final);
         
-        filename = ['gabor_ori' num2str(theta) '_phase' num2str(phase) '.png'];
+        filename = ['gabor_ori' num2str(theta_for_name) '_phase' num2str(phase) '.png'];
         display(filename);
         imwrite(gabor_final, filename);
     end

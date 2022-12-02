@@ -56,20 +56,26 @@
 	        
 	    // practice stimuli
 	    const training_stimuli = [
-		    { stimulus: "gabor_stimuli_new/gabor_ori15_phase0.05.png", orientation: 90-15},
-		    { stimulus: "gabor_stimuli_new/gabor_ori29_phase0.05.png", orientation: 90-29},
+		    { stimulus: "gabor_stimuli_matching/gabor_ori15_phase0.05.png", orientation: 15},
+		    { stimulus: "gabor_stimuli_matching/gabor_ori139_phase0.05.png", orientation: 139},
 	    ];
 	    
 	    // test stimuli for condition 1
     	    const test_stimuli_range1 = [
-		    { stimulus: "gabor_stimuli_new/gabor_ori23_phase0.05.png", orientation: 90-23},
-		    { stimulus: "gabor_stimuli_new/gabor_ori27_phase0.05.png", orientation: 90-27},
+		    { stimulus: "gabor_stimuli_matching/gabor_ori41_phase0.05.png", orientation: 41},
+		    { stimulus: "gabor_stimuli_matching/gabor_ori50_phase0.05.png", orientation: 50},
+			{ stimulus: "gabor_stimuli_matching/gabor_ori59_phase0.05.png", orientation: 59},
+		    { stimulus: "gabor_stimuli_matching/gabor_ori68_phase0.05.png", orientation: 68},
+		    { stimulus: "gabor_stimuli_matching/gabor_ori77_phase0.05.png", orientation: 77},
 	    ];
 	    
 	    // test stimuli for condition 2
 	    const test_stimuli_range2 = [
-		    { stimulus: "gabor_stimuli_new/gabor_ori17_phase0.05.png", orientation: 90-17},
-		    { stimulus: "gabor_stimuli_new/gabor_ori21_phase0.05.png", orientation: 90-21},
+		    { stimulus: "gabor_stimuli_matching/gabor_ori41_phase0.05.png", orientation: 77},
+		    { stimulus: "gabor_stimuli_matching/gabor_ori50_phase0.05.png", orientation: 86},
+			{ stimulus: "gabor_stimuli_matching/gabor_ori59_phase0.05.png", orientation: 95},
+		    { stimulus: "gabor_stimuli_matching/gabor_ori68_phase0.05.png", orientation: 104},
+		    { stimulus: "gabor_stimuli_matching/gabor_ori77_phase0.05.png", orientation: 113},
 	    ];
 	    
 	    // assign order of conditions based on subject and session ids
@@ -236,7 +242,7 @@
 		    line_width: 5,
 		    angle: function() {
 			    	let initial_orientation = Math.round(Math.random()*180);
-			    	while (initial_orientation <= jsPsych.timelineVariable('orientation') + 5 && initial_orientation >=initial_orientation <= jsPsych.timelineVariable('orientation') - 5) {
+			    	while (initial_orientation <= jsPsych.timelineVariable('orientation') + 5 && initial_orientation >= jsPsych.timelineVariable('orientation') - 5) {
 					initial_orientation = Math.round(Math.random()*180);
 				}
 			    	return initial_orientation;
