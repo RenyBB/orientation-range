@@ -198,7 +198,7 @@
 	    const gabor = {
 		    obj_type: 'image',
 		    image_width: 200,
-			startY: 200,
+		    startY: 200,
 		    file: jsPsych.timelineVariable('stimulus'), 
 		    is_frame: true,
 		    show_start_frame: () => Math.round((1000+250+250)/((1 / jsPsych.data.get().select('vsync_rate').values[0]) * 1000)),
@@ -1079,6 +1079,10 @@
 		    response_ends_trial: false,
 		    background_color: '#808080',
 		    on_finish: function (data) {
+			    data.first_left_orientation = jsPsych.timelineVariable('first_left_gabor_orientation') ;
+		            data.first_right_orientation = jsPsych.timelineVariable('first_right_gabor_orientation') ;
+			    data.second_left_orientation = jsPsych.timelineVariable('second_left_gabor_orientation') ;
+			    data.second_right_orientation = jsPsych.timelineVariable('second_right_gabor_orientation') ;
 			    data.difference_first_pair = Math.abs(jsPsych.timelineVariable('first_left_gabor_orientation') - jsPsych.timelineVariable('first_right_gabor_orientation'));
 			    data.difference_second_pair = Math.abs(jsPsych.timelineVariable('second_left_gabor_orientation') - jsPsych.timelineVariable('second_right_gabor_orientation'));
 			    
@@ -1142,7 +1146,7 @@
 		    timeline: [discrimination_trial,  discrimination_response],  //Interval1_Training, Interval2_Training,
 		    timeline_variables: discrimination_test_stimuli,
 		    repetitions: 3,
-		    randomize: true,
+		    randomize_order: true,
 	    };
 	    
 	    // define tinemline and run experiment
