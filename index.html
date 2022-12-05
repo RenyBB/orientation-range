@@ -198,7 +198,7 @@
 	    const gabor = {
 		    obj_type: 'image',
 		    image_width: 200,
-		    startY: 100,
+		    startY: 150,
 		    file: jsPsych.timelineVariable('stimulus'), 
 		    is_frame: true,
 		    show_start_frame: () => Math.round((250+500)/jsPsych.data.get().select('frame_duration').values[0]),
@@ -1115,7 +1115,7 @@
 			    console.log(data.correct);
 		    }
 	    };
-	    // Feedback - appears only in training phase
+	    // Feedback in training phase
 	    var training_feedback = {
 		    type: jsPsychHtmlButtonResponse,
 		    stimulus: function () {
@@ -1136,7 +1136,28 @@
             //trial_duration: 5000,
             choices: ['Continue'],
             response_ends_trial: true,
-        }
+        };
+	    
+	   // Feedback in testing phase
+	    var testing_feedback = {
+		    type: jsPsychHtmlButtonResponse,
+		    stimulus: function () {
+			    // The feedback stimulus is a dynamic parameter because we can't know in advance whether
+			    // the stimulus should be 'correct' or 'incorrect'.
+			    // Instead, this function will check the accuracy of the last response and use that information to set
+			    // the stimulus value on each trial.
+			    var last_trial_correct_resp = jsPsych.data.get().last(1).values()[0].correct_response;
+			    var last_trial_correct = jsPsych.data.get().last(1).values()[0].correct;
+			    if (last_trial_correct) {
+				    return "<p>Correct</p>"; // the parameter value has to be returned from the function
+			    } else if (last_trial_correct != last_trial_correct_resp) {
+                    return "<p>Incorrect</p>"; // the parameter value has to be returned from the function
+                } 
+            },
+            //trial_duration: 5000,
+            choices: ['Continue'],
+            response_ends_trial: true,
+        };
 	    // Training procedure
 	    let training_procedure = {
 		    timeline: [discrimination_trial,  discrimination_response, training_feedback],  //Interval1_Training, Interval2_Training,
@@ -1147,7 +1168,7 @@
 	    
 	    
 	    let testing_procedure = {
-		    timeline: [discrimination_trial,  discrimination_response],  //Interval1_Training, Interval2_Training,
+		    timeline: [discrimination_trial,  discrimination_response, testing_feedback],  //Interval1_Training, Interval2_Training,
 		    timeline_variables: discrimination_test_stimuli,
 		    repetitions: 3,
 		    randomize_order: true,
