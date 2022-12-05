@@ -50,7 +50,7 @@
 	    const pixi_flag = jsPsych.data.getURLVariable('pixi_flag') === '1' ? true : false;
 	    
 	    // lenght of the line used in the response in pixels	    
-	    const line_length = 100; 
+	    const line_length = 120; 
 	    
 // Orientation reproduction task
 	        
@@ -198,7 +198,7 @@
 	    const gabor = {
 		    obj_type: 'image',
 		    image_width: 200,
-		    startY: 250,
+		    startY: 100,
 		    file: jsPsych.timelineVariable('stimulus'), 
 		    is_frame: true,
 		    show_start_frame: () => Math.round((250+500)/jsPsych.data.get().select('frame_duration').values[0]),
@@ -210,7 +210,7 @@
 		    type: jsPsychPsychophysics,
 		    pixi: pixi_flag,
 		    canvas_offsetY: 0,
-		    canvas_height: 500,
+		    canvas_height: 700,
 		    response_type: 'key',
 		    choices: ['NO_KEYS'],
 		    trial_duration: 2250,
@@ -229,7 +229,7 @@
 		    obj_type: 'circle',
 		    startX: 'center',
 		    startY: 'center',
-		    radius: 50,
+		    radius: 60,
 		    line_color: 'white',
 		    line_width: 5,
 	    };
@@ -238,7 +238,7 @@
 //!!NOTE: need to exclude correct orientation from possible starting points
 	    const line_obj = {
 		    obj_type: 'line',
-		    line_length: 100,
+		    line_length: 120,
 		    line_color: 'black',
 		    line_width: 5,
 		    angle: function() {
@@ -264,7 +264,7 @@
 		    type: jsPsychPsychophysics,
 		    pixi: pixi_flag,
 		    canvas_offsetY: 0,
-		    canvas_height: 500,
+		    canvas_height: 700,
 		    response_type: 'key',
 		    choices: [' '],
 		    prompt: 'Left-click to wake up mouse. Move mouse SLOWLY to the left or right to rotate the line.<br>When you are happy with the orientation of the line, left click to stop the line moving.Then press the spacebar to save your response.',
@@ -350,7 +350,7 @@
 		    type: jsPsychPsychophysics,
 		    pixi: pixi_flag,
 		    canvas_offsetY: 0,
-		    canvas_height: 800,
+		    canvas_height: 700,
 		    response_type: 'key',
 		    choices: [' '],
 		    prompt: [],
@@ -368,7 +368,7 @@
 			      // response line
 			      {
 				      obj_type: 'line',
-				      line_length: 100,
+				      line_length: 120,
 				      line_color: function () {return jsPsych.data.get().last(1).values()[0].feedback_colour},
 				      line_width: 5,
 				      angle: function () {return jsPsych.data.get().last(1).values()[0].selected_response},
@@ -376,7 +376,7 @@
 			      // stimulus line
 			      {
 				      obj_type: 'line',
-				      line_length: 100,
+				      line_length: 120,
 				      line_color: 'white',
 				      line_width: 5,
 				      angle: function () {return 180 - jsPsych.timelineVariable('orientation')}	 
