@@ -307,7 +307,7 @@
 			    }
 
 			    corrected_angle = [];
-			    if (quadrant_angle>=0 && quadrant_angle<=90) {corrected_angle = quadrant_angle;}
+			    if (quadrant_angle>=0 && quadrant_angle<=90) {corrected_angle =  180 - quadrant_angle;}
 			    else if (quadrant_angle>90 && quadrant_angle<=180) {corrected_angle = 180 - quadrant_angle;}
 			    else if (quadrant_angle>180 && quadrant_angle<=270) {corrected_angle = quadrant_angle - 180;}
 			    else if (quadrant_angle>270 && quadrant_angle<=360) {corrected_angle = 360 - quadrant_angle;}
