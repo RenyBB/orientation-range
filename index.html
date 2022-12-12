@@ -457,10 +457,11 @@
 		    pages: [
 			    // stimulus instructions
 			    '<p> You will now perform an orientation discrimination task.<br>'+
-			    'On each trial you will see two black and white gratings one after the other.<br>'+
-			    'Your task will be to report whether the first or second grating was closer to vertical.<br>'+
-			    'You will then receive feedback whether your response was correct.<br><br>'+
-			    'You will first complete a practice block. Click Next to start the task. </p>'   	    
+			    'When a trial starts, you will see a pair of black and white gratings.<br>'+
+			    'This will be follows by another pair of black and white gratins.<br>'
+			    'Your task will be to report whether the gratings in the first or second pair were more similar in orientation.<br>'+
+			    'You will then receive feedback whether your response was correct.<br><br></p>'   	  
+			    //'You will first complete a practice block. Click Next to start the task. </p>'   	    
 		    ],
 		    show_clickable_nav: true,
 		    allow_backward: false
@@ -472,8 +473,8 @@
 		    pages: [
 			    // stimulus instructions
 			    '<p> You will now complete a test block.<br>'+
-			    'On each trial you will see two black and white gratings one after the other.<br><br>'+
-			    'Your task will be to report whether the first or second grating was closer to vertical.<br>'+
+			    'On each trial you will see two pairs of gratings one after the other.<br><br>'+
+			    'Your task will be to report whether the gratings in the first or second pair were more similar in orientation.<br>'+
 			    'You will not receive feedback in the test block. Click Next to start the task. </p>'   	    
 		    ],
 		    show_clickable_nav: true,
@@ -1196,10 +1197,10 @@
 	    jsPsych.run([
 	            browser_check,
 		    preload,
-		    //welcome_instructions,
-		    //virtual_chinrest, 
-		   // reproduction_practice_instructions,
-		   // practice block
+		    welcome_instructions,
+		  //virtual_chinrest, 
+		    reproduction_practice_instructions,
+		    // practice block
 		    {
 			    timeline: [test, response, feedback],
 			    timeline_variables: training_stimuli,
