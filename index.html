@@ -262,7 +262,7 @@
 		    line_width: 5,
 		    angle: function() {
 			    	let initial_orientation = Math.round(Math.random()*180);
-			    	while (initial_orientation <= jsPsych.timelineVariable('orientation') + 5 && initial_orientation >= jsPsych.timelineVariable('orientation') - 5) {
+			    	while (initial_orientation <= jsPsych.timelineVariable('orientation') + 5 && initial_orientation >= jsPsych.timelineVariable('orientation') - 5 && initial_orientation >= jsPsych.timelineVariable('orientation') + 45 && initial_orientation <= jsPsych.timelineVariable('orientation') - 45) {
 					initial_orientation = Math.round(Math.random()*180);
 				}
 			    	return initial_orientation;
@@ -299,9 +299,9 @@
 			    }
 			    // stim_array[0] means a circle, and stim_array[1] means a line.
 			    if (event.offsetX > prev_mouseX){
-				    jsPsych.getCurrentTrial().stim_array[1].angle += 1; // The angle changes by 1 degrees.
+				    jsPsych.getCurrentTrial().stim_array[1].angle += 0.5; // The angle changes by 1 degrees.
 			    } else {
-				    jsPsych.getCurrentTrial().stim_array[1].angle -= 1;
+				    jsPsych.getCurrentTrial().stim_array[1].angle -= 0.5;
 			    }
 			    prev_mouseX = event.offsetX;
 			    console.log(`current orientation: ${jsPsych.getCurrentTrial().stim_array[1].angle}`);
@@ -352,7 +352,7 @@
 			    
 			    // define colour of feedback line: green if response is close to the stimulus; red if it is not
 			    var feedback_colour = [];
-			    if (Math.abs(error) <= 5) { feedback_colour = 'green';}
+			    if (Math.abs(error) <= 3) { feedback_colour = 'green';}
 			    else {feedback_colour = 'red';} 
 			    
 			    data.corrected_stimulus = corrected_stimulus;
