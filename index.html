@@ -64,7 +64,7 @@
     	    const test_stimuli_range1 = [
 		    { stimulus: "gabor_stimuli_matching/gabor_ori41_phase0.05.png", orientation: 41},
 		    { stimulus: "gabor_stimuli_matching/gabor_ori50_phase0.05.png", orientation: 50},
-			{ stimulus: "gabor_stimuli_matching/gabor_ori59_phase0.05.png", orientation: 59},
+		    { stimulus: "gabor_stimuli_matching/gabor_ori59_phase0.05.png", orientation: 59},
 		    { stimulus: "gabor_stimuli_matching/gabor_ori68_phase0.05.png", orientation: 68},
 		    { stimulus: "gabor_stimuli_matching/gabor_ori77_phase0.05.png", orientation: 77},
 	    ];
@@ -73,7 +73,7 @@
 	    const test_stimuli_range2 = [
 		    { stimulus: "gabor_stimuli_matching/gabor_ori77_phase0.05.png", orientation: 77},
 		    { stimulus: "gabor_stimuli_matching/gabor_ori86_phase0.05.png", orientation: 86},
-			{ stimulus: "gabor_stimuli_matching/gabor_ori95_phase0.05.png", orientation: 95},
+		    { stimulus: "gabor_stimuli_matching/gabor_ori95_phase0.05.png", orientation: 95},
 		    { stimulus: "gabor_stimuli_matching/gabor_ori104_phase0.05.png", orientation: 104},
 		    { stimulus: "gabor_stimuli_matching/gabor_ori113_phase0.05.png", orientation: 113},
 	    ];
@@ -109,6 +109,23 @@
 			    let frame_duration = (1 / data.vsync_rate) * 1000;
 		    }
 	    };
+	    
+	    // Preload stimuli
+	    
+	        // create list of all video files for preloading
+    		var all_gabors = [];
+   		 for (var i = 0; i < sel_clips.length; i++) {
+       		 all_gabors_range1.push(test_stimuli_range1[i].stimulus);
+		 all_gabors_range2.push(test_stimuli_range2[i].stimulus);
+	    	};
+	    const preload = {
+		    type: jsPsychPreload,
+		    images: [all_gabors_range1, all_gabors_range2, "gabor_stimuli_matching/gabor_ori15_phase0.05.png", "gabor_stimuli_matching/gabor_ori139_phase0.05.png", "correct_response_feedback.png", "incorrect_response_feedback.png"],
+		    video: "response_instruction_video.mp4"
+      };
+
+
+	    
 	    
 	    // measure screen resolution and participants' distance from the screen; 
 	    // resize stimuli accordingly in degrees of visual angle. current setting - 50 pixels are strethced to 1 dva
@@ -1177,6 +1194,7 @@
 	    // define tinemline and run experiment
 	    jsPsych.run([
 	            browser_check,
+		    preload,
 		    //welcome_instructions,
 		    //virtual_chinrest, 
 		   // reproduction_practice_instructions,
