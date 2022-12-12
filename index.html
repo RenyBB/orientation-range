@@ -299,9 +299,9 @@
 			    }
 			    // stim_array[0] means a circle, and stim_array[1] means a line.
 			    if (event.offsetX > prev_mouseX){
-				    jsPsych.getCurrentTrial().stim_array[1].angle += 2.5; // The angle changes by 1 degrees.
+				    jsPsych.getCurrentTrial().stim_array[1].angle += 4; // The angle changes by 1 degrees.
 			    } else {
-				    jsPsych.getCurrentTrial().stim_array[1].angle -= 0.5;
+				    jsPsych.getCurrentTrial().stim_array[1].angle -= 0.1;
 			    }
 			    prev_mouseX = event.offsetX;
 			    console.log(`current orientation: ${jsPsych.getCurrentTrial().stim_array[1].angle}`);
@@ -352,7 +352,7 @@
 			    
 			    // define colour of feedback line: green if response is close to the stimulus; red if it is not
 			    var feedback_colour = [];
-			    if (Math.abs(error) <= 3) { feedback_colour = 'green';}
+			    if (Math.abs(error) <= 3.5) { feedback_colour = 'green';}
 			    else {feedback_colour = 'red';} 
 			    
 			    data.corrected_stimulus = corrected_stimulus;
