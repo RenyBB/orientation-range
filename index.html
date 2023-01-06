@@ -1169,6 +1169,8 @@
 			    // the stimulus value on each trial.
 			    var last_trial_correct_resp = jsPsych.data.get().last(1).values()[0].correct_response;
 			    var last_trial_correct = jsPsych.data.get().last(1).values()[0].correct;
+			    console.log(last_trial_correct_resp);
+			    console.log(last_trial_correct);
 			    if (last_trial_correct) {
 				    return "<p>Correct</p>"; // the parameter value has to be returned from the function
 			    } else if (last_trial_correct != last_trial_correct_resp) {
