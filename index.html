@@ -43,7 +43,8 @@
 	    // add above information to dataset
 	    jsPsych.data.addProperties({
 		    subject_id: subject_id,
-		    study_id: study_id,session_id: session_id
+		    study_id: study_id,
+		    session_id: session_id
 	    });
 	    
 	    // currently not using pixijs, but would be a good idea to do so
@@ -1200,6 +1201,11 @@
 		    preload,
 		    welcome_instructions,
 		  //virtual_chinrest, 
+		    		        discrimination_practice_instructions,
+		   	 		training_procedure,
+		    			discrimination_test_instructions,
+		    			testing_procedure,
+		    
 		    reproduction_practice_instructions,
 		    // practice block
 		    {
@@ -1225,7 +1231,8 @@
 		    {
 			    timeline: [test, response, feedback],
 			    timeline_variables: test_stimuli_block2,
-			    randomize_order: true,repetitions: 2
+			    randomize_order: true,
+			    repetitions: 2
 		    }, 
 		    //mkTimer,
 		    //alarm, 
