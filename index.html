@@ -1149,14 +1149,14 @@
 			    if (last_trial_correct) {
 				    return "<p>That was the correct answer!</p>"; // the parameter value has to be returned from the function
 			    } else if (last_trial_correct == 0 && last_trial_correct_resp == 0) {
-                    return "<p>That wasn't the correct answer.</p><p>The first grating was closer to vertical.</p>"; // the parameter value has to be returned from the function
-                } else if (last_trial_correct == 0 && last_trial_correct_resp == 1) {
-                    return "<p>That wasn't the correct answer.</p><p>The second grating was closer to vertical.</p>"; // the parameter value has to be returned from the function
-                }
-            },
-            //trial_duration: 5000,
-            choices: ['Continue'],
-            response_ends_trial: true,
+				    return "<p>That wasn't the correct answer.</p><p>The gratings in the first pair were closer in orientation.</p>"; // the parameter value has to be returned from the function
+			    } else if (last_trial_correct == 0 && last_trial_correct_resp == 1) {
+				    return "<p>That wasn't the correct answer.</p><p>The gratings in the second pair were closer in orientation.</p>"; // the parameter value has to be returned from the function
+			    }
+		    },
+		    //trial_duration: 5000,
+		    choices: ['Continue'],
+		    response_ends_trial: true,
         };
 	    
 	   // Feedback in testing phase
@@ -1173,9 +1173,11 @@
 			    console.log(last_trial_correct);
 			    if (last_trial_correct) {
 				    return "<p>Correct</p>"; // the parameter value has to be returned from the function
-			    } else if (last_trial_correct != last_trial_correct_resp) {
-                    return "<p>Incorrect</p>"; // the parameter value has to be returned from the function
-                } 
+			    } else if (last_trial_correct == 0 && last_trial_correct_resp == 0) {
+				    return "<p>Incorrect</p>"; // the parameter value has to be returned from the function
+			    } else if (last_trial_correct == 0 && last_trial_correct_resp == 1) {
+				    return "<p>Incorrect</p>"; // the parameter value has to be returned from the function
+			    }
             },
             //trial_duration: 5000,
             choices: ['Continue'],
