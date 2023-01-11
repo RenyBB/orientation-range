@@ -451,7 +451,38 @@
 	    };
 	    	    
 // orientation discrimination task
-	   
+	    
+    
+	    // 	orientation discrimination instructions: practice 
+	    const discrimination_practice_instructions = {
+		    type: jsPsychInstructions,
+		    pages: [
+			    // stimulus instructions
+			    '<p> You will now perform an orientation discrimination task.<br>'+
+			    'When a trial starts, you will see a pair of black and white gratings.<br>'+
+			    'This will be follows by another pair of black and white gratins.<br>'+
+			    'Your task will be to report whether the gratings in the first or second pair were more similar in orientation.<br>'+
+			    'You will then receive feedback whether your response was correct.<br><br></p>'   	  
+			    //'You will first complete a practice block. Click Next to start the task. </p>'   	    
+		    ],
+		    show_clickable_nav: true,
+		    allow_backward: false
+	    };
+	    
+	    // 	orientation discrimination instructions: test 
+	    const discrimination_test_instructions = {
+		    type: jsPsychInstructions,
+		    pages: [
+			    // stimulus instructions
+			    '<p> You will now complete a test block.<br>'+
+			    'On each trial you will see two pairs of gratings one after the other.<br><br>'+
+			    'Your task will be to report whether the gratings in the first or second pair were more similar in orientation.<br>'+
+			    'You will not receive feedback in the test block. Click Next to start the task. </p>'   	    
+		    ],
+		    show_clickable_nav: true,
+		    allow_backward: false
+	    };	    
+	    
 	    // Define stimuli combinations for practice and test blocks
 	    const discrimination_training_stimuli = [
 		      {
@@ -1008,39 +1039,9 @@
     "second_right_gabor_filename": "gabor_stimuli_new/gabor_ori15_phase0.05.png"
   }
 ];
-	    // 	orientation discrimination instructions: practice 
-	    const discrimination_practice_instructions = {
-		    type: jsPsychInstructions,
-		    pages: [
-			    // stimulus instructions
-			    '<p> You will now perform an orientation discrimination task.<br>'+
-			    'When a trial starts, you will see a pair of black and white gratings.<br>'+
-			    'This will be follows by another pair of black and white gratins.<br>'+
-			    'Your task will be to report whether the gratings in the first or second pair were more similar in orientation.<br>'+
-			    'You will then receive feedback whether your response was correct.<br><br></p>'   	  
-			    //'You will first complete a practice block. Click Next to start the task. </p>'   	    
-		    ],
-		    show_clickable_nav: true,
-		    allow_backward: false
-	    };
-	    
-	    // 	orientation discrimination instructions: test 
-	    const discrimination_test_instructions = {
-		    type: jsPsychInstructions,
-		    pages: [
-			    // stimulus instructions
-			    '<p> You will now complete a test block.<br>'+
-			    'On each trial you will see two pairs of gratings one after the other.<br><br>'+
-			    'Your task will be to report whether the gratings in the first or second pair were more similar in orientation.<br>'+
-			    'You will not receive feedback in the test block. Click Next to start the task. </p>'   	    
-		    ],
-		    show_clickable_nav: true,
-		    allow_backward: false
-	    };	    
-	       
+	    	    
 
 	    // Define stimuli 
-	    const stim_duration_ms = 400;
 	    let first_left_gabor = {
 		    obj_type: 'image',
 		    file: jsPsych.timelineVariable('first_left_gabor_filename'), 
@@ -1066,6 +1067,8 @@
 		    file: jsPsych.timelineVariable('second_left_gabor_filename'), 
 		    startX: 300,
 		    image_width: 200,
+		    show_start_time: 1500,
+		    show_end_time: 2000,
 		    is_frame: true,
 		    show_start_frame: () => Math.round(1500/jsPsych.data.get().select('frame_duration').values[0]),
 		    show_end_frame: () => Math.round(2000/jsPsych.data.get().select('frame_duration').values[0]),
@@ -1094,68 +1097,7 @@
 	    };
 	    let discrimination_trial = {
 		    type: jsPsychPsychophysics,
-		   /* on_start: function(trial) {
-			    var pre_iti = 300;
-			    var stim_iti = 500;
-			    var post_iti = 1000;
-			    
-			    var start_fixation = 0;
-			    var start_first_pair = start_fixation + pre_iti;
-			    var end_first_pair = start_first_pair + stim_duration_ms;
-			    var start_second_pair = end_first_pair + stim_iti;
-			    var end_second_pair = start_second_pair + stim_duration_ms;
-			    var end_fixation = end_second_pair + post_iti;
-			    
-		    },*/
 		    stimuli: [fixation_discrimination, first_left_gabor, first_right_gabor, second_left_gabor, second_right_gabor],
-		    
-		    /*[fixation_discrimination, 
-			      {//fixation cross
-				      obj_type: 'cross',
-				      line_length: 25,
-				      line_color: 'white',
-				      line_width: 5,
-				      startX: 'center',
-				      is_frame: true,
-				      show_start_frame: () => start_fixation,
-				      show_end_frame: () => Math.round(end_fixation/jsPsych.data.get().select('frame_duration').values[0]),
-			      },
-			      { //first pair, left gabor
-				      obj_type: 'image',
-				      file: jsPsych.timelineVariable('first_left_gabor_filename'), 
-				      startX: 300,
-				      image_width: 200,
-				      is_frame: true,
-				      show_start_frame: () => Math.round(start_first_pair/jsPsych.data.get().select('frame_duration').values[0]),
-				      show_end_frame: () => Math.round(end_first_pair/jsPsych.data.get().select('frame_duration').values[0]),					       		    
-			      }, 
-			     { //first pair, right gabor
-				      obj_type: 'image',
-				      file: jsPsych.timelineVariable('first_right_gabor_filename'),
-				      startX: 700,
-				      image_width: 200,
-				      is_frame: true,
-				      show_start_frame: () => Math.round(start_first_pair/jsPsych.data.get().select('frame_duration').values[0]),
-				      show_end_frame: () => Math.round(end_first_pair/jsPsych.data.get().select('frame_duration').values[0]),	    
-			     }, 
-			     {//second pair, left gabor
-				      obj_type: 'image',
-				      file: jsPsych.timelineVariable('second_left_gabor_filename'), 
-				      startX: 300,
-				      image_width: 200,
-				      is_frame: true,
-				      show_start_frame: () => Math.round(start_second_pair/jsPsych.data.get().select('frame_duration').values[0]),
-				      show_end_frame: () => Math.round(end_second_pair/jsPsych.data.get().select('frame_duration').values[0]),
-			     }, 
-			     {//second pair, right gabor
-				      obj_type: 'image',
-				      file: jsPsych.timelineVariable('second_right_gabor_filename'), 
-				      startX: 700,
-				      image_width: 200,
-				      is_frame: true,
-				      show_start_frame: () => Math.round(start_second_pair/jsPsych.data.get().select('frame_duration').values[0]),
-				      show_end_frame: () => Math.round(end_second_pair/jsPsych.data.get().select('frame_duration').values[0]),
-			     }, ], */
 		    canvas_width: 1000,
 		    canvas_height: 800,
 		    trial_duration: 2800,
@@ -1261,11 +1203,11 @@
 	    jsPsych.run([
 	            browser_check,
 		    preload,
-		    discrimination_practice_instructions,
+		    
+		       discrimination_practice_instructions,
 		    training_procedure,
 		    discrimination_test_instructions,
 		    testing_procedure,
-		    
 		    
 		    welcome_instructions,
 		  //virtual_chinrest,	    
@@ -1299,10 +1241,7 @@
 		    }, 
 		    //mkTimer,
 		    //alarm, 
-		    discrimination_practice_instructions,
-		    training_procedure,
-		    discrimination_test_instructions,
-		    testing_procedure,
+		 
 	    ]);
 	    
 	    
