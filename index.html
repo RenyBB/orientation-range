@@ -1098,9 +1098,9 @@
 	    };
 	    let discrimination_trial = {
 		    type: jsPsychPsychophysics,
-		    stimuli: //[fixation_discrimination, first_left_gabor, first_right_gabor, second_left_gabor, second_right_gabor],
-		    	[ 
-			      {//fixation cross
+		    stimuli: [fixation_discrimination],//[fixation_discrimination, first_left_gabor, first_right_gabor, second_left_gabor, second_right_gabor],
+		    	
+			      /*{//fixation cross
 				      obj_type: 'cross',
 				      line_length: 25,
 				      line_color: 'white',
@@ -1109,7 +1109,7 @@
 				      is_frame: true,
 				      show_start_frame: () => 0,
 				      show_end_frame: function () {return Math.round(2500/jsPsych.data.get().select('frame_duration').values[0])},
-			      },/*
+			      },
 			      { //first pair, left gabor
 				      obj_type: 'image',
 				      file: jsPsych.timelineVariable('first_left_gabor_filename'), 
@@ -1145,8 +1145,8 @@
 				      is_frame: true,
 				      show_start_frame: () => Math.round(1000/jsPsych.data.get().select('frame_duration').values[0]),
 				      show_end_frame: () => Math.round(1500/jsPsych.data.get().select('frame_duration').values[0]),
-			     }, */
-				     ],
+			     }, ],*/
+				     
 		    canvas_width: 1000,
 		    canvas_height: 800,
 		    trial_duration: 2800,
