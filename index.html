@@ -299,11 +299,13 @@
 				    return
 			    }
 			    // stim_array[0] means a circle, and stim_array[1] means a line.
-			    if (event.offsetX > prev_mouseX){
+			    /*if (event.offsetX > prev_mouseX){
 				    jsPsych.getCurrentTrial().stim_array[1].angle += 1; // The angle changes by 0.5 degrees.
 			    } else {
 				    jsPsych.getCurrentTrial().stim_array[1].angle -= 1;
-			    }
+			    }*/
+			    jsPsych.getCurrentTrial().stim_array[1].angle =  event.offsetX*0.07;
+			    
 			    prev_mouseX = event.offsetX;
 			    console.log(`current orientation: ${jsPsych.getCurrentTrial().stim_array[1].angle}`);
 			    console.log(`current mouse position: ${event.offsetX }`);
