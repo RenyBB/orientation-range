@@ -293,11 +293,12 @@
 			    mouse_move_start = !mouse_move_start;
 		    },*/
 		    mouse_move_func: function(event){ // This function will be automatically added as the event listener of the canvas.
-			    /*if (mouse_move_start === false) return;
+			    //if (mouse_move_start === false) return;
 			    if (prev_mouseX === null){
 				    prev_mouseX = event.offsetX;
 				    return
-			    }*/
+			    }
+			    
 			    // stim_array[0] means a circle, and stim_array[1] means a line.
 			    if (event.offsetX > prev_mouseX){
 				    jsPsych.getCurrentTrial().stim_array[1].angle += (event.offsetX - prev_mouseX)*0.07; // The angle changes by 0.5 degrees.
