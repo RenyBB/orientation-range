@@ -1066,8 +1066,6 @@
 		    file: jsPsych.timelineVariable('second_left_gabor_filename'), 
 		    startX: 300,
 		    image_width: 200,
-		    show_start_time: 1500,
-		    show_end_time: 2000,
 		    is_frame: true,
 		    show_start_frame: () => Math.round(1500/jsPsych.data.get().select('frame_duration').values[0]),
 		    show_end_frame: () => Math.round(2000/jsPsych.data.get().select('frame_duration').values[0]),
@@ -1096,7 +1094,7 @@
 	    };
 	    let discrimination_trial = {
 		    type: jsPsychPsychophysics,
-		    on_start: function(trial) {
+		   /* on_start: function(trial) {
 			    var pre_iti = 300;
 			    var stim_iti = 500;
 			    var post_iti = 1000;
@@ -1108,8 +1106,10 @@
 			    var end_second_pair = start_second_pair + stim_duration_ms;
 			    var end_fixation = end_second_pair + post_iti;
 			    
-		    },
-		    stimuli: [fixation_discrimination, 
+		    },*/
+		    stimuli: [fixation_discrimination, first_left_gabor, first_right_gabor, second_left_gabor, second_right_gabor],
+		    
+		    /*[fixation_discrimination, 
 			      {//fixation cross
 				      obj_type: 'cross',
 				      line_length: 25,
@@ -1155,7 +1155,7 @@
 				      is_frame: true,
 				      show_start_frame: () => Math.round(start_second_pair/jsPsych.data.get().select('frame_duration').values[0]),
 				      show_end_frame: () => Math.round(end_second_pair/jsPsych.data.get().select('frame_duration').values[0]),
-			     }, ],
+			     }, ], */
 		    canvas_width: 1000,
 		    canvas_height: 800,
 		    trial_duration: 2800,
@@ -1261,6 +1261,12 @@
 	    jsPsych.run([
 	            browser_check,
 		    preload,
+		    discrimination_practice_instructions,
+		    training_procedure,
+		    discrimination_test_instructions,
+		    testing_procedure,
+		    
+		    
 		    welcome_instructions,
 		  //virtual_chinrest,	    
 		    reproduction_practice_instructions,
