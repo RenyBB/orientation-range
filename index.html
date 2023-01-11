@@ -209,7 +209,7 @@
 		    line_width: 5,
 		    is_frame: true,
 		    show_start_frame: () => Math.round(250/jsPsych.data.get().select('frame_duration').values[0]),
-		    show_end_frame: () => Math.round((250+500+300+500)/jsPsych.data.get().select('frame_duration').values[0]), // Math.round((500+250)/((1 / jsPsych.data.get().select('vsync_rate').values[0]) * 1000)),
+		    show_end_frame: () => Math.round((250+500+400+500)/jsPsych.data.get().select('frame_duration').values[0]), // Math.round((500+250)/((1 / jsPsych.data.get().select('vsync_rate').values[0]) * 1000)),
 	    };
 	    
 	    
@@ -222,7 +222,7 @@
 		    file: jsPsych.timelineVariable('stimulus'), 
 		    is_frame: true,
 		    show_start_frame: () => Math.round((250+500)/jsPsych.data.get().select('frame_duration').values[0]),
-		    show_end_frame: () => Math.round((250+500+300)/jsPsych.data.get().select('frame_duration').values[0]),
+		    show_end_frame: () => Math.round((250+500+400)/jsPsych.data.get().select('frame_duration').values[0]),
 	    };
 	     
 	    // display fixation cross followed by gabor
