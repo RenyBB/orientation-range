@@ -1110,7 +1110,7 @@
 	    };
 	    let discrimination_trial = {
 		    type: jsPsychPsychophysics,
-		     on_start: function (trial) {
+		     on_start: function () {
 		   	    pre_iti = 300;
 			    stim_iti = 500;
 			    post_iti = 1000;
@@ -1121,6 +1121,8 @@
 			    start_second_pair = end_first_pair + stim_iti;
 			    end_second_pair = start_second_pair + stim_duration_ms;
 			    end_fixation = end_second_pair + post_iti;
+			    console.log(start_first_pair);
+			    console.log(start_second_pair);
 
 		    },
 		    stimuli: [
