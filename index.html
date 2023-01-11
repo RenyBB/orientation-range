@@ -291,7 +291,7 @@
 		    stimuli: [circle_obj, line_obj], // These can be referenced using the jsPsych.currentTrial().stim_array array.
 		    mouse_down_func: function(event){
 			    mouse_move_start = !mouse_move_start;
-		    
+		    },
 		    mouse_move_func: function(event){ // This function will be automatically added as the event listener of the canvas.
 			    if (mouse_move_start === false) return;
 			    if (prev_mouseX === null){
