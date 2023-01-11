@@ -306,6 +306,7 @@
 			    }
 			    prev_mouseX = event.offsetX;
 			    console.log(`current orientation: ${jsPsych.getCurrentTrial().stim_array[1].angle}`);
+			    console.log(`current mouse position: ${event.offsetX }`);
 		    },
 		    on_finish: function(data) {
 			    // transform selected orientation to a number between 0 and 180
