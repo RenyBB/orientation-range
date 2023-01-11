@@ -1157,6 +1157,26 @@
 				      show_start_frame: () => Math.round(start_first_pair/jsPsych.data.get().select('frame_duration').values[0]),
 				      show_end_frame: () => Math.round(end_first_pair/jsPsych.data.get().select('frame_duration').values[0]),
 			    },
+			    // second pair, left gabor
+			    {
+			    	      obj_type: 'image',
+				      file: jsPsych.timelineVariable('second_left_gabor_filename'), 
+				      startX: 300,
+				      image_width: 200,
+				      is_frame: true,
+				      show_start_frame: () => Math.round(start_second_pair/jsPsych.data.get().select('frame_duration').values[0]),
+				      show_end_frame: () => Math.round(end_second_pair/jsPsych.data.get().select('frame_duration').values[0]),
+			    },
+			    // second pair, right gabor
+		    	    {
+			    	      obj_type: 'image',
+				      file: jsPsych.timelineVariable('second_right_gabor_filename'), 
+				      startX: 700,
+				      image_width: 200,
+				      is_frame: true,
+				      show_start_frame: () => Math.round(start_second_pair/jsPsych.data.get().select('frame_duration').values[0]),
+				      show_end_frame: () => Math.round(end_second_pair/jsPsych.data.get().select('frame_duration').values[0]),
+			    },
 		    ],
 		    //[fixation_discrimination, first_left_gabor, first_right_gabor, second_left_gabor, second_right_gabor],
 		    	
