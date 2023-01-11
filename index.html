@@ -1044,16 +1044,16 @@
 	    // Define stimuli 
 	    const stim_duration_ms = 400;
 	    
-	    		    var pre_iti = [];
-			    var stim_iti = [];
-			    var post_iti = [];
+	    		    var pre_iti = 700;
+			    var stim_iti = 1000;
+			    var post_iti = 10;
 
-			    var start_fixation = [];
-			    var start_first_pair = [];
-			    var end_first_pair = [];
-			    var start_second_pair = [];
-			    var end_second_pair = [];
-			    var end_fixation = [];
+			    var start_fixation = 0;
+			    var start_first_pair = start_fixation + pre_iti;
+			    var end_first_pair = start_first_pair + stim_duration_ms;
+			    var start_second_pair = end_first_pair + stim_iti;
+			    var end_second_pair = start_second_pair + stim_duration_ms;
+			    var end_fixation = end_second_pair + post_iti;
 	    
 	    let first_left_gabor = {
 		    obj_type: 'image',
