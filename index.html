@@ -1043,6 +1043,18 @@
 
 	    // Define stimuli 
 	    const stim_duration_ms = 400;
+	    
+	    		    var pre_iti = [];
+			    var stim_iti = [];
+			    var post_iti = [];
+
+			    var start_fixation = [];
+			    var start_first_pair = [];
+			    var end_first_pair = [];
+			    var start_second_pair = [];
+			    var end_second_pair = [];
+			    var end_fixation = [];
+	    
 	    let first_left_gabor = {
 		    obj_type: 'image',
 		    file: jsPsych.timelineVariable('first_left_gabor_filename'), 
@@ -1098,6 +1110,19 @@
 	    };
 	    let discrimination_trial = {
 		    type: jsPsychPsychophysics,
+		     on_start: function (trial) {
+		   	    var pre_iti = 300;
+			    var stim_iti = 500;
+			    var post_iti = 1000;
+
+			    var start_fixation = 0;
+			    var start_first_pair = start_fixation + pre_iti;
+			    var end_first_pair = start_first_pair + stim_duration_ms;
+			    var start_second_pair = end_first_pair + stim_iti;
+			    var end_second_pair = start_second_pair + stim_duration_ms;
+			    var end_fixation = end_second_pair + post_iti;
+
+		    },
 		    stimuli: [
 			    {
 			  	      obj_type: 'cross',
@@ -1106,7 +1131,7 @@
 				      line_width: 5,
 				      startX: 'center',
 				      is_frame: true,
-				      show_start_frame: 0,
+				      show_start_frame () => start_fixation,
 				      show_end_frame: () => Math.round(2500/jsPsych.data.get().select('frame_duration').values[0]),
 			    },],//[fixation_discrimination, first_left_gabor, first_right_gabor, second_left_gabor, second_right_gabor],
 		    	
@@ -1162,19 +1187,6 @@
 		    trial_duration: 2800,
 		    response_ends_trial: false,
 		    background_color: '#808080',
-		    on_start: function (trial) {
-		   	    var pre_iti = 300;
-			    var stim_iti = 500;
-			    var post_iti = 1000;
-
-			    var start_fixation = 0;
-			    var start_first_pair = start_fixation + pre_iti;
-			    var end_first_pair = start_first_pair + stim_duration_ms;
-			    var start_second_pair = end_first_pair + stim_iti;
-			    var end_second_pair = start_second_pair + stim_duration_ms;
-			    var end_fixation = end_second_pair + post_iti;
-
-		    },
 		    on_finish: function (data) {
 			    data.first_left_orientation = jsPsych.timelineVariable('first_left_gabor_orientation') ;
 		            data.first_right_orientation = jsPsych.timelineVariable('first_right_gabor_orientation') ;
