@@ -289,22 +289,22 @@
 		    choices: [' '],
 		    prompt: 'Left-click to wake up mouse. Move mouse SLOWLY to the left or right to rotate the line.<br>When you are happy with the orientation of the line, left click to stop the line moving.Then press the spacebar to save your response.',
 		    stimuli: [circle_obj, line_obj], // These can be referenced using the jsPsych.currentTrial().stim_array array.
-		    mouse_down_func: function(event){
+		    /*mouse_down_func: function(event){
 			    mouse_move_start = !mouse_move_start;
-		    },                
+		    },*/                
 		    mouse_move_func: function(event){ // This function will be automatically added as the event listener of the canvas.
-			    if (mouse_move_start === false) return;
+			   // if (mouse_move_start === false) return;
 			    if (prev_mouseX === null){
 				    prev_mouseX = event.offsetX;
 				    return
 			    }
 			    // stim_array[0] means a circle, and stim_array[1] means a line.
-			    if (event.offsetX > prev_mouseX){
+			   /* if (event.offsetX > prev_mouseX){
 				    jsPsych.getCurrentTrial().stim_array[1].angle += event.offsetX*0.07; // The angle changes by 0.5 degrees.
 			    } else {
 				    jsPsych.getCurrentTrial().stim_array[1].angle -= event.offsetX*0.07;
-			    }
-			    //jsPsych.getCurrentTrial().stim_array[1].angle =  event.offsetX*0.07;
+			    }*/
+			    jsPsych.getCurrentTrial().stim_array[1].angle =  event.offsetX*0.07;
 			    
 			    prev_mouseX = event.offsetX;
 			    console.log(`current orientation: ${jsPsych.getCurrentTrial().stim_array[1].angle}`);
@@ -375,7 +375,7 @@
 		    canvas_offsetY: 0,
 		    canvas_height: 700,
 		    response_type: 'button',
-		    button_choices: 'Continue',
+		    button_choices: ['Continue'],
 		    choices: [' '],
 		    prompt: [],
 		    on_start: function(trial) {
