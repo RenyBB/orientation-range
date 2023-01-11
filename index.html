@@ -1210,8 +1210,9 @@
             choices: ['Continue'],
             response_ends_trial: true,
         };
+	    // Discrimination task timeline
 	    // Training procedure
-	    let training_procedure = {
+	    let discrimination_training_procedure = {
 		    timeline: [discrimination_trial,  discrimination_response, training_feedback],  //Interval1_Training, Interval2_Training,
 		    timeline_variables: discrimination_training_stimuli,
 		    repetitions: 1,
@@ -1219,7 +1220,7 @@
 	    };
 	    
 	    // Testing procedure
-	    let testing_procedure = {
+	    let discrimination_testing_procedure = {
 		    timeline: [discrimination_trial,  discrimination_response, testing_feedback],  //Interval1_Training, Interval2_Training,
 		    timeline_variables: discrimination_test_stimuli,
 		    repetitions: 2,
@@ -1227,55 +1228,53 @@
 	    };
 	    
 	    // Full discrimination task procedure
-	    
 	    let discrimination_task = {
-		    timeline: [discrimination_practice_instructions, training_procedure, discrimination_test_instructions, testing_procedure]
+		    timeline: [discrimination_practice_instructions, discrimination_training_procedure, discrimination_test_instructions, discrimination_testing_procedure]
+	    };
+	    
+	    // Reproduction task timeline
+	    // Training procedure
+	    let reproduction_training_procedure = {
+		    timeline: [test, response, feedback],
+	            timeline_variables: training_stimuli,
+		    randomize_order: true,
+		    repetitions: 1
+	    };
+	    
+	    // Testing procedure, divided in 2 blocks
+	    let reproduction_testing_procedure_block1 = {
+		    timeline: [test, response, feedback],
+		    timeline_variables: test_stimuli_block1,
+		    randomize_order: true,
+		    repetitions: 2
+	    };
+	    
+	    let reproduction_testing_procedure_block2 = {
+		    timeline: [test, response, feedback],
+		    timeline_variables: test_stimuli_block2,
+		    randomize_order: true,
+		    repetitions: 2
+	    };
+	    
+	  	    
+	    // Full reproduction task procedure
+	    let reproduction_task = {
+		    timeline: [reproduction_practice_instructions, reproduction_training_procedure, 
+			       reproduction_test_instructions_block1, reproduction_testing_procedure_block1, /*mkTimer, allarm,*/
+			       reproduction_test_instructions_block2, reproduction_testing_procedure_block2];
 	    };
 	    
 	    // define tinemline and run experiment
 	    jsPsych.run([
 	            browser_check,
 		    preload,
-		    
-		    discrimination_task,
-		    
+		    //virtual_chinrest,	 
 		    welcome_instructions,
-		  //virtual_chinrest,	    
-		    reproduction_practice_instructions,
-		    // practice block
-		    {
-			    timeline: [test, response, feedback],
-			    timeline_variables: training_stimuli,
-			    randomize_order: true,
-			    repetitions: 1
-		    },
+		    discrimination_task,
 		    //mkTimer,
 		    //alarm,
-		    reproduction_test_instructions_block1,
-		    // block 1
-		    {
-			    timeline: [test, response, feedback],
-			    timeline_variables: test_stimuli_block1,
-			    randomize_order: true,
-			    repetitions: 2
-		    },  
-		    //mkTimer,
-		    //alarm,
-		    reproduction_test_instructions_block2,
-		    // block 2
-		    {
-			    timeline: [test, response, feedback],
-			    timeline_variables: test_stimuli_block2,
-			    randomize_order: true,
-			    repetitions: 2
-		    }, 
-		    //mkTimer,
-		    //alarm, 
-		 
+		    reproduction_task
 	    ]);
-	    
-	    
-	
-	    
+
 	</script>
 </html>
