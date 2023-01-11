@@ -1042,7 +1042,7 @@
 	    	    
 
 	    // Define stimuli 
-	    const stim_duration_ms = 400;
+	    var stim_duration_ms = 400;
 	    
 	    		    var pre_iti = Math.round((Math.random()*(1.2-0.5) + 0.5)*1000);
 			    var stim_iti = Math.round((Math.random()*(1.2-0.5) + 0.5)*1000);
@@ -1142,16 +1142,6 @@
 			    	      obj_type: 'image',
 				      file: jsPsych.timelineVariable('first_left_gabor_filename'), 
 				      startX: 300,
-				      image_width: 200,
-				      is_frame: true,
-				      show_start_frame: () => Math.round(start_first_pair/jsPsych.data.get().select('frame_duration').values[0]),
-				      show_end_frame: () => Math.round(end_first_pair/jsPsych.data.get().select('frame_duration').values[0]),
-			    },
-			    // first pair, right gabor
-			    {
-			    	      obj_type: 'image',
-				      file: jsPsych.timelineVariable('first_right_gabor_filename'), 
-				      startX: 700,
 				      image_width: 200,
 				      is_frame: true,
 				      show_start_frame: () => Math.round(start_first_pair/jsPsych.data.get().select('frame_duration').values[0]),
