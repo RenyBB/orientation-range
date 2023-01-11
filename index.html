@@ -259,7 +259,7 @@
 	    const line_obj = {
 		    obj_type: 'line',
 		    line_length: 120,
-		    line_color: 'grey',
+		    line_color: 'black',
 		    line_width: 5,
 		    angle: function() {
 			    	let initial_orientation = Math.round(Math.random()*180);
@@ -291,21 +291,20 @@
 		    stimuli: [circle_obj, line_obj], // These can be referenced using the jsPsych.currentTrial().stim_array array.
 		    mouse_down_func: function(event){
 			    mouse_move_start = !mouse_move_start;
-			    jsPsych.getCurrentTrial().stim_array[1].line_color =  'black';
 		    },                
 		    mouse_move_func: function(event){ // This function will be automatically added as the event listener of the canvas.
-			   // if (mouse_move_start === false) return;
+			    if (mouse_move_start === false) return;
 			    if (prev_mouseX === null){
 				    prev_mouseX = event.offsetX;
 				    return
 			    }
 			    // stim_array[0] means a circle, and stim_array[1] means a line.
-			   /* if (event.offsetX > prev_mouseX){
-				    jsPsych.getCurrentTrial().stim_array[1].angle += event.offsetX*0.07; // The angle changes by 0.5 degrees.
+			    if (event.offsetX > prev_mouseX){
+				    jsPsych.getCurrentTrial().stim_array[1].angle += (event.offsetX - prev_mouseX)*0.07; // The angle changes by 0.5 degrees.
 			    } else {
-				    jsPsych.getCurrentTrial().stim_array[1].angle -= event.offsetX*0.07;
-			    }*/
-			    jsPsych.getCurrentTrial().stim_array[1].angle =  event.offsetX*0.07;
+				    jsPsych.getCurrentTrial().stim_array[1].angle -= (prev_mouseX - event.offsetX)*0.07;
+			    }
+			    //jsPsych.getCurrentTrial().stim_array[1].angle =  event.offsetX*0.07;
 			    
 			    prev_mouseX = event.offsetX;
 			    console.log(`current orientation: ${jsPsych.getCurrentTrial().stim_array[1].angle}`);
