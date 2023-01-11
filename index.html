@@ -1044,9 +1044,9 @@
 	    // Define stimuli 
 	    var stim_duration_ms = 400;
 	    
-	    		    var pre_iti = Math.round((Math.random()*(1.2-0.5) + 0.5)*1000);
-			    var stim_iti = Math.round((Math.random()*(1.2-0.5) + 0.5)*1000);
-			    var post_iti = Math.round((Math.random()*(1.2-0.5) + 0.5)*1000);
+	    		    var pre_iti = (Math.random()*(1.2-0.5) + 0.5)*1000;
+			    var stim_iti = (Math.random()*(1.2-0.5) + 0.5)*1000;
+			    var post_iti = (Math.random()*(1.2-0.5) + 0.5)*1000;
 
 			    var start_fixation = 0;
 			    var start_first_pair = start_fixation + pre_iti;
@@ -1111,9 +1111,9 @@
 	    let discrimination_trial = {
 		    type: jsPsychPsychophysics,
 		     on_start: function () {
-		   	    pre_iti = Math.round((Math.random()*(1.2-0.5) + 0.5)*1000);
-			    stim_iti = Math.round((Math.random()*(1.2-0.5) + 0.5)*1000);
-			    post_iti = Math.round((Math.random()*(1.2-0.5) + 0.5)*1000);
+		   	    pre_iti = (Math.random()*(1.2-0.5) + 0.5)*1000;
+			    stim_iti = (Math.random()*(1.2-0.5) + 0.5)*1000;
+			    post_iti = (Math.random()*(1.2-0.5) + 0.5)*1000;
 
 			    start_fixation = 0;
 			    start_first_pair = start_fixation + pre_iti;
