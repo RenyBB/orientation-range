@@ -1127,7 +1127,7 @@
 		    ],
 		    canvas_width: 1000,
 		    canvas_height: 800,
-		    trial_duration: 2800,
+		    trial_duration: () => {return end_fixation+100},
 		    response_ends_trial: false,
 		    background_color: '#808080',
 		    on_finish: function (data) {
