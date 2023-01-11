@@ -200,6 +200,18 @@
 		    show_clickable_nav: true,
 		    allow_backward: false
 	    };
+	    	    
+	    // Stimulus timings
+	    var gabor_duration_ms = 400;
+	    
+	    var pre_stim = Math.round((Math.random()*(1-0.5) + 0.5)*1000);
+	    var post_stim = Math.round((Math.random()*(1-0.5) + 0.5)*1000);
+
+	    var start_fixation = 0;
+	    var start_gabor = start_fixation + pre_stim;
+	    var end_gabor = start_gabor + gabor_duration_ms;
+	    var end_fixation = end_gabor + post_stim;
+	    
 	    
 	    //define fixation cross
 	    const fixation = {
@@ -233,13 +245,43 @@
 		    canvas_height: 700,
 		    response_type: 'key',
 		    choices: ['NO_KEYS'],
-		    trial_duration: 2250,
-		    stimuli: [fixation, gabor], // These can be referenced using the jsPsych.currentTrial().stim_array array.
+		    on_start: function () {
+			    pre_stim = Math.round((Math.random()*(1-0.5) + 0.5)*1000);
+			    post_stim = Math.round((Math.random()*(1-0.5) + 0.5)*1000);
+
+			    start_fixation = 0;
+			    start_gabor = start_fixation + pre_stim;
+			    end_gabor = start_gabor + 400;
+			    end_fixation = end_gabor + post_stim; 
+		    },
+		    stimuli: [
+			    // Fixation cross
+			    {
+				    obj_type: 'cross',
+				    line_length: 25,
+				    line_color: 'white',
+				    line_width: 5,
+				    is_frame: true,
+				    show_start_frame: () => Math.round(start_fixation/jsPsych.data.get().select('frame_duration').values[0]),
+				    show_end_frame: () => Math.round(end_fixation/jsPsych.data.get().select('frame_duration').values[0]), // Math.round((500+250)/((1 / jsPsych.data.get().select('vsync_rate').values[0]) * 1000)),
+
+			    }, 
+			    // Gabor
+			    {
+				    obj_type: 'image',
+				    image_width: 200,
+				    startY: 150,
+				    file: jsPsych.timelineVariable('stimulus'), 
+				    is_frame: true,
+				    show_start_frame: () => Math.round(start_gabor/jsPsych.data.get().select('frame_duration').values[0]),
+				    show_end_frame: () => Math.round(end_gabor/jsPsych.data.get().select('frame_duration').values[0]),
+			    }], // These can be referenced using the jsPsych.currentTrial().stim_array array.
 		    on_finish: function(data) {
 			    // transform selected orientation to a number between 0 and 180
 			    data.stimulus_file = jsPsych.getCurrentTrial().stim_array[1].file; 
 			    //data.stimulus_orientation = jsPsych.timelineVariable('orientation');
-			    }
+			    },
+		   trial_duration: () => {return end_fixation+100},
 	    };
 	    
 	    // define objects needed for response display
