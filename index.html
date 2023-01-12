@@ -181,7 +181,7 @@
 	    var gabor_duration_ms = 400;
 	    
 	    var pre_stim = Math.round((Math.random()*(1-0.5) + 0.5)*1000);
-	    var post_stim = Math.round((Math.random()*(1-0.5) + 0.5)*1000);
+	    var post_stim = Math.round((Math.random()*(0.5-0.3) + 0.3)*1000);
 
 	    var start_fixation = 0;
 	    var start_gabor = start_fixation + pre_stim;
@@ -223,7 +223,7 @@
 		    choices: ['NO_KEYS'],
 		    on_start: function () {
 			    pre_stim = Math.round((Math.random()*(1-0.5) + 0.5)*1000);
-			    post_stim = Math.round((Math.random()*(1-0.5) + 0.5)*1000);
+			    post_stim = Math.round((Math.random()*(0.5-0.3) + 0.3)*1000);
 
 			    start_fixation = 0;
 			    start_gabor = start_fixation + pre_stim;
