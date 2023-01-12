@@ -319,9 +319,9 @@
 			    
 			    // stim_array[0] means a circle, and stim_array[1] means a line.
 			    if (event.offsetX > prev_mouseX){
-				    jsPsych.getCurrentTrial().stim_array[1].angle += (event.offsetX - prev_mouseX)*0.1; // The angle changes by 0.5 degrees.
+				    jsPsych.getCurrentTrial().stim_array[1].angle += (event.offsetX - prev_mouseX)*0.2; // The angle changes by 0.5 degrees.
 			    } else {
-				    jsPsych.getCurrentTrial().stim_array[1].angle -= (prev_mouseX - event.offsetX)*0.1;
+				    jsPsych.getCurrentTrial().stim_array[1].angle -= (prev_mouseX - event.offsetX)*0.2;
 			    };
 			    //jsPsych.getCurrentTrial().stim_array[1].angle =  event.offsetX*0.07;
 			    
