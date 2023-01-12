@@ -188,30 +188,6 @@
 	    var end_gabor = start_gabor + gabor_duration_ms;
 	    var end_fixation = end_gabor + post_stim;
 	    
-	    
-	    //define fixation cross
-	    const fixation = {
-		    obj_type: 'cross',
-		    line_length: 25,
-		    line_color: 'white',
-		    line_width: 5,
-		    is_frame: true,
-		    show_start_frame: () => Math.round(250/jsPsych.data.get().select('frame_duration').values[0]),
-		    show_end_frame: () => Math.round((250+500+400+500)/jsPsych.data.get().select('frame_duration').values[0]), // Math.round((500+250)/((1 / jsPsych.data.get().select('vsync_rate').values[0]) * 1000)),
-	    };
-	    
-	    
-	    
-	    // define gabor
-	    const gabor = {
-		    obj_type: 'image',
-		    image_width: 200,
-		    startY: 150,
-		    file: jsPsych.timelineVariable('stimulus'), 
-		    is_frame: true,
-		    show_start_frame: () => Math.round((250+500)/jsPsych.data.get().select('frame_duration').values[0]),
-		    show_end_frame: () => Math.round((250+500+400)/jsPsych.data.get().select('frame_duration').values[0]),
-	    };
 	     
 	    // display fixation cross followed by gabor
 	    const test = {
@@ -223,7 +199,7 @@
 		    choices: ['NO_KEYS'],
 		    on_start: function () {
 			    pre_stim = Math.round((Math.random()*(1-0.5) + 0.5)*1000);
-			    post_stim = 0.25;
+			    post_stim = 250;
 
 			    start_fixation = 0;
 			    start_gabor = start_fixation + pre_stim;
