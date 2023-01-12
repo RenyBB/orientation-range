@@ -255,6 +255,8 @@
 		    on_finish: function(data) {
 			    // transform selected orientation to a number between 0 and 180
 			    data.stimulus_file = jsPsych.getCurrentTrial().stim_array[1].file; 
+			    console.log(end_gabor);
+			    console.log(end_fixation);
 			    //data.stimulus_orientation = jsPsych.timelineVariable('orientation');
 			    },
 		   trial_duration: () => {return end_fixation+100},
@@ -326,7 +328,6 @@
 			    //jsPsych.getCurrentTrial().stim_array[1].angle =  event.offsetX*0.07;
 			    
 			    prev_mouseX = event.offsetX;
-			    console.log(`starting orientation: ${initial_orientation}`);
 			    console.log(`current orientation: ${jsPsych.getCurrentTrial().stim_array[1].angle}`);
 			    console.log(`current mouse position: ${event.offsetX }`);
 		    },
