@@ -17,11 +17,11 @@
 	    
 	    // test stimuli for condition 2
 	    const test_stimuli_range2 = [
-		    { stimulus: "gabor_stimuli_matching/gabor_ori65_phase0.05.png", orientation: 65},
-		    { stimulus: "gabor_stimuli_matching/gabor_ori69_phase0.05.png", orientation: 69},
-		    { stimulus: "gabor_stimuli_matching/gabor_ori73_phase0.05.png", orientation: 73},
-		    { stimulus: "gabor_stimuli_matching/gabor_ori77_phase0.05.png", orientation: 77},
-		    { stimulus: "gabor_stimuli_matching/gabor_ori81_phase0.05.png", orientation: 81},
+		    { stimulus: "gabor_stimuli_matching/gabor_ori65_phase0.png", orientation: 65},
+		    { stimulus: "gabor_stimuli_matching/gabor_ori69_phase0.png", orientation: 69},
+		    { stimulus: "gabor_stimuli_matching/gabor_ori73_phase0.png", orientation: 73},
+		    { stimulus: "gabor_stimuli_matching/gabor_ori77_phase0.png", orientation: 77},
+		    { stimulus: "gabor_stimuli_matching/gabor_ori81_phase0.png", orientation: 81},
 	    ];
 
 
