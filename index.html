@@ -281,7 +281,7 @@
 		    line_width: 5,
 		    angle: function() {
 			    	let initial_orientation = Math.round(Math.random()*180);
-			    	while (initial_orientation <= jsPsych.timelineVariable('orientation') + 5 && initial_orientation >= jsPsych.timelineVariable('orientation') - 5 && initial_orientation >= jsPsych.timelineVariable('orientation') + 45 && initial_orientation <= jsPsych.timelineVariable('orientation') - 45) {
+			    	while (initial_orientation <= jsPsych.timelineVariable('orientation') + 5 && initial_orientation >= jsPsych.timelineVariable('orientation') - 5) {
 					initial_orientation = Math.round(Math.random()*180);
 				}
 			    	return initial_orientation;
@@ -326,6 +326,7 @@
 			    //jsPsych.getCurrentTrial().stim_array[1].angle =  event.offsetX*0.07;
 			    
 			    prev_mouseX = event.offsetX;
+			    console.log(`starting orientation: ${initial_orientation}`);
 			    console.log(`current orientation: ${jsPsych.getCurrentTrial().stim_array[1].angle}`);
 			    console.log(`current mouse position: ${event.offsetX }`);
 		    },
