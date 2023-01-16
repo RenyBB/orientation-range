@@ -365,10 +365,10 @@
 			    	    
 			    // calculate error between stimulus and response
 			    // first transform stimulus orientation to be between 0 and 90 degrees
-			    let corrected_stimulus = [];
-			    if (jsPsych.timelineVariable('orientation')>90) {corrected_stimulus = 180 - jsPsych.timelineVariable('orientation');}
-			    else {corrected_stimulus = jsPsych.timelineVariable('orientation');}
-			    //let corrected_stimulus = jsPsych.timelineVariable('orientation');
+			    //let corrected_stimulus = [];
+			    //if (jsPsych.timelineVariable('orientation')>90) {corrected_stimulus = 180 - jsPsych.timelineVariable('orientation');}
+			    //else {corrected_stimulus = jsPsych.timelineVariable('orientation');}
+			    let corrected_stimulus = jsPsych.timelineVariable('orientation');
 			    let error = [];
 			    error = corrected_stimulus-corrected_angle;
 			    /*if (error>90) {
