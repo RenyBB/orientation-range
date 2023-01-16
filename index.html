@@ -232,10 +232,10 @@
 			    // transform selected orientation to a number between 0 and 180
 			    data.stimulus_file = jsPsych.getCurrentTrial().stim_array[1].file; 
 			    console.log(end_gabor);
-			    console.log(end_fixation);
+			    console.log(end_fixation_matching);
 			    //data.stimulus_orientation = jsPsych.timelineVariable('orientation');
 			    },
-		   trial_duration: () => {return end_fixation+250},
+		   trial_duration: () => {return end_fixation_matching+250},
 	    };
 	    
 	    // define objects needed for response display
