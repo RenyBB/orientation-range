@@ -10,7 +10,8 @@
   	<script src="https://unpkg.com/@jspsych/plugin-html-keyboard-response"></script>
 	<script src="https://unpkg.com/@jspsych/plugin-html-button-response"></script>
   	<script src="https://unpkg.com/@jspsych/plugin-image-keyboard-response"></script>
-    	<script src="https://unpkg.com/@jspsych/plugin-instructions"></script>
+    	<script src="https://unpkg.com/@jspsych/plugin-instructions"></script>	    
+        <script src="https://unpkg.com/@jspsych/plugin-call-function"></script>
 	<script src="stimulus_list.js"></script>
 	    
       	<script src="jspsych-psychophysics.js"></script>
@@ -104,7 +105,7 @@
 		    type: jsPsychPreload,
 		    images: [all_gabors_range1, all_gabors_range2, "gabor_stimuli_matching/gabor_ori15_phase0.05.png", "gabor_stimuli_matching/gabor_ori139_phase0.05.png", "correct_response_feedback.png", "incorrect_response_feedback.png"],
 		    video: "response_instruction_video.mp4",
-		    message: "Task loading"
+		    message: "Task loading",
       };
 
 
@@ -124,9 +125,9 @@
 		    type: jsPsychInstructions,
 		    pages: [
 			    '<p>Welcome to the experiment. You have volunteered to take part in a research study investigating individual differences in orienation perception.<br>'+
-			    'This study consists of 2 sessions. In each session, you will complete 2 different tasks. You have to complete the two sessions within 1 week.<br>'+
+			    'This study consists of 2 sessions. In sesion 1, you will complete 2 different tasks. In session 2, you will complete only 1 task. You have to complete the two sessions within 1 week.<br>'+
 			    'This means that by agreeing to take part in this experiment, you will be committing to 2 sessions.<br>'+
-			    'The experimenter will invite you to complete the second session. Each session should take you around 45 minutes to complete.</p>'
+			    'The experimenter will invite you to complete the second session. Session 1 will take you around 45 minutes to complete. Session 2 will take you around 30 minutes to complete.</p>'
 		    ],
 		    show_clickable_nav: true,
 		    allow_backward: false
@@ -435,7 +436,7 @@
 			    '<p> You will now complete a test block.<br>'+
 			    'On each trial you will see two pairs of gratings one after the other.<br><br>'+
 			    'Your task will be to report whether the gratings in the first or second pair were more similar in orientation.<br>'+
-			    'You will not receive feedback in the test block. Click Next to start the task. </p>'   	    
+			    'Click Next to start the task. </p>'   	//You will not receive feedback in the test block.    
 		    ],
 		    show_clickable_nav: true,
 		    allow_backward: false
@@ -568,7 +569,7 @@
 	    };
 	    // Feedback in training phase
 	    var training_feedback = {
-		    type: jsPsychHtmlButtonResponse,
+		    type: jsPsychHtmlKeyboardResponse,
 		    stimulus: function () {
 			    // The feedback stimulus is a dynamic parameter because we can't know in advance whether
 			    // the stimulus should be 'correct' or 'incorrect'.
@@ -577,21 +578,21 @@
 			    var last_trial_correct_resp = jsPsych.data.get().last(1).values()[0].correct_response;
 			    var last_trial_correct = jsPsych.data.get().last(1).values()[0].correct;
 			    if (last_trial_correct) {
-				    return "<p>That was the correct answer!</p>"; // the parameter value has to be returned from the function
+				    return "<p>That was the correct answer!</p><p>Press space to continue.</p>"; // the parameter value has to be returned from the function
 			    } else if (last_trial_correct == 0 && last_trial_correct_resp == 0) {
-				    return "<p>That wasn't the correct answer.</p><p>The gratings in the first pair were closer in orientation.</p>"; // the parameter value has to be returned from the function
+				    return "<p>That wasn't the correct answer.</p><p>The gratings in the first pair were closer in orientation.</p><p>Press space to continue.</p>"; // the parameter value has to be returned from the function
 			    } else if (last_trial_correct == 0 && last_trial_correct_resp == 1) {
-				    return "<p>That wasn't the correct answer.</p><p>The gratings in the second pair were closer in orientation.</p>"; // the parameter value has to be returned from the function
+				    return "<p>That wasn't the correct answer.</p><p>The gratings in the second pair were closer in orientation.</p><p>Press space to continue.</p>"; // the parameter value has to be returned from the function
 			    }
 		    },
 		    //trial_duration: 5000,
-		    choices: ['Continue'],
+		    choices: [' '],
 		    response_ends_trial: true,
         };
 	    
 	   // Feedback in testing phase
 	    var testing_feedback = {
-		    type: jsPsychHtmlButtonResponse,
+		    type: jsPsychHtmlKeyboardResponse,
 		    stimulus: function () {
 			    // The feedback stimulus is a dynamic parameter because we can't know in advance whether
 			    // the stimulus should be 'correct' or 'incorrect'.
@@ -602,15 +603,15 @@
 			    console.log(last_trial_correct_resp);
 			    console.log(last_trial_correct);
 			    if (last_trial_correct) {
-				    return "<p>Correct</p>"; // the parameter value has to be returned from the function
+				    return "<p>Correct</p><p>Press space to continue.</p>"; // the parameter value has to be returned from the function
 			    } else if (last_trial_correct == 0 && last_trial_correct_resp == 0) {
-				    return "<p>Incorrect</p>"; // the parameter value has to be returned from the function
+				    return "<p>Incorrect</p><p>Press space to continue.</p>"; // the parameter value has to be returned from the function
 			    } else if (last_trial_correct == 0 && last_trial_correct_resp == 1) {
-				    return "<p>Incorrect</p>"; // the parameter value has to be returned from the function
+				    return "<p>Incorrect</p><p>Press space to continue.</p>"; // the parameter value has to be returned from the function
 			    }
             },
             //trial_duration: 5000,
-            choices: ['Continue'],
+            choices: [' '],
             response_ends_trial: true,
         };
 	    
@@ -698,7 +699,22 @@
 		    prompt: 'This is the end of the break. Please continue the experiment.'	
 	    };
 	    
+	    // Cursor hidden and showing
+	    const hide_cursor = 
+		  {
+			  type: jsPsychCallFunction,
+			  func: function() {
+				  document.body.style.cursor= "none";
+			  };
+		  };
 	    
+	    const show_cursor = 
+		  {
+			  type: jsPsychCallFunction,
+			  func: function() {
+				  document.body.style.cursor= "auto";
+			  };
+		  };
 	    
 	    // Discrimination task timeline
 	    // Training procedure
@@ -725,7 +741,7 @@
 	    // Reproduction task timeline
 	    // Training procedure
 	    let reproduction_training_procedure = {
-		    timeline: [test, response, feedback],
+		    timeline: [hide_cursor, test, show_cursor, response, feedback],
 	            timeline_variables: training_stimuli,
 		    randomize_order: true,
 		    repetitions: 1
@@ -733,14 +749,14 @@
 	    
 	    // Testing procedure, divided in 2 blocks
 	    let reproduction_testing_procedure_block1 = {
-		    timeline: [test, response, feedback],
+		    timeline: [hide_cursor, test, show_cursor, response, feedback],
 		    timeline_variables: test_stimuli_block1,
 		    randomize_order: true,
 		    repetitions: 2
 	    };
 	    
 	    let reproduction_testing_procedure_block2 = {
-		    timeline: [test, response, feedback],
+		    timeline: [hide_cursor, test, show_cursor, response, feedback],
 		    timeline_variables: test_stimuli_block2,
 		    randomize_order: true,
 		    repetitions: 2
