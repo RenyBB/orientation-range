@@ -790,10 +790,10 @@
 		    choices: ['Save data'],
 	    };
 		    
-	     let end_session1 = {
+	     let end_session2 = {
 		    type: jsPsychHtmlButtonResponse,
 		    stimulus: '<p>This is the end of session 2.<br>Please press the button below to save your data.<p/><p>Thank you for completing the experiment!</p>', 
-		    choices: ['Save data'];,
+		    choices: ['Save data'],
 	     };
 		        
 		     
@@ -806,7 +806,8 @@
 			    reproduction_task,
 			    mkTimer_end_matching,
 			    alarm,
-			    discrimination_task,]    
+			    discrimination_task,
+				end_session1]    
 	    };
 	    
 	    let session_2_timeline = {		    
@@ -816,6 +817,7 @@
 			    //virtual_chinrest,	 
 			    welcome_instructions,
 			    reproduction_task,
+				end_session2
 			    ]    
 	    };
 	    
