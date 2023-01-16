@@ -60,11 +60,15 @@
 	    let test_stimuli_block2 = [];
 	    
 	    if( (subject_id % 2==0 && session_id == 1) || (subject_id % 2!=0 && session_id == 2)) {
+		    //practice_stimuli_block1 = practice_stimuli_range1;
 		    test_stimuli_block1 = test_stimuli_range1; 
+		    //practice_stimuli_block2 = practice_stimuli_range2;
 		    test_stimuli_block2 = test_stimuli_range2; 
 	    }
 	    else if ( (subject_id % 2==0 && session_id == 2) || (subject_id % 2!=0 && session_id == 1)) {
+		    //practice_stimuli_block1 = practice_stimuli_range2;
 		    test_stimuli_block1 = test_stimuli_range2; 
+		    //practice_stimuli_block2 = practice_stimuli_range1;
 		    test_stimuli_block2 = test_stimuli_range1; 
 	    };    
 	    
@@ -403,53 +407,7 @@
 			      }   
 			     ],
 	    };
-	    
-	    // timer for breaks    
-	    const mkTimer = {
-		    type: jsPsychHtmlKeyboardResponse,
-		    stimulus: '<div style="font-size: 25px"><p>The next part of the experiment will start in</p>'
-		    + '<div style="font-size: 50px; color: white"><p><span id="clock">0:10</span></div></p></div>',
-		    choices: ['q'],
-		    trial_duration: 10500,
-		    on_load: function(){
-			    // add a keyboard listener 
-			    document.addEventListener('keydown', function(e){
-				    if (e.key == 'q'){
-					    window.clear_timer = -1;
-				    }
-			    });
-			    window.clear_timer = 1;
-			    var wait_time = 1 * 10 * 1000; // in milliseconds
-			    var start_time = performance.now();
-			    var interval = setInterval(function(){
-				    var time_left = wait_time - (performance.now() - start_time);
-				    var minutes = Math.floor(time_left / 1000 / 60);
-				    var seconds = Math.floor((time_left - minutes*1000*60)/1000);
-				    var seconds_str = seconds.toString().padStart(2,'0');
-				    if(time_left <= 0){
-					    document.querySelector('#clock').innerHTML = "0:00";
-					    window.clear_timer = -1;
-				    };
-				    if(window.clear_timer > 0){
-					    document.querySelector('#clock').innerHTML = minutes + ':' + seconds_str
-				    } else {
-					    clearInterval(interval);
-				    };
-			    }, 250)
-			    },
-		    on_finish: function(){
-			    window.clear_timer = -1;          
-		    }
-	    };
-	    
-	    // define alarm that signals end of break
-	    const alarm = {
-		    type: jsPsychAudioButtonResponse,
-		    stimulus: 'Alarm.mp3',
-		    choices: ['Continue'],
-		    prompt: 'This is the end of the break. Please continue the experiment.'	
-	    };
-	    	    
+	    	    	    
 // orientation discrimination task
 	    
     
@@ -655,6 +613,93 @@
             choices: ['Continue'],
             response_ends_trial: true,
         };
+	    
+	    // timer for breaks    
+	    const mkTimer_middle_matching = {
+		    type: jsPsychHtmlKeyboardResponse,
+		    stimulus: '<div style="font-size: 25px"><p>The next part of the experiment will start in</p>'
+		    + '<div style="font-size: 50px; color: white"><p><span id="clock">0:10</span></div></p></div>',
+		    choices: ['q'],
+		    trial_duration: 10500,
+		    on_load: function(){
+			    // add a keyboard listener 
+			    document.addEventListener('keydown', function(e){
+				    if (e.key == 'q'){
+					    window.clear_timer = -1;
+				    }
+			    });
+			    window.clear_timer = 1;
+			    var wait_time = 1 * 10 * 1000; // in milliseconds
+			    var start_time = performance.now();
+			    var interval = setInterval(function(){
+				    var time_left = wait_time - (performance.now() - start_time);
+				    var minutes = Math.floor(time_left / 1000 / 60);
+				    var seconds = Math.floor((time_left - minutes*1000*60)/1000);
+				    var seconds_str = seconds.toString().padStart(2,'0');
+				    if(time_left <= 0){
+					    document.querySelector('#clock').innerHTML = "0:00";
+					    window.clear_timer = -1;
+				    };
+				    if(window.clear_timer > 0){
+					    document.querySelector('#clock').innerHTML = minutes + ':' + seconds_str
+				    } else {
+					    clearInterval(interval);
+				    };
+			    }, 250)
+			    },
+		    on_finish: function(){
+			    window.clear_timer = -1;          
+		    }
+	    };
+	    
+	    const mkTimer_end_matching = {
+		    type: jsPsychHtmlKeyboardResponse,
+		    stimulus: '<div style="font-size: 25px"><p>The next part of the experiment will start in</p>'
+		    + '<div style="font-size: 50px; color: white"><p><span id="clock">0:30</span></div></p></div>',
+		    choices: ['q'],
+		    trial_duration: 30500,
+		    on_load: function(){
+			    // add a keyboard listener 
+			    document.addEventListener('keydown', function(e){
+				    if (e.key == 'q'){
+					    window.clear_timer = -1;
+				    }
+			    });
+			    window.clear_timer = 1;
+			    var wait_time = 1 * 10 * 1000; // in milliseconds
+			    var start_time = performance.now();
+			    var interval = setInterval(function(){
+				    var time_left = wait_time - (performance.now() - start_time);
+				    var minutes = Math.floor(time_left / 1000 / 60);
+				    var seconds = Math.floor((time_left - minutes*1000*60)/1000);
+				    var seconds_str = seconds.toString().padStart(2,'0');
+				    if(time_left <= 0){
+					    document.querySelector('#clock').innerHTML = "0:00";
+					    window.clear_timer = -1;
+				    };
+				    if(window.clear_timer > 0){
+					    document.querySelector('#clock').innerHTML = minutes + ':' + seconds_str
+				    } else {
+					    clearInterval(interval);
+				    };
+			    }, 250)
+			    },
+		    on_finish: function(){
+			    window.clear_timer = -1;          
+		    }
+	    };
+	    
+	    
+	    // define alarm that signals end of break
+	    const alarm = {
+		    type: jsPsychAudioButtonResponse,
+		    stimulus: 'Alarm.mp3',
+		    choices: ['Continue'],
+		    prompt: 'This is the end of the break. Please continue the experiment.'	
+	    };
+	    
+	    
+	    
 	    // Discrimination task timeline
 	    // Training procedure
 	    let discrimination_training_procedure = {
@@ -705,9 +750,11 @@
 	    // Full reproduction task procedure
 	    let reproduction_task = {
 		    timeline: [reproduction_practice_instructions, reproduction_training_procedure, 
-			       reproduction_test_instructions_block1, reproduction_testing_procedure_block1, /*mkTimer, allarm,*/
+			       reproduction_test_instructions_block1, reproduction_testing_procedure_block1, mkTimer_middle_matching, allarm,
 			       reproduction_test_instructions_block2, reproduction_testing_procedure_block2]
 	    };
+	    
+	    
 	    
 	    // define tinemline and run experiment
 	    jsPsych.run([
@@ -716,9 +763,10 @@
 		    //virtual_chinrest,	 
 		    welcome_instructions,
 		    reproduction_task,
+		    mkTimer_end_matching,
+		    alarm,
 		    discrimination_task,
-		    //mkTimer,
-		    //alarm,
+		    
 		    
 	    ]);
 
