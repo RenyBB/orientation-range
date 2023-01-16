@@ -61,15 +61,15 @@
 	    let test_stimuli_block2 = [];
 	    
 	    if( (subject_id % 2==0 && session_id == 1) || (subject_id % 2!=0 && session_id == 2)) {
-		    //practice_stimuli_block1 = practice_stimuli_range1;
+		    training_stimuli_block1 = training_stimuli_range1;
 		    test_stimuli_block1 = test_stimuli_range1; 
-		    //practice_stimuli_block2 = practice_stimuli_range2;
+		    training_stimuli_block2 = training_stimuli_range2;
 		    test_stimuli_block2 = test_stimuli_range2; 
 	    }
 	    else if ( (subject_id % 2==0 && session_id == 2) || (subject_id % 2!=0 && session_id == 1)) {
-		    //practice_stimuli_block1 = practice_stimuli_range2;
+		    training_stimuli_block1 = training_stimuli_range2;
 		    test_stimuli_block1 = test_stimuli_range2; 
-		    //practice_stimuli_block2 = practice_stimuli_range1;
+		    training_stimuli_block2 = training_stimuli_range1;
 		    test_stimuli_block2 = test_stimuli_range1; 
 	    };    
 	    
@@ -178,7 +178,17 @@
 	    const reproduction_test_instructions_block1 = {
 		    type: jsPsychInstructions,
 		    pages: [
-			    '<p> You will now complete two test blocks. Click Next to start the first test block.</p>'
+			    '<p>You will now complete the test block. Click Next to start.</p>'
+		    ],
+		    show_clickable_nav: true,
+		    allow_backward: false
+	    };
+
+		// orientation reproduction instructions: test block 2
+		const reproduction_practice_instructions_block2 = {
+		    type: jsPsychInstructions,
+		    pages: [
+			    '<p>You will now complete the second practice blokc. Click Next to start.</p>'
 		    ],
 		    show_clickable_nav: true,
 		    allow_backward: false
@@ -188,7 +198,7 @@
 	    const reproduction_test_instructions_block2 = {
 		    type: jsPsychInstructions,
 		    pages: [
-			    '<p>Click Next to start the second test block.</p>'
+			    '<p>You will now complete the test block. Click Next to start.</p>'
 		    ],
 		    show_clickable_nav: true,
 		    allow_backward: false
@@ -752,9 +762,16 @@
 	    
 	    // Reproduction task timeline
 	    // Training procedure
-	    let reproduction_training_procedure = {
+	    let reproduction_training_procedure_block1 = {
 		    timeline: [hide_cursor, test, show_cursor, response, feedback],
-	            timeline_variables: training_stimuli,
+	            timeline_variables: training_stimuli_block1,
+		    randomize_order: true,
+		    repetitions: 1
+	    };
+
+		let reproduction_training_procedure_block2 = {
+		    timeline: [hide_cursor, test, show_cursor, response, feedback],
+	            timeline_variables: training_stimuli_block2,
 		    randomize_order: true,
 		    repetitions: 1
 	    };
@@ -777,9 +794,9 @@
 	  	    
 	    // Full reproduction task procedure
 	    let reproduction_task = {
-		    timeline: [reproduction_practice_instructions, reproduction_training_procedure, 
+		    timeline: [reproduction_practice_instructions, reproduction_training_procedure_block1, 
 			       reproduction_test_instructions_block1, reproduction_testing_procedure_block1, mkTimer_middle_matching, alarm,
-			       reproduction_test_instructions_block2, reproduction_testing_procedure_block2]
+			       reproduction_practice_instructions_block2, reproduction_training_procedure_block1, reproduction_test_instructions_block2, reproduction_testing_procedure_block2]
 	    };
 	    
 	    // define timeline for the two sessions and select timeline for current session
