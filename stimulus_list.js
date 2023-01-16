@@ -4,7 +4,6 @@
 	    const training_stimuli_range1 = [
 		    { stimulus: "gabor_stimuli_matching/gabor_ori8_phase0.05.png", orientation: 8},
 		    { stimulus: "gabor_stimuli_matching/gabor_ori179_phase0.05.png", orientation: 179},
-        { stimulus: "gabor_stimuli_matching/gabor_ori170_phase0.05.png", orientation: 170},
 	    ];
 	    
 	    // test stimuli for condition 1
@@ -20,7 +19,6 @@
 	    const training_stimuli_range2 = [
 		    { stimulus: "gabor_stimuli_matching/gabor_ori98_phase0.05.png", orientation: 98},
 		    { stimulus: "gabor_stimuli_matching/gabor_ori107_phase0.05.png", orientation: 107},
-        { stimulus: "gabor_stimuli_matching/gabor_ori116_phase0.05.png", orientation: 116},
 	    ];
 	    
 	    // test stimuli for condition 2
