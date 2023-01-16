@@ -178,15 +178,15 @@
 	    };
 	    	    
 	    // Stimulus timings
-	    var gabor_duration_ms = 400;
+	    let gabor_duration_ms = 400;
 	    
-	    var pre_stim = 500;//Math.round((Math.random()*(1-0.5) + 0.5)*1000);
-	    var post_stim = 0;
+	    let pre_stim = Math.round((Math.random()*(1-0.5) + 0.5)*1000);
+	    let post_stim = 250;
 
-	    var start_fixation = 0;
-	    var start_gabor = start_fixation + pre_stim;
-	    var end_gabor = start_gabor + gabor_duration_ms;
-	    var end_fixation = 0; //end_gabor + post_stim;
+	    let start_fixation_matching = 0;
+	    let start_gabor = start_fixation + pre_stim;
+	    let end_gabor = start_gabor + gabor_duration_ms;
+	    let end_fixation_matching = end_gabor + post_stim;
 	    
 	     
 	    // display fixation cross followed by gabor
@@ -199,12 +199,12 @@
 		    choices: ['NO_KEYS'],
 		    on_start: function () {
 			    pre_stim = 500;//Math.round((Math.random()*(1-0.5) + 0.5)*1000);
-			    post_stim = 0;//250;
+			    post_stim = 250;
 
-			    start_fixation = 0;
+			    start_fixation_matching = 0;
 			    start_gabor = start_fixation + pre_stim;
 			    end_gabor = start_gabor + 400;
-			    end_fixation = 0;//end_gabor + post_stim; 
+			    end_fixation_matching = end_gabor + post_stim; 
 		    },
 		    stimuli: [
 			    // Fixation cross
@@ -214,8 +214,8 @@
 				    line_color: 'white',
 				    line_width: 5,
 				    is_frame: true,
-				    show_start_frame: () => Math.round(start_fixation/jsPsych.data.get().select('frame_duration').values[0]),
-				    show_end_frame: () => Math.round(end_fixation/jsPsych.data.get().select('frame_duration').values[0]), // Math.round((500+250)/((1 / jsPsych.data.get().select('vsync_rate').values[0]) * 1000)),
+				    show_start_frame: () => Math.round(start_fixation_matching/jsPsych.data.get().select('frame_duration').values[0]),
+				    show_end_frame: () => Math.round(end_fixation_matching/jsPsych.data.get().select('frame_duration').values[0]), // Math.round((500+250)/((1 / jsPsych.data.get().select('vsync_rate').values[0]) * 1000)),
 
 			    }, 
 			    // Gabor
@@ -487,17 +487,17 @@
 	    	    
 
 	    // Define stimulus duration and starting itis (updated on every trial)
-	    var stim_duration_ms = 400;
+	    let stim_duration_ms = 400;
 	    
-	    var pre_iti = (Math.random()*(1.2-0.5) + 0.5)*1000;
-	    var stim_iti = (Math.random()*(1.2-0.5) + 0.5)*1000;
-	    var post_iti = (Math.random()*(1.2-0.5) + 0.5)*1000;
-	    var start_fixation = 0;
-	    var start_first_pair = start_fixation + pre_iti;
-	    var end_first_pair = start_first_pair + stim_duration_ms;
-	    var start_second_pair = end_first_pair + stim_iti;
-	    var end_second_pair = start_second_pair + stim_duration_ms;
-	    var end_fixation = end_second_pair + post_iti;
+	    let pre_iti = (Math.random()*(1.2-0.5) + 0.5)*1000;
+	    let stim_iti = (Math.random()*(1.2-0.5) + 0.5)*1000;
+	    let post_iti = (Math.random()*(1.2-0.5) + 0.5)*1000;
+	    let start_fixation = 0;
+	    let start_first_pair = start_fixation + pre_iti;
+	    let end_first_pair = start_first_pair + stim_duration_ms;
+	    let start_second_pair = end_first_pair + stim_iti;
+	    let end_second_pair = start_second_pair + stim_duration_ms;
+	    let end_fixation = end_second_pair + post_iti;
 	   
 	    // Define stimulus presentation structure: fixation appears, first pair of gabors, second pair of gabors, fixaction disappears
 	    let discrimination_trial = {
