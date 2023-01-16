@@ -186,7 +186,7 @@
 	    var start_fixation = 0;
 	    var start_gabor = start_fixation + pre_stim;
 	    var end_gabor = start_gabor + gabor_duration_ms;
-	    var end_fixation = end_gabor + post_stim;
+	    var end_fixation = 0; //end_gabor + post_stim;
 	    
 	     
 	    // display fixation cross followed by gabor
@@ -204,7 +204,7 @@
 			    start_fixation = 0;
 			    start_gabor = start_fixation + pre_stim;
 			    end_gabor = start_gabor + 400;
-			    end_fixation = end_gabor + post_stim; 
+			    end_fixation = 0;//end_gabor + post_stim; 
 		    },
 		    stimuli: [
 			    // Fixation cross
