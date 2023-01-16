@@ -120,15 +120,27 @@
 		    pixels_per_unit: 50
 	    };
 	    
+	    
+	    let welcome_instructions_text = [];
+	    if (session_id == 1) {
+		    welcome_instructions_text = [
+			    '<p>Welcome to the experiment. You have volunteered to take part in a research study investigating individual differences in orienation perception.<br>'+
+			    'This study consists of 2 sessions, and this is session 1.<br>In sesion 1, you will complete 2 different tasks - an orientation matching task and an orientation discrimination task. In session 2, you will complete only 1 task - the orientation matching task. You have to complete the two sessions within 1 week.<br>'+
+			    'This means that by agreeing to take part in this experiment, you will be committing to 2 sessions.<br>'+
+			    'The experimenter will invite you to complete the second session. Session 1 will take you around 45 minutes to complete. Session 2 will take you around 30 minutes to complete.</p>'
+		    ];
+	    } else if (session_id == 2) {
+		    welcome_instructions_text = [
+			    '<p>Welcome to the experiment. You have volunteered to take part in a research study investigating individual differences in orienation perception.<br>'+
+			    'This study consists of 2 sessions, and this is session 2.<br>In this sesion, you will complete an orientation matching task which will take you around 30 minutes to complete.</p>'
+		    ];
+	    
+	    };
+	    
 	    // welcome to experiment instructions
 	    const welcome_instructions = {
 		    type: jsPsychInstructions,
-		    pages: [
-			    '<p>Welcome to the experiment. You have volunteered to take part in a research study investigating individual differences in orienation perception.<br>'+
-			    'This study consists of 2 sessions. In sesion 1, you will complete 2 different tasks. In session 2, you will complete only 1 task. You have to complete the two sessions within 1 week.<br>'+
-			    'This means that by agreeing to take part in this experiment, you will be committing to 2 sessions.<br>'+
-			    'The experimenter will invite you to complete the second session. Session 1 will take you around 45 minutes to complete. Session 2 will take you around 30 minutes to complete.</p>'
-		    ],
+		    pages: welcome_instructions_text,
 		    show_clickable_nav: true,
 		    allow_backward: false
 	    };
@@ -770,20 +782,39 @@
 			       reproduction_test_instructions_block2, reproduction_testing_procedure_block2]
 	    };
 	    
+	    // define timeline for the two sessions and select timeline for current session
+	    let session_1_timeline = {
+		    timeline: [ 
+			    browser_check,
+			    preload,
+			    //virtual_chinrest,	 
+			    welcome_instructions,
+			    reproduction_task,
+			    mkTimer_end_matching,
+			    alarm,
+			    discrimination_task,]    
+	    };
 	    
+	    let session_2_timeline = {		    
+		    timeline: [ 
+			    browser_check,
+			    preload,
+			    //virtual_chinrest,	 
+			    welcome_instructions,
+			    reproduction_task,
+			    ]    
+	    };
 	    
-	    // define tinemline and run experiment
+	    let current_session_timeline = [];
+	    if (session_id == 1) {
+		    current_session_timeline = session_1_timeline;
+	    } else if (session_id == 2) {
+		    current_session_timeline = session_2_timeline;
+	    };
+	    
+	    //run experiment
 	    jsPsych.run([
-	            browser_check,
-		    preload,
-		    //virtual_chinrest,	 
-		    welcome_instructions,
-		    reproduction_task,
-		    mkTimer_end_matching,
-		    alarm,
-		    discrimination_task,
-		    
-		    
+		    current_session_timeline	    
 	    ]);
 
 	</script>
