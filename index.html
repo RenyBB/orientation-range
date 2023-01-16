@@ -124,9 +124,9 @@
 	    let welcome_instructions_text = [];
 	    if (session_id == 1) {
 		    welcome_instructions_text = [
-			    '<p>Welcome to the experiment. You have volunteered to take part in a research study investigating individual differences in orienation perception.<br>'+
-			    'This study consists of 2 sessions<br>In sesion 1, you will complete 2 different tasks - an orientation matching task and an orientation discrimination task, and it will take your around 45 minutes to complete.<br><br>In session 2, you will complete only 1 task - the orientation matching task, and it will take you around 30 minutes to complete.<br>You have to complete the two sessions within 1 week.<br>'+
-			    'This means that by agreeing to take part in this experiment, you will be committing to 2 sessions.<br><br>'+
+			    '<p>Welcome to the experiment.<br><br>You have volunteered to take part in a research study investigating individual differences in orienation perception.This study consists of 2 sessions.<br><br>'+
+			    'In sesion 1, you will complete 2 different tasks - an orientation matching task and an orientation discrimination task, and it will take your around 45 minutes to complete.<br><br>In session 2, you will complete only 1 task - the orientation matching task, and it will take you around 30 minutes to complete.<br><br>'+
+			    'By agreeing to take part in this experiment, you will be committing to 2 sessions.You have to complete the two sessions within 1 week.<br><br>'+
 			    'This is session 1.</p>'
 		    ];
 	    } else if (session_id == 2) {
@@ -783,6 +783,20 @@
 	    };
 	    
 	    // define timeline for the two sessions and select timeline for current session
+	    
+	    let end_session1 = {
+		    type: jsPsychHtmlButtonResponse,
+		    stimulus: '<p>This is the end of session 1.<br>Please press the button below to save your data. Please remember to return to the experiment and complete session 2 within 7 days.<p/><p>Thank you for your participation!</p>', 
+		    choices: ['Save data'],
+	    };
+		    
+	     let end_session1 = {
+		    type: jsPsychHtmlButtonResponse,
+		    stimulus: '<p>This is the end of session 2.<br>Please press the button below to save your data.<p/><p>Thank you for completing the experiment!</p>', 
+		    choices: ['Save data'];,
+	     };
+		        
+		     
 	    let session_1_timeline = {
 		    timeline: [ 
 			    browser_check,
