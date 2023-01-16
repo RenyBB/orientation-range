@@ -8,20 +8,20 @@
 	    
 	    // test stimuli for condition 1
     	const test_stimuli_range1 = [
-		    { stimulus: "gabor_stimuli_matching/gabor_ori49_phase0.png", orientation: 49},
+		    { stimulus: "gabor_stimuli_matching/gabor_ori17_phase0.png", orientation: 17},
+		    { stimulus: "gabor_stimuli_matching/gabor_ori26_phase0.png", orientation: 26},
+		    { stimulus: "gabor_stimuli_matching/gabor_ori35_phase0.png", orientation: 35},
+		    { stimulus: "gabor_stimuli_matching/gabor_ori44_phase0.png", orientation: 44},
 		    { stimulus: "gabor_stimuli_matching/gabor_ori53_phase0.png", orientation: 53},
-		    { stimulus: "gabor_stimuli_matching/gabor_ori57_phase0.png", orientation: 57},
-		    { stimulus: "gabor_stimuli_matching/gabor_ori61_phase0.png", orientation: 61},
-		    { stimulus: "gabor_stimuli_matching/gabor_ori65_phase0.png", orientation: 65},
 	    ];
 	    
 	    // test stimuli for condition 2
 	    const test_stimuli_range2 = [
-		    { stimulus: "gabor_stimuli_matching/gabor_ori65_phase0.png", orientation: 65},
-		    { stimulus: "gabor_stimuli_matching/gabor_ori69_phase0.png", orientation: 69},
-		    { stimulus: "gabor_stimuli_matching/gabor_ori73_phase0.png", orientation: 73},
-		    { stimulus: "gabor_stimuli_matching/gabor_ori77_phase0.png", orientation: 77},
-		    { stimulus: "gabor_stimuli_matching/gabor_ori81_phase0.png", orientation: 81},
+		    { stimulus: "gabor_stimuli_matching/gabor_ori53_phase0.png", orientation: 53},
+		    { stimulus: "gabor_stimuli_matching/gabor_ori62_phase0.png", orientation: 62},
+		    { stimulus: "gabor_stimuli_matching/gabor_ori71_phase0.png", orientation: 71},
+		    { stimulus: "gabor_stimuli_matching/gabor_ori80_phase0.png", orientation: 80},
+		    { stimulus: "gabor_stimuli_matching/gabor_ori89_phase0.png", orientation: 89},
 	    ];
 
 
