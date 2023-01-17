@@ -185,7 +185,7 @@
 			    '<img src="correct_response_feedback.png" width="150"></img><br>'+
 			    'If the coloured line is red, that means your response was not close to the true orientation of the grating.<br>'+
 			    '<img src="incorrect_response_feedback.png" width="150"></img></p>',
-			    '<p>The experiment is divided into 2 blocks. Each block starts with 6 practice examples so that you get used to the task.<br>The task will take you around 30 minutes to complete.</p>'
+			    '<p>The experiment is divided into 2 blocks. Each block starts with 6 practice examples so that you get used to the task.<br>The task will take you around 30 minutes to complete.<br>Click Next to start the practice examples.</p>'
 			    	    
 		    ],
 		    show_clickable_nav: true,
@@ -197,7 +197,7 @@
 	    const reproduction_test_instructions_block1 = {
 		    type: jsPsychInstructions,
 		    pages: [
-			    '<p>This was the end of the practice examples. Now you will complete the main task.<br>During each trial, keep looking at the fixation cross in the middle of the screen.<br>Click Next to start.</p>'
+			    '<p>This was the end of the practice examples. Now you will complete the main task.<br>During each trial, <strong>keep looking at the fixation cross in the middle of the screen.</strong><br>Click Next to start.</p>'
 		    ],
 		    show_clickable_nav: true,
 		    allow_backward: false
@@ -207,7 +207,7 @@
 		const reproduction_practice_instructions_block2 = {
 		    type: jsPsychInstructions,
 		    pages: [
-			    '<p>This is the start of the second block. You will now complete 6 practice examples.<br>During each trial, keep looking at the fixation cross in the middle of the screen.<br>Click Next to start.</p>'
+			    '<p>This is the start of the second block. You will now complete 6 practice examples.<br>During each trial, <strong>keep looking at the fixation cross in the middle of the screen.</strong><br>Click Next to start.</p>'
 		    ],
 		    show_clickable_nav: true,
 		    allow_backward: false
@@ -217,7 +217,7 @@
 	    const reproduction_test_instructions_block2 = {
 		    type: jsPsychInstructions,
 		    pages: [
-			    '<p><p>This was the end of the practice examples. Now you will complete the main task.<br>During each trial, keep looking at the fixation cross in the middle of the screen.<br>Click Next to start.</p>'
+			    '<p>This was the end of the practice examples. Now you will complete the main task.<br>During each trial, <strong>keep looking at the fixation cross in the middle of the screen.</strong><br>Click Next to start.</p>'
 		    ],
 		    show_clickable_nav: true,
 		    allow_backward: false
@@ -461,11 +461,12 @@
 		    pages: [
 			    // stimulus instructions
 			    '<p> You will now perform an orientation discrimination task.<br>'+
-			    'When a trial starts, you will see a pair of black and white gratings.<br>'+
-			    'This will be follows by another pair of black and white gratins.<br>'+
+			    'Each trial will begin with the presentation of a fixation cross.<br>Keep looking at the fixation cross in the middle of the screen until it diseappers.<br><br>'+
+			    'You will see a pair of black and white gratings.<br>'+
+			    'This will be follows by another pair of black and white gratings.<br>'+
 			    'Your task will be to report whether the gratings in the first or second pair were more similar in orientation.<br>'+
 			    'You will then receive feedback whether your response was correct.<br><br></p>'   	  
-			    //'You will first complete a practice block. Click Next to start the task. </p>'   	    
+			    'You will first complete 6 practice examples to get used to the task. Click Next to start the practice examples.</p>'   	    
 		    ],
 		    show_clickable_nav: true,
 		    allow_backward: false
@@ -476,17 +477,11 @@
 		    type: jsPsychInstructions,
 		    pages: [
 			    // stimulus instructions
-			    '<p> You will now complete a test block.<br>'+
-			    'On each trial you will see two pairs of gratings one after the other.<br><br>'+
-			    'Your task will be to report whether the gratings in the first or second pair were more similar in orientation.<br>'+
-			    'Click Next to start the task. </p>'   	//You will not receive feedback in the test block.    
+			    '<p>This was the end of the practice examples. Now you will complete the main task.<br>During each trial, <strong>keep looking at the fixation cross in the middle of the screen.</strong><br>Click Next to start. </p>'
 		    ],
 		    show_clickable_nav: true,
 		    allow_backward: false
 	    };	    
-	    
-
-	    	    
 
 	    // Define stimulus duration and starting itis (updated on every trial)
 	    let stim_duration_ms = 400;
