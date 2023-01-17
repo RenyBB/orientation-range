@@ -716,7 +716,7 @@
 	    // define alarm that signals end of break
 	    const alarm = {
 		    type: jsPsychHtmlButtonResponse//jsPsychAudioButtonResponse,
-		    stimulus: 'This is the end of the break. Please continue the experiment.'//'Alarm.mp3',
+		    stimulus: 'This is the end of the break. Please continue the experiment.',//'Alarm.mp3',
 		    choices: ['Continue'],
 		    //prompt: 'This is the end of the break. Please continue the experiment.'	
 	    };
@@ -769,7 +769,7 @@
 		    repetitions: 3
 	    };
 
-		let reproduction_training_procedure_block2 = {
+	    let reproduction_training_procedure_block2 = {
 		    timeline: [hide_cursor, test, show_cursor, response, feedback],
 	            timeline_variables: training_stimuli_block2,
 		    randomize_order: true,
