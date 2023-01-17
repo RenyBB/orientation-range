@@ -143,10 +143,9 @@
 	    let welcome_instructions_text = [];
 	    if (session_id == 1) {
 		    welcome_instructions_text = [
-			    '<p>Welcome to the experiment.<br>You have volunteered to take part in a research study investigating individual differences in orienation perception. This study consists of 2 sessions.<br>'+
-			    'By agreeing to take part in this experiment, you will be committing to 2 sessions. You have to complete the two sessions within 1 week.<br><br>'+
-			    'In sesion 1, you will complete 2 different tasks and it will take you around 45 minutes to complete.<br>In session 2, you will complete one task, and it will take you around 30 minutes to complete.<br><br>'+
-			    'This is session 1.</p>'
+			    '<p>Welcome to the experiment.<br>You have volunteered to take part in a research study investigating individual differences in orienation perception.<br>The study consists of 2 sessions and you have to complete the two sessions within 1 week.<br><br>'+
+			    'This is Session 1. It consists of 2 different tasks and it will take you around 45 minutes to complete.<br>Session 2 consists of one task and will take you around 30 minutes to complete.<br><br>'+
+			    'Click Next to start Session 1.</p>'
 		    ];
 	    } else if (session_id == 2) {
 		    welcome_instructions_text = [
@@ -824,13 +823,13 @@
 	    // end of session messages
 	    let end_session1 = {
 		    type: jsPsychHtmlButtonResponse,
-		    stimulus: '<p>This is the end of session 1.<br>Please press the button below to save your data. Please remember to return to the experiment and complete session 2 within 7 days.<p/><p>Thank you for your participation!</p>', 
+		    stimulus: '<p>This is the end of Session 1.<br>Please press the button below to save your data. Please remember to return to the experiment and complete Session 2 within 7 days.<p/><p>Thank you for your participation!</p>', 
 		    choices: ['Save data'],
 	    };
 		    
 	     let end_session2 = {
 		    type: jsPsychHtmlButtonResponse,
-		    stimulus: '<p>This is the end of session 2.<br>Please press the button below to save your data.<p/><p>Thank you for completing the experiment!</p>', 
+		    stimulus: '<p>This is the end of Session 2.<br>Please press the button below to save your data.<p/><p>Thank you for completing the experiment!</p>', 
 		    choices: ['Save data'],
 	     };
 		        
