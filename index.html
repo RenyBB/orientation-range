@@ -646,11 +646,11 @@
 			    console.log(last_trial_correct_resp);
 			    console.log(last_trial_correct);
 			    if (last_trial_correct) {
-				    return "<p style="color: green">Correct</p><p>Press space to continue.</p>"; // the parameter value has to be returned from the function
+				    return "<p style="color: #00FF00">Correct</p><p>Press space to continue.</p>"; // the parameter value has to be returned from the function
 			    } else if (last_trial_correct == 0 && last_trial_correct_resp == 0) {
-				    return "<p style="color: red">Incorrect</p><p>Press space to continue.</p>"; // the parameter value has to be returned from the function
+				    return "<p style="color: #FF0000">Incorrect</p><p>Press space to continue.</p>"; // the parameter value has to be returned from the function
 			    } else if (last_trial_correct == 0 && last_trial_correct_resp == 1) {
-				    return "<p style="color: red">Incorrect</p><p>Press space to continue.</p>"; // the parameter value has to be returned from the function
+				    return "<p style="color: #FF0000">Incorrect</p><p>Press space to continue.</p>"; // the parameter value has to be returned from the function
 			    }
             },
             //trial_duration: 5000,
