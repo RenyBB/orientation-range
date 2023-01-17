@@ -715,10 +715,10 @@
 	    
 	    // define alarm that signals end of break
 	    const alarm = {
-		    type: jsPsychAudioButtonResponse,
-		    stimulus: 'Alarm.mp3',
+		    type: jsPsychHtmlButtonResponse//jsPsychAudioButtonResponse,
+		    stimulus: 'This is the end of the break. Please continue the experiment.'//'Alarm.mp3',
 		    choices: ['Continue'],
-		    prompt: 'This is the end of the break. Please continue the experiment.'	
+		    //prompt: 'This is the end of the break. Please continue the experiment.'	
 	    };
 	    
 	    // Cursor hidden and showing
