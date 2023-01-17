@@ -35,12 +35,37 @@
 */	    
 	    // Initialize jspsych
 	    const jsPsych = initJsPsych({
+		    show_progress_bar: true,
+		    auto_update_progress_bar: false,
 		    on_interaction_data_update: function(data) {
 			    console.log(JSON.stringify(data))},
 		    on_finish: function() {
 			    jsPsych.data.displayData();
 		    }
 	    });
+	    
+	    // Count total number of trials across the two tasks
+	    const reproduction_training_stimulus_repetitions = 3; 
+	    const reproduction_testing_stimulus_repetitions = 3; // to change
+	    const discrimination_training_stimulus_repetitions = 3;
+	    const discrimination_testing_stimulus_repetitions = 2; // DO NOT CHANGE
+	    
+	    const total_n_trials = training_stimuli_range1.length*reproduction_training_stimulus_repetitions + 
+		  			training_stimuli_range2.length*reproduction_training_stimulus_repetitions  + 
+		  			test_stimuli_range1.length*reproduction_testing_stimulus_repetitions + 
+		  			test_stimuli_range2.length*reproduction_testing_stimulus_repetitions + 
+		  			discrimination_training_stimuli.length*discrimination_training_stimulus_repetitions + 
+		  			discrimination_test_stimuli.length*discrimination_testing_stimulus_repetitions; 
+	    
+	    // measure screen resolution and participants' distance from the screen; 
+	    // resize stimuli accordingly in degrees of visual angle. current setting - 50 pixels are strethced to 1 dva
+	    const virtual_chinrest = {
+		    type: jsPsychVirtualChinrest,
+		    blindspot_reps: 3,
+		    resize_units: "deg",
+		    pixels_per_unit: 50
+	    };
+	    
 	    
 	    // placeholder variables for subject, study, and sesion ids
 	    let subject_id =  Math.round(Math.random()*100); //jsPsych.data.getURLVariable('PROLIFIC_PID');
@@ -113,25 +138,13 @@
 		    message: "Task loading",
       };
 
-
-	    
-	    
-	    // measure screen resolution and participants' distance from the screen; 
-	    // resize stimuli accordingly in degrees of visual angle. current setting - 50 pixels are strethced to 1 dva
-	    const virtual_chinrest = {
-		    type: jsPsychVirtualChinrest,
-		    blindspot_reps: 5,
-		    resize_units: "deg",
-		    pixels_per_unit: 50
-	    };
-	    
 	    
 	    let welcome_instructions_text = [];
 	    if (session_id == 1) {
 		    welcome_instructions_text = [
 			    '<p>Welcome to the experiment.<br>You have volunteered to take part in a research study investigating individual differences in orienation perception. This study consists of 2 sessions.<br>'+
-			    'Therefore, by agreeing to take part in this experiment, you will be committing to 2 sessions. You have to complete the two sessions within 1 week.<br><br>'+
-			    'In sesion 1, you will complete 2 different tasks - an orientation matching task and an orientation discrimination task. Session 1 will take you around 45 minutes to complete.<br>In session 2, you will complete only an orientation matching task, and it will take you around 30 minutes to complete.<br><br>'+
+			    'By agreeing to take part in this experiment, you will be committing to 2 sessions. You have to complete the two sessions within 1 week.<br><br>'+
+			    'In sesion 1, you will complete 2 different tasks and it will take you around 45 minutes to complete.<br>In session 2, you will complete one task, and it will take you around 30 minutes to complete.<br><br>'+
 			    'This is session 1.</p>'
 		    ];
 	    } else if (session_id == 2) {
@@ -156,7 +169,7 @@
 		    pages: [
 			    // stimulus instructions
 			    '<p> You will now perform an orientation matching task.<br>'+
-			    'Each trial will begin with the presentation of a fixation cross.<br><br>'+
+			    'Each trial will begin with the presentation of a fixation cross.<br>Keep looking at the fixation cross in the middle of the screen until it diseappers.<br><br>'+
 			    'Then you will see a black and white grating like the one below.<br>'+
 			    '<img src="gabor_stimuli_matching/gabor_ori15_phase0.05.png" width="200"></img></p>',
 			    // response instructions
@@ -172,18 +185,19 @@
 			    '<img src="correct_response_feedback.png" width="150"></img><br>'+
 			    'If the coloured line is red, that means your response was not close to the true orientation of the grating.<br>'+
 			    '<img src="incorrect_response_feedback.png" width="150"></img></p>',
-			    '<p>The experiment is divided into 2 blocks. Each block starts with 6 practice examples so that you get used to the task.The task will take your around 30 minutes to complete</p>'
+			    '<p>The experiment is divided into 2 blocks. Each block starts with 6 practice examples so that you get used to the task.<br>The task will take you around 30 minutes to complete.</p>'
 			    	    
 		    ],
 		    show_clickable_nav: true,
 		    allow_backward: true
 	    };
 	    
+	    let trial_counter = 0;
 	    // orientation reproduction instructions: test block 1
 	    const reproduction_test_instructions_block1 = {
 		    type: jsPsychInstructions,
 		    pages: [
-			    '<p>This was the end of the practice examples. Click Next to start the main part of the task.</p>'
+			    '<p>This was the end of the practice examples. Now you will complete the main task.<br>During each trial, keep looking at the fixation cross in the middle of the screen.<br>Click Next to start.</p>'
 		    ],
 		    show_clickable_nav: true,
 		    allow_backward: false
@@ -193,7 +207,7 @@
 		const reproduction_practice_instructions_block2 = {
 		    type: jsPsychInstructions,
 		    pages: [
-			    '<p>This is the start of the second block. You will now complete 6 practice examples. Click Next to start.</p>'
+			    '<p>This is the start of the second block. You will now complete 6 practice examples.<br>During each trial, keep looking at the fixation cross in the middle of the screen.<br>Click Next to start.</p>'
 		    ],
 		    show_clickable_nav: true,
 		    allow_backward: false
@@ -203,7 +217,7 @@
 	    const reproduction_test_instructions_block2 = {
 		    type: jsPsychInstructions,
 		    pages: [
-			    '<p>This was the end of the practice examples. Click Next to start the main part of the task.</p>'
+			    '<p><p>This was the end of the practice examples. Now you will complete the main task.<br>During each trial, keep looking at the fixation cross in the middle of the screen.<br>Click Next to start.</p>'
 		    ],
 		    show_clickable_nav: true,
 		    allow_backward: false
@@ -340,6 +354,10 @@
 			    console.log(`current mouse position: ${event.offsetX }`);
 		    },
 		    on_finish: function(data) {
+			    // progress trial counter
+			    var curr_progress_bar_value = jsPsych.getProgressBarCompleted();
+			    jsPsych.setProgressBar(curr_progress_bar_value + (1/total_n_trials));
+			    trial_counter = trial_counter+1;
 			    // transform selected orientation to a number between 0 and 180
 			    var selected_orientation = jsPsych.getCurrentTrial().stim_array[1].angle;
 			    var positive_orientation = [];
@@ -583,6 +601,10 @@
 		    stimulus: '<p>Which pair was closer together?</p>',
 		    choices: ['First', 'Second'],
 		    on_finish: function (data) {
+			    // progress trial counter 
+			    trial_counter = trial_counter+1;
+			    var curr_progress_bar_value = jsPsych.getProgressBarCompleted();
+        		    jsPsych.setProgressBar(curr_progress_bar_value + (1/totral_n_trials));
 			    var stim_trial_id = data.trial_index - 1;
 			    data.correct_response = jsPsych.data.get().trials[stim_trial_id].correct_response;
 			    // Score the response as correct or incorrect.
