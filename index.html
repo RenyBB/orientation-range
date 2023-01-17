@@ -45,17 +45,18 @@
 	    });
 	    
 	    // Count total number of trials across the two tasks
-	    const reproduction_training_stimulus_repetitions = 3; 
-	    const reproduction_testing_stimulus_repetitions = 3; // to change
+	    const reproduction_training_stimulus_repetitions = 3; // 3 is good
+	    const reproduction_testing_stimulus_repetitions = 1; // T0 CHANGE
 	    const discrimination_training_stimulus_repetitions = 3;
-	    const discrimination_testing_stimulus_repetitions = 2; // DO NOT CHANGE
+	    const discrimination_testing_stimulus_repetitions = 1; // FOR THE REAL EXPERIMENT THIS MUST BE 2
 	    
 	    const total_n_trials = training_stimuli_range1.length*reproduction_training_stimulus_repetitions + 
 		  			training_stimuli_range2.length*reproduction_training_stimulus_repetitions  + 
 		  			test_stimuli_range1.length*reproduction_testing_stimulus_repetitions + 
 		  			test_stimuli_range2.length*reproduction_testing_stimulus_repetitions + 
 		  			discrimination_training_stimuli.length*discrimination_training_stimulus_repetitions + 
-		  			discrimination_test_stimuli.length*discrimination_testing_stimulus_repetitions; 
+		  			discrimination_test_stimuli.slice(44).length*discrimination_testing_stimulus_repetitions; // REMOVE SLICE
+
 	    
 	    // measure screen resolution and participants' distance from the screen; 
 	    // resize stimuli accordingly in degrees of visual angle. current setting - 50 pixels are strethced to 1 dva
@@ -755,21 +756,21 @@
 			    document.body.style.cursor= "auto";
 		    }
 	    };
-	    
+
 	    // Discrimination task timeline
 	    // Training procedure
 	    let discrimination_training_procedure = {
 		    timeline: [discrimination_trial,  discrimination_response, training_feedback],  //Interval1_Training, Interval2_Training,
 		    timeline_variables: discrimination_training_stimuli,
-		    repetitions: 1,
+		    repetitions: discrimination_training_stimulus_repetitions,
 		    randomize_order: true
 	    };
 	    
 	    // Testing procedure
 	    let discrimination_testing_procedure = {
 		    timeline: [discrimination_trial,  discrimination_response, testing_feedback],  //Interval1_Training, Interval2_Training,
-		    timeline_variables: discrimination_test_stimuli,
-		    repetitions: 2,
+		    timeline_variables: discrimination_test_stimuli.slice(44), // MUST REMOVE SLICE
+		    repetitions: discrimination_testing_stimulus_repetitions, // MUST BE 2
 		    randomize_order: true
 	    };
 	    
@@ -784,14 +785,14 @@
 		    timeline: [hide_cursor, test, show_cursor, response, feedback],
 	            timeline_variables: training_stimuli_block1,
 		    randomize_order: true,
-		    repetitions: 3
+		    repetitions: reproduction_training_stimulus_repetitions
 	    };
 
 	    let reproduction_training_procedure_block2 = {
 		    timeline: [hide_cursor, test, show_cursor, response, feedback],
 	            timeline_variables: training_stimuli_block2,
 		    randomize_order: true,
-		    repetitions: 3
+		    repetitions: reproduction_training_stimulus_repetitions
 	    };
 	    
 	    // Testing procedure, divided in 2 blocks
@@ -799,17 +800,16 @@
 		    timeline: [hide_cursor, test, show_cursor, response, feedback],
 		    timeline_variables: test_stimuli_block1,
 		    randomize_order: true,
-		    repetitions: 2
+		    repetitions: reproduction_testing_stimulus_repetitions
 	    };
 	    
 	    let reproduction_testing_procedure_block2 = {
 		    timeline: [hide_cursor, test, show_cursor, response, feedback],
 		    timeline_variables: test_stimuli_block2,
 		    randomize_order: true,
-		    repetitions: 2
+		    repetitions: reproduction_testing_stimulus_repetitions
 	    };
-	    
-	  	    
+ 	    
 	    // Full reproduction task procedure
 	    let reproduction_task = {
 		    timeline: [reproduction_practice_instructions, reproduction_training_procedure_block1, 
