@@ -393,12 +393,10 @@
 			    //else {corrected_stimulus = jsPsych.timelineVariable('orientation');}
 			    let corrected_stimulus = jsPsych.timelineVariable('orientation');
 			    let error = [];
-			    error = corrected_stimulus-corrected_angle;
-			    /*if (error>90) {
+			    error = Math.abs(corrected_stimulus-corrected_angle);
+			    if (error>90) {
 				    error = 180 - error;
-			    } else if (error<-90) {
-				    error = error + 180;
-			    }*/
+			    }
 			    console.log(`error between stimulus and response: ${error}`);
 			    
 			    // define colour of feedback line: green if response is close to the stimulus; red if it is not
