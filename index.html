@@ -144,7 +144,7 @@
 	    if (session_id == 1) {
 		    welcome_instructions_text = [
 			    '<p>Welcome to the experiment.<br>You have volunteered to take part in a research study investigating individual differences in orienation perception.<br>The study consists of 2 sessions and you have to complete the two sessions within 1 week.<br><br>'+
-			    'This is Session 1. It consists of 2 different tasks and it will take you around 45 minutes to complete.<br>Session 2 consists of one task and will take you around 30 minutes to complete.<br><br>'+
+			    'Session 1 consists of 2 different tasks and it will take you around 45 minutes to complete.<br>Session 2 consists of one task and will take you around 30 minutes to complete.<br><br>'+
 			    'Click Next to start Session 1.</p>'
 		    ];
 	    } else if (session_id == 2) {
@@ -838,7 +838,7 @@
 		    timeline: [ 
 			    browser_check,
 			    preload,
-			    //virtual_chinrest,	 
+			    virtual_chinrest,	 
 			    welcome_instructions,
 			    reproduction_task,
 			    mkTimer_end_matching,
@@ -851,7 +851,7 @@
 		    timeline: [ 
 			    browser_check,
 			    preload,
-			    //virtual_chinrest,	 
+			    virtual_chinrest,	 
 			    welcome_instructions,
 			    reproduction_task,
 				end_session2
