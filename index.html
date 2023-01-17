@@ -29,7 +29,10 @@
     <script>
 	    
 	    
-	    // This experiment contains 2 tasks: an orientation reproduction task and an orientation discrimination task
+// This experiment contains 2 tasks: an orientation matching/reproduction task and an orientation discrimination task
+/* In the orientation matching task, participants see a grating and after the grating disappears they have to rotate a line to match the orientation of the grating.
+   In the orientation discrimination task, participants see two pairs of gratings and have to decide which are more similar in orientation. 
+*/	    
 	    // Initialize jspsych
 	    const jsPsych = initJsPsych({
 		    on_finish: function() {
@@ -715,28 +718,26 @@
 	    
 	    // define alarm that signals end of break
 	    const alarm = {
-		    type: jsPsychHtmlButtonResponse//jsPsychAudioButtonResponse,
+		    type: jsPsychHtmlButtonResponse,//jsPsychAudioButtonResponse,
 		    stimulus: 'This is the end of the break. Please continue the experiment.',//'Alarm.mp3',
 		    choices: ['Continue'],
 		    //prompt: 'This is the end of the break. Please continue the experiment.'	
 	    };
 	    
 	    // Cursor hidden and showing
-	    const hide_cursor = 
-		  {
-			  type: jsPsychCallFunction,
-			  func: function() {
-				  document.body.style.cursor= "none";
-			  }
-		  };
+	    const hide_cursor = {
+		    type: jsPsychCallFunction,
+		    func: function() {
+			    document.body.style.cursor= "none";
+		    }
+	    };
 	    
-	    const show_cursor = 
-		  {
-			  type: jsPsychCallFunction,
-			  func: function() {
-				  document.body.style.cursor= "auto";
-			  }
-		  };
+	    const show_cursor = {
+		    type: jsPsychCallFunction,
+		    func: function() {
+			    document.body.style.cursor= "auto";
+		    }
+	    };
 	    
 	    // Discrimination task timeline
 	    // Training procedure
@@ -752,7 +753,7 @@
 		    timeline: [discrimination_trial,  discrimination_response, testing_feedback],  //Interval1_Training, Interval2_Training,
 		    timeline_variables: discrimination_test_stimuli,
 		    repetitions: 2,
-		    randomize_order: true,
+		    randomize_order: true
 	    };
 	    
 	    // Full discrimination task procedure
@@ -799,8 +800,11 @@
 			       reproduction_practice_instructions_block2, reproduction_training_procedure_block1, reproduction_test_instructions_block2, reproduction_testing_procedure_block2]
 	    };
 	    
-	    // define timeline for the two sessions and select timeline for current session
+	    // define timeline for the two sessions
+	    // session 1: orientation matching followed by orientation discrimination
+	    // session 2: orientation matching only
 	    
+	    // end of session messages
 	    let end_session1 = {
 		    type: jsPsychHtmlButtonResponse,
 		    stimulus: '<p>This is the end of session 1.<br>Please press the button below to save your data. Please remember to return to the experiment and complete session 2 within 7 days.<p/><p>Thank you for your participation!</p>', 
@@ -838,6 +842,7 @@
 			    ]    
 	    };
 	    
+	    // select timeline for current session
 	    let current_session_timeline = [];
 	    if (session_id == 1) {
 		    current_session_timeline = session_1_timeline;
