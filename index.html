@@ -123,22 +123,22 @@
 	    };
 	    
 	    // Preload stimuli
-	    
-	        // create list of all video files for preloading
-    		let all_gabors_range1 = [];
-	        let all_gabors_range2 = [];
-   		 for (var i = 0; i < test_stimuli_range1.length; i++) {
-       		 all_gabors_range1.push(test_stimuli_range1[i].stimulus);
-		 all_gabors_range2.push(test_stimuli_range2[i].stimulus);
-	    	};
+	    // create list of files for preloading
+    	    let all_gabors_range1 = [];
+	    let all_gabors_range2 = [];
+	    for (var i = 0; i < test_stimuli_range1.length; i++) {
+		    all_gabors_range1.push(test_stimuli_range1[i].stimulus);
+		    all_gabors_range2.push(test_stimuli_range2[i].stimulus);
+	    };
 	    const preload = {
 		    type: jsPsychPreload,
 		    images: [all_gabors_range1, all_gabors_range2, "gabor_stimuli_matching/gabor_ori15_phase0.05.png", "gabor_stimuli_matching/gabor_ori139_phase0.05.png", "correct_response_feedback.png", "incorrect_response_feedback.png"],
 		    video: "response_instruction_video.mp4",
 		    message: "Task loading",
-      };
+		    max_load_time: 10000,
+		    show_detailed_errors: true
+	    };
 
-	    
 	    let welcome_instructions_text = [];
 	    if (session_id == 1) {
 		    welcome_instructions_text = [
