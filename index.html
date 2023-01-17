@@ -402,7 +402,7 @@
 			    
 			    // define colour of feedback line: green if response is close to the stimulus; red if it is not
 			    var feedback_colour = [];
-			    if (Math.abs(error) <= 3.5) { feedback_colour = 'green';}
+			    if (Math.abs(error) <= 3) { feedback_colour = 'green';}
 			    else {feedback_colour = 'red';} 
 			    
 			    data.corrected_stimulus = corrected_stimulus;
@@ -439,7 +439,7 @@
 				      obj_type: 'line',
 				      line_length: 120,
 				      line_color: function () {return jsPsych.data.get().last(1).values()[0].feedback_colour},
-				      line_width: 5,
+				      line_width: 7,
 				      angle: function () {return jsPsych.data.get().last(1).values()[0].selected_response},
 			      },
 			      // stimulus line
@@ -646,11 +646,11 @@
 			    console.log(last_trial_correct_resp);
 			    console.log(last_trial_correct);
 			    if (last_trial_correct) {
-				    return "<p>Correct</p><p>Press space to continue.</p>"; // the parameter value has to be returned from the function
+				    return "<p style="color: green">Correct</p><p>Press space to continue.</p>"; // the parameter value has to be returned from the function
 			    } else if (last_trial_correct == 0 && last_trial_correct_resp == 0) {
-				    return "<p>Incorrect</p><p>Press space to continue.</p>"; // the parameter value has to be returned from the function
+				    return "<p style="color: red">Incorrect</p><p>Press space to continue.</p>"; // the parameter value has to be returned from the function
 			    } else if (last_trial_correct == 0 && last_trial_correct_resp == 1) {
-				    return "<p>Incorrect</p><p>Press space to continue.</p>"; // the parameter value has to be returned from the function
+				    return "<p style="color: red">Incorrect</p><p>Press space to continue.</p>"; // the parameter value has to be returned from the function
 			    }
             },
             //trial_duration: 5000,
