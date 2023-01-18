@@ -337,7 +337,7 @@
 		    canvas_height: 450,
 		    response_type: 'key',
 		    choices: [' '],
-		    prompt: 'Left-click to wake up mouse. Move mouse to the left or right to rotate the line.<br>When you are happy with the orientation of the line, left click to stop the line moving.Then press the spacebar to save your response.',
+		    prompt: 'Left-click to wake up mouse. Move mouse to the left or right to rotate the line.<br>When you are happy with the orientation of the line, left click to stop the line moving. Then press the spacebar to continue.',
 		    stimuli: [circle_obj, line_obj], // These can be referenced using the jsPsych.currentTrial().stim_array array.
 		    mouse_down_func: function(event){
 			    mouse_move_start = !mouse_move_start;
