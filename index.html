@@ -133,7 +133,7 @@
 	    };
 	    const preload = {
 		    type: jsPsychPreload,
-		    images: [all_gabors_range1, all_gabors_range2, "gabor_stimuli_matching/gabor_ori15_phase0.05.png", "gabor_stimuli_matching/gabor_ori139_phase0.05.png", "correct_response_feedback.png", "incorrect_response_feedback.png"],
+		    //images: [all_gabors_range1, all_gabors_range2, "gabor_stimuli_matching/gabor_ori15_phase0.05.png", "gabor_stimuli_matching/gabor_ori139_phase0.05.png", "correct_response_feedback.png", "incorrect_response_feedback.png"],
 		    video: "response_instruction_video.mp4",
 		    message: "Task loading",
 		    max_load_time: 10000,
@@ -269,7 +269,7 @@
 				    obj_type: 'image',
 				    image_width: 200,
 				    startY: 150,
-				    file: jsPsych.timelineVariable('stimulus'), 
+				    file: () => jsPsych.timelineVariable('stimulus').concat(phase_array[Math.floor((Math.random() * phase_array.length))].toString()).concat(".png"), 
 				    is_frame: true,
 				    show_start_frame: () => Math.round(start_gabor/jsPsych.data.get().select('frame_duration').values[0]),
 				    show_end_frame: () => Math.round(end_gabor/jsPsych.data.get().select('frame_duration').values[0]),
