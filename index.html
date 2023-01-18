@@ -602,7 +602,7 @@
 			    // progress trial counter 
 			    trial_counter = trial_counter+1;
 			    var curr_progress_bar_value = jsPsych.getProgressBarCompleted();
-        		    jsPsych.setProgressBar(curr_progress_bar_value + (1/totral_n_trials));
+        		    jsPsych.setProgressBar(curr_progress_bar_value + (1/total_n_trials));
 			    var stim_trial_id = data.trial_index - 1;
 			    data.correct_response = jsPsych.data.get().trials[stim_trial_id].correct_response;
 			    // Score the response as correct or incorrect.
