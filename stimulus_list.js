@@ -20,8 +20,8 @@ let training_stimuli_range1 = [
 ];
 
 
-for (var i = 0; i < training_stimuli_r1.length; i++) {
-	training_stimuli_r1[i].stimulus = "gabor_stimuli_matching/gabor_ori".concat(training_stimuli_r1[i].orientation.toString()).concat("_phase").concat(training_stimuli_r1[i].phase.toString()).concat(".png");
+for (var i = 0; i < training_stimuli_range1.length; i++) {
+	training_stimuli_range1[i].stimulus = "gabor_stimuli_matching/gabor_ori".concat(training_stimuli_range1[i].orientation.toString()).concat("_phase").concat(training_stimuli_r1[i].phase.toString()).concat(".png");
 };
 
 	    
