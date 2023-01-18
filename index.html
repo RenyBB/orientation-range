@@ -573,7 +573,7 @@
 			    },
 		    ],
 		    canvas_width: 1000,
-		    canvas_height: 800,
+		    canvas_height: 400,
 		    trial_duration: () => {return end_fixation+100},
 		    response_ends_trial: false,
 		    background_color: '#808080',
@@ -817,7 +817,7 @@
 	    // Full reproduction task procedure
 	    let reproduction_task = {
 		    timeline: [reproduction_practice_instructions, reproduction_training_procedure_block1, 
-			       reproduction_test_instructions_block1, reproduction_testing_procedure_block1, mkTimer_middle_matching, alarm,
+			       reproduction_test_instructions_block1, reproduction_testing_procedure_block1, //mkTimer_middle_matching, alarm,
 			       reproduction_practice_instructions_block2, reproduction_training_procedure_block2, reproduction_test_instructions_block2, reproduction_testing_procedure_block2]
 	    };
 	    
@@ -846,8 +846,8 @@
 			    virtual_chinrest,	 
 			    welcome_instructions,
 			    reproduction_task,
-			    mkTimer_end_matching,
-			    alarm,
+			    //mkTimer_end_matching,
+			    //alarm,
 			    discrimination_task,
 				end_session1]    
 	    };
