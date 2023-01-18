@@ -1,10 +1,29 @@
+// Range of phases
+let start = 0;
+let end = 1;
+
+let phase_array = [];
+current_phase = start;
+phase_array.push(+current_phase.toFixed(2));
+
+while (current_phase <= end) {
+	current_phase = current_phase + 0.05;
+	phase_array.push(+current_phase.toFixed(2));
+};
+
 // Orientation reproduction task
-	        
-	    // practice stimuli for condition 1
-	    const training_stimuli_range1 = [
-		    { stimulus: "gabor_stimuli_matching/gabor_ori8_phase0.05.png", orientation: 8},
-		    { stimulus: "gabor_stimuli_matching/gabor_ori179_phase0.05.png", orientation: 179},
-	    ];
+
+// practice stimuli for condition 1
+let training_stimuli_range1 = [
+	{ orientation: 8, phase: phase_array[Math.floor((Math.random() * phase_array.length))]},
+	{ orientation: 179, phase: phase_array[Math.floor((Math.random() * phase_array.length))]},
+];
+
+
+for (var i = 0; i < training_stimuli_r1.length; i++) {
+	training_stimuli_r1[i].stimulus = "gabor_stimuli_matching/gabor_ori".concat(training_stimuli_r1[i].orientation.toString()).concat("_phase").concat(training_stimuli_r1[i].phase.toString()).concat(".png");
+};
+
 	    
 	    // test stimuli for condition 1
     	const test_stimuli_range1 = [
