@@ -15,8 +15,8 @@ while (current_phase <= end) {
 
 // practice stimuli for condition 1
 let training_stimuli_range1 = [
-	{ stimulus: "gabor_stimuli_matching/gabor_ori17_phase", orientation: 8},
-	{ stimulus: "gabor_stimuli_matching/gabor_ori17_phase", orientation: 179},
+	{ stimulus: "gabor_stimuli_matching/gabor_ori8_phase", orientation: 8},
+	{ stimulus: "gabor_stimuli_matching/gabor_ori170_phase", orientation: 179},
 ];
 
 
