@@ -495,6 +495,8 @@
 	    let start_second_pair = end_first_pair + stim_iti;
 	    let end_second_pair = start_second_pair + stim_duration_ms;
 	    let end_fixation = end_second_pair + post_iti;
+	    
+	    let phase = [];
 	   
 	    // Define stimulus presentation structure: fixation appears, first pair of gabors, second pair of gabors, fixaction disappears
 	    let discrimination_trial = {
@@ -510,9 +512,12 @@
 			    start_second_pair = end_first_pair + stim_iti;
 			    end_second_pair = start_second_pair + stim_duration_ms;
 			    end_fixation = end_second_pair + post_iti;
+			     
+			    phase = phase_array[Math.floor((Math.random() * phase_array.length))];
 			    console.log(end_second_pair);
 			    console.log(end_fixation);
-
+			    console.log(phase);	     
+			   
 		    },
 		    stimuli: [
 			    // fixation cross
@@ -529,7 +534,7 @@
 			    // first pair, left gabor
 			    {
 			    	      obj_type: 'image',
-				      file: jsPsych.timelineVariable('first_left_gabor_filename'), 
+				      file: () => jsPsych.timelineVariable('first_left_gabor_filename').concat(phase.toString()).concat(".png"), 
 				      startX: 300,
 				      image_width: 200,
 				      is_frame: true,
@@ -539,7 +544,7 @@
 			    // first pair, right gabor
 		    	    {
 			    	      obj_type: 'image',
-				      file: jsPsych.timelineVariable('first_right_gabor_filename'), 
+				      file: () => jsPsych.timelineVariable('first_right_gabor_filename').concat(phase.toString()).concat(".png"), 
 				      startX: 700,
 				      image_width: 200,
 				      is_frame: true,
@@ -549,7 +554,7 @@
 			    // second pair, left gabor
 			    {
 			    	      obj_type: 'image',
-				      file: jsPsych.timelineVariable('second_left_gabor_filename'), 
+				      file: () => jsPsych.timelineVariable('second_left_gabor_filename').concat(phase.toString()).concat(".png"), 
 				      startX: 300,
 				      image_width: 200,
 				      is_frame: true,
@@ -559,7 +564,7 @@
 			    // second pair, right gabor
 		    	    {
 			    	      obj_type: 'image',
-				      file: jsPsych.timelineVariable('second_right_gabor_filename'), 
+				      file: () => jsPsych.timelineVariable('second_right_gabor_filename').concat(phase.toString()).concat(".png"), 
 				      startX: 700,
 				      image_width: 200,
 				      is_frame: true,
