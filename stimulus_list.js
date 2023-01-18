@@ -15,38 +15,38 @@ while (current_phase <= end) {
 
 // practice stimuli for condition 1
 let training_stimuli_range1 = [
-	{ orientation: 8, phase: phase_array[Math.floor((Math.random() * phase_array.length))]},
-	{ orientation: 179, phase: phase_array[Math.floor((Math.random() * phase_array.length))]},
+	{ stimulus: "gabor_stimuli_matching/gabor_ori17_phase", orientation: 8},
+	{ stimulus: "gabor_stimuli_matching/gabor_ori17_phase", orientation: 179},
 ];
 
 
-for (var i = 0; i < training_stimuli_range1.length; i++) {
+/*for (var i = 0; i < training_stimuli_range1.length; i++) {
 	training_stimuli_range1[i].stimulus = "gabor_stimuli_matching/gabor_ori".concat(training_stimuli_range1[i].orientation.toString()).concat("_phase").concat(training_stimuli_range1[i].phase.toString()).concat(".png");
-};
+};*/
 
 	    
 	    // test stimuli for condition 1
     	const test_stimuli_range1 = [
-		    { stimulus: "gabor_stimuli_matching/gabor_ori17_phase0.png", orientation: 17},
-		    { stimulus: "gabor_stimuli_matching/gabor_ori26_phase0.png", orientation: 26},
-		    { stimulus: "gabor_stimuli_matching/gabor_ori35_phase0.png", orientation: 35},
-		    { stimulus: "gabor_stimuli_matching/gabor_ori44_phase0.png", orientation: 44},
-		    { stimulus: "gabor_stimuli_matching/gabor_ori53_phase0.png", orientation: 53},
+		    { stimulus: "gabor_stimuli_matching/gabor_ori17_phase", orientation: 17},
+		    { stimulus: "gabor_stimuli_matching/gabor_ori26_phase", orientation: 26},
+		    { stimulus: "gabor_stimuli_matching/gabor_ori35_phase", orientation: 35},
+		    { stimulus: "gabor_stimuli_matching/gabor_ori44_phase", orientation: 44},
+		    { stimulus: "gabor_stimuli_matching/gabor_ori53_phase", orientation: 53},
 	    ];
 
       // practice stimuli for condition 2
 	    const training_stimuli_range2 = [
-		    { stimulus: "gabor_stimuli_matching/gabor_ori98_phase0.05.png", orientation: 98},
-		    { stimulus: "gabor_stimuli_matching/gabor_ori107_phase0.05.png", orientation: 107},
+		    { stimulus: "gabor_stimuli_matching/gabor_ori98_phase", orientation: 98},
+		    { stimulus: "gabor_stimuli_matching/gabor_ori107_phase", orientation: 107},
 	    ];
 	    
 	    // test stimuli for condition 2
 	    const test_stimuli_range2 = [
-		    { stimulus: "gabor_stimuli_matching/gabor_ori53_phase0.png", orientation: 53},
-		    { stimulus: "gabor_stimuli_matching/gabor_ori62_phase0.png", orientation: 62},
-		    { stimulus: "gabor_stimuli_matching/gabor_ori71_phase0.png", orientation: 71},
-		    { stimulus: "gabor_stimuli_matching/gabor_ori80_phase0.png", orientation: 80},
-		    { stimulus: "gabor_stimuli_matching/gabor_ori89_phase0.png", orientation: 89},
+		    { stimulus: "gabor_stimuli_matching/gabor_ori53_phase", orientation: 53},
+		    { stimulus: "gabor_stimuli_matching/gabor_ori62_phase", orientation: 62},
+		    { stimulus: "gabor_stimuli_matching/gabor_ori71_phase", orientation: 71},
+		    { stimulus: "gabor_stimuli_matching/gabor_ori80_phase", orientation: 80},
+		    { stimulus: "gabor_stimuli_matching/gabor_ori89_phase", orientation: 89},
 	    ];
 
 
