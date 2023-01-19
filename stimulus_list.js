@@ -55,10 +55,10 @@ let training_stimuli_range1 = [
 	    const discrimination_training_stimuli = [
         {
           "stimulus_directory": "gabor_stimuli_new/",
-    			"first_left_gabor_orientation": 23,
-    			"first_left_gabor_filename": "gabor_stimuli_new/gabor_ori23_phase",
-   			"first_right_gabor_orientation": 23,
-   			"first_right_gabor_filename": "gabor_stimuli_new/gabor_ori23_phase",
+    			"first_left_gabor_orientation": 17,
+    			"first_left_gabor_filename": "gabor_stimuli_new/gabor_ori17_phase",
+   			"first_right_gabor_orientation": 15,
+   			"first_right_gabor_filename": "gabor_stimuli_new/gabor_ori15_phase",
     			"second_left_gabor_orientation": 15,
     			"second_left_gabor_filename": "gabor_stimuli_new/gabor_ori15_phase",
     			"second_right_gabor_orientation": 29,
@@ -70,10 +70,10 @@ let training_stimuli_range1 = [
     			"first_left_gabor_filename": "gabor_stimuli_new/gabor_ori29_phase",
     			"first_right_gabor_orientation": 15,
     			"first_right_gabor_filename": "gabor_stimuli_new/gabor_ori15_phase",
-    			"second_left_gabor_orientation": 23,
-    			"second_left_gabor_filename": "gabor_stimuli_new/gabor_ori23_phase",
-    			"second_right_gabor_orientation": 23,
-    			"second_right_gabor_filename": "gabor_stimuli_new/gabor_ori23_phase"
+    			"second_left_gabor_orientation": 15,
+    			"second_left_gabor_filename": "gabor_stimuli_new/gabor_ori15_phase",
+    			"second_right_gabor_orientation": 17,
+    			"second_right_gabor_filename": "gabor_stimuli_new/gabor_ori17_phase"
 		    },
 	    ];
 	    
