@@ -152,7 +152,7 @@
 	    let welcome_instructions_text = [];
 	    if (session_id == 1) {
 		    welcome_instructions_text = [
-			    '<p>Welcome to the experiment.<br>You have volunteered to take part in a research study investigating individual differences in orienation perception.<br>The study consists of 2 sessions and you have to complete the two sessions within 1 week.<br><br>'+
+			    '<p>Welcome to the experiment.<br>You have volunteered to take part in a research study investigating individual differences in orienation perception.<br>The study consists of 2 sessions.<br><br>'+
 			    'Session 1 consists of 2 different tasks and it will take you around 45 minutes to complete.<br>Session 2 consists of one task and will take you around 30 minutes to complete.<br><br>'+
 			    'Click Next to start Session 1.</p>'
 		    ];
@@ -837,7 +837,7 @@
 	    // end of session messages
 	    let end_session1 = {
 		    type: jsPsychHtmlButtonResponse,
-		    stimulus: '<p>This is the end of Session 1.<br>Please press the button below to save your data. Please remember to return to the experiment and complete Session 2 within 7 days.<p/><p>Thank you for your participation!</p>', 
+		    stimulus: '<p>This is the end of Session 1.<br>Please press the button below to save your data.<br><br>The experimenter will get in touch to invite you to complet Session 2.<br>Please remember that you have to complete Session 2 within 7 days of receiving the invitation.<p/><p>Thank you for your participation!</p>', 
 		    choices: ['Save data'],
 	    };
 		    
