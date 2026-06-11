@@ -251,7 +251,7 @@
 		    canvas_offsetY: 0,
 		    canvas_height: 650,
 		    response_type: 'key',
-		    choices: ['NO_KEYS'],
+		    choices: ['a'],
 		    on_start: function () {
 			    pre_stim = 500;//Math.round((Math.random()*(1-0.5) + 0.5)*1000);
 			    post_stim = 250;
@@ -337,7 +337,7 @@
 		    canvas_offsetY: 0,
 		    canvas_height: 450,
 		    response_type: 'key',
-		    choices: [' '],
+		    choices: ['a'],
 		    prompt: 'Left-click to wake up mouse. Move mouse to the left or right to rotate the line.<br>When you are happy with the orientation of the line, left click to stop the line moving. Then press the spacebar to continue.',
 		    stimuli: [circle_obj, line_obj], // These can be referenced using the jsPsych.currentTrial().stim_array array.
 		    mouse_down_func: function(event){
@@ -429,7 +429,7 @@
 		    canvas_offsetY: 0,
 		    canvas_height: 450,
 		    response_type: 'key',
-		    choices: [' '],
+		    choices: ['a'],
 		    prompt: [],
 		    on_start: function(trial) {
 			    if (jsPsych.data.get().last(1).values()[0].feedback_colour == 'green') {
