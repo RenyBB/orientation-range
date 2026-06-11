@@ -137,7 +137,23 @@
 			    let frame_duration = (1 / data.vsync_rate) * 1000;
 		    }
 	    };
-	    
+
+		var setup_info = {
+    		type: jsPsychBrowserCheck,
+			minimum_width: 1500,
+		    minimum_height: 750,
+		    on_finish: function (data) {
+			    data.frame_duration = (1 / data.vsync_rate) * 1000;
+			    let frame_duration = (1 / data.vsync_rate) * 1000;
+		    }
+	    };
+
+ 		 };
+  		timeline.push(setup_info);
+
+
+
+		
 	    // Preload stimuli
 	    // create list of files for preloading
     	    let all_gabors_range1 = [];
@@ -856,7 +872,7 @@
 		     
 	    let session_1_timeline = {
 		    timeline: [ 
-			    browser_check,
+			    //browser_check,
 			    preload,
 			    virtual_chinrest,	 
 			    welcome_instructions,
@@ -869,7 +885,7 @@
 	    
 	    let session_2_timeline = {		    
 		    timeline: [ 
-			    browser_check,
+			    //browser_check,
 			    preload,
 			    virtual_chinrest,	 
 			    welcome_instructions,
